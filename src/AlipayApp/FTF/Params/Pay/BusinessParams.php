@@ -1,8 +1,8 @@
 <?php
-namespace Yurun\PaySDK\AlipayFTF\Params\Pay;
+namespace Yurun\PaySDK\AlipayApp\FTF\Params\Pay;
 
-use \Yurun\PaySDK\AlipayFTF\Params\GoodsDetail;
-use \Yurun\PaySDK\AlipayFTF\Params\ExtendParams;
+use \Yurun\PaySDK\AlipayApp\FTF\Params\GoodsDetail;
+use \Yurun\PaySDK\AlipayApp\FTF\Params\ExtendParams;
 
 class BusinessParams
 {
@@ -73,13 +73,13 @@ class BusinessParams
 
 	/**
 	 * 订单包含的商品列表信息
-	 * @var array<\Yurun\PaySDK\AlipayFTF\Params\GoodsDetail>
+	 * @var array<\Yurun\PaySDK\AlipayApp\FTF\Params\GoodsDetail>
 	 */
 	public $goods_detail;
 
 	/**
 	 * 业务扩展参数，详见业务扩展参数说明
-	 * @var \Yurun\PaySDK\AlipayFTF\Params\ExtendParams
+	 * @var \Yurun\PaySDK\AlipayApp\FTF\Params\ExtendParams
 	 */
 	public $extend_params;
 

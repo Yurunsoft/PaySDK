@@ -1,8 +1,8 @@
 <?php
-namespace Yurun\PaySDK\AlipayPage\Params\Pay;
+namespace Yurun\PaySDK\AlipayApp\Page\Params\Pay;
 
-use \Yurun\PaySDK\AlipayPage\Params\GoodsDetail;
-use \Yurun\PaySDK\AlipayPage\Params\Pay\ExtendParams;
+use \Yurun\PaySDK\AlipayApp\Page\Params\GoodsDetail;
+use \Yurun\PaySDK\AlipayApp\Page\Params\Pay\ExtendParams;
 
 class BusinessParams
 {
@@ -40,7 +40,7 @@ class BusinessParams
 
 	/**
 	 * 订单包含的商品列表信息，Json格式： {"show_url":"https://或http://打头的商品的展示地址"} ，在支付时，可点击商品名称跳转到该地址
-	 * @var \Yurun\PaySDK\AlipayPage\Params\GoodsDetail
+	 * @var \Yurun\PaySDK\AlipayApp\Page\Params\GoodsDetail
 	 */
 	public $goods_detail;
 
@@ -52,7 +52,7 @@ class BusinessParams
 
 	/**
 	 * 业务扩展参数，详见业务扩展参数说明
-	 * @var \Yurun\PaySDK\AlipayPage\Params\Pay\ExtendParams
+	 * @var \Yurun\PaySDK\AlipayApp\Page\Params\Pay\ExtendParams
 	 */
 	public $extend_params;
 

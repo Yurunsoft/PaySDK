@@ -1,8 +1,8 @@
 <?php
-namespace Yurun\PaySDK\AlipayPage\Params\Pay;
+namespace Yurun\PaySDK\AlipayApp\Wap\Params\Pay;
 
 use \Yurun\PaySDK\AlipayRequestBase;
-use \Yurun\PaySDK\AlipayPage\Params\Pay\BusinessParams;
+use \Yurun\PaySDK\AlipayApp\Wap\Params\Pay\BusinessParams;
 
 class Request extends AlipayRequestBase
 {
@@ -10,7 +10,7 @@ class Request extends AlipayRequestBase
 	 * 接口名称
 	 * @var string
 	 */
-	public $method = 'alipay.trade.page.pay';
+	public $method = 'alipay.trade.wap.pay';
 
 	/**
 	 * 同步返回地址，HTTP/HTTPS开头字符串
@@ -26,8 +26,8 @@ class Request extends AlipayRequestBase
 
 	/**
 	 * 业务请求参数
-	 * 参考https://docs.open.alipay.com/common/105901
-	 * @var \Yurun\PaySDK\AlipayPage\Params\Pay\BusinessParams
+	 * 参考https://docs.open.alipay.com/203/107090/
+	 * @var \Yurun\PaySDK\AlipayApp\Wap\Params\Pay\BusinessParams
 	 */
 	public $businessParams;
 

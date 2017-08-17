@@ -1,8 +1,8 @@
 <?php
-namespace Yurun\PaySDK\AlipayFTF\Params\Pay;
+namespace Yurun\PaySDK\AlipayApp\FTF\Params\Pay;
 
 use \Yurun\PaySDK\AlipayRequestBase;
-use \Yurun\PaySDK\AlipayFTF\Params\Pay\BusinessParams;
+use \Yurun\PaySDK\AlipayApp\FTF\Params\Pay\BusinessParams;
 
 class Request extends AlipayRequestBase
 {
@@ -27,7 +27,7 @@ class Request extends AlipayRequestBase
 	/**
 	 * 业务请求参数
 	 * 参考https://docs.open.alipay.com/common/105901
-	 * @var \Yurun\PaySDK\AlipayFTF\Params\Pay\BusinessParams
+	 * @var \Yurun\PaySDK\AlipayApp\FTF\Params\Pay\BusinessParams
 	 */
 	public $businessParams;
 

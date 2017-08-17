@@ -2,12 +2,12 @@
 require __DIR__ . '/common.php';
 
 // 公共配置
-$params = new \Yurun\PaySDK\AlipayWap\Params\PublicParams;
+$params = new \Yurun\PaySDK\AlipayApp\Params\PublicParams;
 $params->appPublicKey = $GLOBALS['PAY_CONFIG']['publicKey'];
 $params->appPrivateKey = $GLOBALS['PAY_CONFIG']['privateKey'];
 
 // SDK实例化，传入公共配置
-$pay = new \Yurun\PaySDK\AlipayWap\SDK($params);
+$pay = new \Yurun\PaySDK\AlipayApp\SDK($params);
 
 $content = var_export($_POST, true) . PHP_EOL . 'verify:' . $pay->verifyCallback($_POST);
 

@@ -1,5 +1,5 @@
 <?php
-namespace Yurun\PaySDK\AlipayPage\Params\Pay;
+namespace Yurun\PaySDK\AlipayApp\Page\Params\Pay;
 
 use \Yurun\PaySDK\Traits\JSONParams;
 

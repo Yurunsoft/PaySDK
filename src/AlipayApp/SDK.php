@@ -1,5 +1,5 @@
 <?php
-namespace Yurun\PaySDK\AlipayFTF;
+namespace Yurun\PaySDK\AlipayApp;
 
 use \Yurun\PaySDK\Base;
 
@@ -7,7 +7,7 @@ class SDK extends Base
 {
 	/**
 	 * 公共参数
-	 * @var \Yurun\PaySDK\AlipayFTF\Params\PublicParams
+	 * @var \Yurun\PaySDK\AlipayApp\Params\PublicParams
 	 */
 	public $publicParams;
 
@@ -31,7 +31,7 @@ class SDK extends Base
 
 	/**
 	 * 签名
-	 * @param array $data
+	 * @param $data
 	 * @return string
 	 */
 	public function sign($data)

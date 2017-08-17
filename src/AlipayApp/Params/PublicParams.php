@@ -1,5 +1,5 @@
 <?php
-namespace Yurun\PaySDK\AlipayFTF\Params;
+namespace Yurun\PaySDK\AlipayApp\Params;
 
 use \Yurun\PaySDK\PublicBase;
 

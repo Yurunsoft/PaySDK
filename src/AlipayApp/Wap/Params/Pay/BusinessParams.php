@@ -1,7 +1,7 @@
 <?php
-namespace Yurun\PaySDK\AlipayWap\Params\Pay;
+namespace Yurun\PaySDK\AlipayApp\Wap\Params\Pay;
 
-use \Yurun\PaySDK\AlipayWap\Params\Pay\ExtendParams;
+use \Yurun\PaySDK\AlipayApp\Wap\Params\Pay\ExtendParams;
 
 class BusinessParams
 {
@@ -45,7 +45,7 @@ class BusinessParams
 
 	/**
 	 * 业务扩展参数，详见业务扩展参数说明
-	 * @var \Yurun\PaySDK\AlipayWap\Params\Pay\ExtendParams
+	 * @var \Yurun\PaySDK\AlipayApp\Wap\Params\Pay\ExtendParams
 	 */
 	public $extend_params;
 
