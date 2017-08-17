@@ -21,7 +21,7 @@ class SDK extends Base
 	public function __parseExecuteData($params, &$data, &$url)
 	{
 		$data = \array_merge((array)$this->publicParams, (array)$params, (array)$params->businessParams);
-		unset($data['apiDomain'], $data['appID'], $data['businessParams'], $data['appPrivateKey'], $data['appPrivateKeyFile'], $data['md5Key']);
+		unset($data['apiDomain'], $data['appID'], $data['businessParams'], $data['appPrivateKey'], $data['appPrivateKeyFile'], $data['md5Key'], $data['appPublicKey'], $data['appPublicKeyFile'], $data['_syncResponseName'], $data['_method'], $data['_isSyncVerify']);
 		$data['partner'] = $this->publicParams->appID;
 		foreach($data as $key => $value)
 		{
