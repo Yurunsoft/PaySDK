@@ -18,10 +18,14 @@ $request->notify_url = $GLOBALS['PAY_CONFIG']['notify_url']; // 支付后通知�
 $request->businessParams->out_trade_no = 'test' . mt_rand(10000000,99999999); // 商户订单号
 $request->businessParams->total_amount = 0.01; // 价格
 $request->businessParams->subject = '小米手机9黑色陶瓷尊享版';
-
 // 调用接口
-$data = $pay->execute($request);
-var_dump($data);
+try{
+	$data = $pay->execute($request);
+	var_dump($data);
+}
+catch(Exception $e){
+	var_dump($pay->response->body);
+}
 // 下面二维码为演示方便随便找了个二维码接口，如有需要你可以自己生成二维码或者使用其它的二维码接口
 ?>
 <img src="http://qr.liantu.com/api.php?text=<?php echo urlencode($data['alipay_trade_precreate_response']['qr_code']);?>"/>

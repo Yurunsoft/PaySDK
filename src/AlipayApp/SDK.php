@@ -103,6 +103,10 @@ class SDK extends Base
 	 */
 	public function verifySync($params, $data)
 	{
+		if(!isset($data['sign']))
+		{
+			return true;
+		}
 		$content = \json_encode($data[$params->_syncResponseName], JSON_UNESCAPED_UNICODE);
 		if(empty($this->publicParams->appPublicKeyFile))
 		{
