@@ -2,7 +2,7 @@
 namespace Yurun\PaySDK\AlipayApp\Params\Query;
 
 use \Yurun\PaySDK\AlipayRequestBase;
-use \Yurun\PaySDK\AlipayApp\Page\Params\Pay\BusinessParams;
+use \Yurun\PaySDK\AlipayApp\Params\Query\BusinessParams;
 
 class Request extends AlipayRequestBase
 {
