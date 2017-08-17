@@ -1,0 +1,4 @@
+/composer.lock
+/vendor
+/test/*/notify_result.txt
+/test/*/php_errors.log

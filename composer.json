@@ -1,0 +1,13 @@
+{
+	"name": "yurunsoft/pay-sdk",
+	"type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Yurun\\PaySDK\\": "src/"
+        }
+    },
+    "require": {
+		"yurunsoft/yurun-http" : "1.3.*"
+    }
+}
