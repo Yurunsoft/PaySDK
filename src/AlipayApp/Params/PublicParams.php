@@ -54,6 +54,18 @@ class PublicParams extends PublicBase
 	 */
 	public $appPublicKeyFile;
 
+	/**
+	 * 是否使用AES加密解密数据
+	 * @var boolean
+	 */
+	public $isUseAES = false;
+
+	/**
+	 * AES密钥
+	 * @var string
+	 */
+	public $aesKey;
+
 	public function __construct()
 	{
 		$this->apiDomain = 'https://openapi.alipay.com/gateway.do';

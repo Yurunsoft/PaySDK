@@ -1,11 +1,12 @@
 <?php
 require __DIR__ . '/common.php';
-
 // 公共配置
 $params = new \Yurun\PaySDK\AlipayApp\Params\PublicParams;
 $params->appID = $GLOBALS['PAY_CONFIG']['appid'];
 $params->appPrivateKey = $GLOBALS['PAY_CONFIG']['privateKey'];
 $params->appPublicKey = $GLOBALS['PAY_CONFIG']['publicKey'];
+// $params->isUseAES = true; // 沙箱环境可能用不了AES加密
+// $params->aesKey = $GLOBALS['PAY_CONFIG']['aesKey'];
 // $params->appPrivateKeyFile = ''; // 证书文件，如果设置则这个优先使用
 $params->apiDomain = 'https://openapi.alipaydev.com/gateway.do'; // 设为沙箱环境，如正式环境请把这行注释
 

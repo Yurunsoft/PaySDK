@@ -2,6 +2,7 @@
 namespace Yurun\PaySDK\AlipayApp;
 
 use \Yurun\PaySDK\Base;
+use \Yurun\PaySDK\Lib\Encrypt\AES;
 
 class SDK extends Base
 {
@@ -21,9 +22,13 @@ class SDK extends Base
 	public function __parseExecuteData($params, &$data, &$url)
 	{
 		$data = \array_merge((array)$this->publicParams, (array)$params);
-		unset($data['apiDomain'], $data['appID'], $data['businessParams'], $data['appPrivateKey'], $data['appPrivateKeyFile'], $data['appPublicKey'], $data['appPublicKeyFile'], $data['_syncResponseName'], $data['_method'], $data['_isSyncVerify']);
+		unset($data['apiDomain'], $data['appID'], $data['businessParams'], $data['appPrivateKey'], $data['appPrivateKeyFile'], $data['appPublicKey'], $data['appPublicKeyFile'], $data['_syncResponseName'], $data['_method'], $data['_isSyncVerify'], $data['aesKey'], $data['isUseAES']);
 		$data['app_id'] = $this->publicParams->appID;
 		$data['biz_content'] = $params->businessParams->toString();
+		if($this->publicParams->isUseAES)
+		{
+			$data['biz_content'] = AES::encrypt($data['biz_content'], \base64_decode($this->publicParams->aesKey));
+		}
 		$data['timestamp'] = date('Y-m-d H:i:s');
 		$data['sign'] = $this->sign($data);
 		$url = $this->publicParams->apiDomain;
@@ -140,5 +145,22 @@ class SDK extends Base
 			}
 		}
 		return trim($content, '&');
+	}
+
+	
+	/**
+	 * 调用执行接口
+	 * @param mixed $params
+	 * @param string $method
+	 * @return mixed
+	 */
+	public function execute($params, $format = 'JSON')
+	{
+		$result = parent::execute($params, $format);
+		if($this->publicParams->isUseAES && isset($result[$params->_syncResponseName]))
+		{
+			$result[$params->_syncResponseName] = json_decode(AES::decrypt($result[$params->_syncResponseName], \base64_decode($this->publicParams->aesKey)), true);
+		}
+		return $result;
 	}
 }
