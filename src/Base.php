@@ -2,6 +2,7 @@
 namespace Yurun\PaySDK;
 
 use \Yurun\Until\HttpRequest;
+use Yurun\PaySDK\Lib\XML;
 
 abstract class Base
 {
@@ -16,6 +17,12 @@ abstract class Base
 	 * @var \Yurun\Until\HttpResponse
 	 */
 	public $response;
+
+	/**
+	 * 请求数据
+	 * @var array
+	 */
+	public $requestData;
 
 	/**
 	 * 公共参数
@@ -38,7 +45,7 @@ abstract class Base
 	public function execute($params, $format = 'JSON')
 	{
 		$this->__parseExecuteData($params, $data, $url);
-		$url = $this->publicParams->apiDomain;
+		$this->requestData = $data;
 		$method = $params->_method;
 		if('GET' === $method)
 		{
@@ -57,6 +64,9 @@ abstract class Base
 		{
 			case 'JSON':
 				$result = \json_decode($this->response->body, true);
+				break;
+			case 'XML':
+				$result = XML::fromString($this->response->body);
 				break;
 			default:
 				$result = $this->response->body;
@@ -118,6 +128,7 @@ abstract class Base
 		{
 			$url .= '&';
 		}
+		$this->requestData = $data;
 		$url .= \http_build_query($data);
 		header('HTTP/1.1 302 Temporarily Moved');
 		header('Status: 302 Temporarily Moved');
