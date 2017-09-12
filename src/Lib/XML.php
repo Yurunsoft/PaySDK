@@ -35,6 +35,10 @@ class XML
 				{
 					$value = \json_encode($value);
 				}
+				else
+				{
+					continue;
+				}
 			}
 			$result .= "<{$key}><![CDATA[{$value}]]></{$key}>";
 		}
