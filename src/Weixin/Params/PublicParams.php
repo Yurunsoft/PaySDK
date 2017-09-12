@@ -1,0 +1,44 @@
+<?php
+namespace Yurun\PaySDK\Weixin\Params;
+
+use \Yurun\PaySDK\PublicBase;
+
+class PublicParams extends PublicBase
+{
+	/**
+	 * 微信支付分配的商户号
+	 * @var string
+	 */
+	public $mch_id;
+
+	/**
+	 * 签名类型，目前支持HMAC-SHA256和MD5，默认为MD5
+	 * @var string
+	 */
+	public $sign_type = 'MD5';
+
+	/**
+	 * API密钥
+	 * 在API调用时用来按照指定规则对你的请求参数进行签名，服务器收到你的请求时会进行签名验证，既可以界定你的身份也可以防止其他人恶意篡改请求数据。
+	 * 部分API单独使用API密钥签名进行安全加固，部分安全性要求更高的API会要求使用API密钥签名和API证书同时进行安全加固。 
+	 * @var string
+	 */
+	public $key;
+
+	/**
+	 * 证书地址
+	 * @var string
+	 */
+	public $certPath;
+
+	/**
+	 * 私钥地址
+	 * @var string
+	 */
+	public $keyPath;
+
+	public function __construct()
+	{
+		$this->apiDomain = 'https://api.mch.weixin.qq.com/';
+	}
+}

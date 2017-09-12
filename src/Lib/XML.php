@@ -11,7 +11,15 @@ class XML
 	public static function toString($data)
 	{
 		$result = '<xml>';
-		foreach((array)$data as $key => $value)
+		if(is_object($data))
+		{
+			$_data = ObjectToArray::parse($data);
+		}
+		else
+		{
+			$_data = &$data;
+		}
+		foreach($_data as $key => $value)
 		{
 			if(!\is_scalar($value))
 			{

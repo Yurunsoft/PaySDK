@@ -2,6 +2,7 @@
 namespace Yurun\PaySDK\Alipay;
 
 use \Yurun\PaySDK\Base;
+use \Yurun\PaySDK\Lib\ObjectToArray;
 
 class SDK extends Base
 {
@@ -14,13 +15,14 @@ class SDK extends Base
 	/**
 	 * 处理执行接口的数据
 	 * @param $params
-	 * @param &$data
-	 * @param &$url
+	 * @param &$data 数据数组
+	 * @param &$requestData 请求用的数据，格式化后的
+	 * @param &$url 请求地址
 	 * @return array
 	 */
-	public function __parseExecuteData($params, &$data, &$url)
+	public function __parseExecuteData($params, &$data, &$requestData, &$url)
 	{
-		$data = \array_merge((array)$this->publicParams, (array)$params, (array)$params->businessParams);
+		$data = \array_merge(ObjectToArray::parse($this->publicParams), ObjectToArray::parse($params), ObjectToArray::parse($params->businessParams));
 		unset($data['apiDomain'], $data['appID'], $data['businessParams'], $data['appPrivateKey'], $data['appPrivateKeyFile'], $data['md5Key'], $data['appPublicKey'], $data['appPublicKeyFile'], $data['_syncResponseName'], $data['_method'], $data['_isSyncVerify']);
 		$data['partner'] = $this->publicParams->appID;
 		foreach($data as $key => $value)
@@ -31,6 +33,7 @@ class SDK extends Base
 			}
 		}
 		$data['sign'] = $this->sign($data);
+		$requestData = $data;
 		$url = $this->publicParams->apiDomain;
 	}
 
@@ -115,8 +118,8 @@ class SDK extends Base
 		\ksort($data);
 		$content = '';
 		foreach ($data as $k => $v){
-			if($v != "" && !is_array($v)){
-				$content .= $k . "=" . $v . "&";
+			if($v != '' && !is_array($v)){
+				$content .= $k . '=' . $v . '&';
 			}
 		}
 		return trim($content, '&');
