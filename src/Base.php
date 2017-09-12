@@ -44,22 +44,8 @@ abstract class Base
 	 */
 	public function execute($params, $format = 'JSON')
 	{
-		$this->__parseExecuteData($params, $data, $url);
-		$this->requestData = $data;
-		$method = $params->_method;
-		if('GET' === $method)
-		{
-			if(false === strpos($url, '?'))
-			{
-				$url .= '?';
-			}
-			else
-			{
-				$url .= '&';
-			}
-			$url .= \http_build_query($data);
-		}
-		$this->response = $this->http->send($url, $data, $method);
+		$this->prepareExecute($params, $url, $data);
+		$this->response = $this->http->send($url, $this->requestData, $params->_method);
 		switch($format)
 		{
 			case 'JSON':
@@ -91,11 +77,12 @@ abstract class Base
 	/**
 	 * 处理执行接口的数据
 	 * @param $params
-	 * @param &$data
-	 * @param &$url
+	 * @param &$data 数据数组
+	 * @param &$requestData 请求用的数据，格式化后的
+	 * @param &$url 请求地址
 	 * @return array
 	 */
-	public abstract function __parseExecuteData($params, &$data, &$url);
+	public abstract function __parseExecuteData($params, &$data, &$requestData, &$url);
 
 	/**
 	 * 验证回调通知是否合法
@@ -119,7 +106,7 @@ abstract class Base
 	 */
 	public function redirectExecute($params)
 	{
-		$this->__parseExecuteData($params, $data, $url);
+		$this->__parseExecuteData($params, $data, $requestData, $url);
 		if(false === strpos($url, '?'))
 		{
 			$url .= '?';
@@ -133,5 +120,42 @@ abstract class Base
 		header('HTTP/1.1 302 Temporarily Moved');
 		header('Status: 302 Temporarily Moved');
 		header('Location: ' . $url);
+	}
+
+	/**
+	 * 准备处理数据
+	 * @param string $params
+	 * @param string $url
+	 * @param array $data
+	 * @return void
+	 */
+	public function prepareExecute($params, &$url = null, &$data = null)
+	{
+		$this->__parseExecuteData($params, $data, $requestData, $url);
+		$this->requestData = $requestData;
+		if('GET' === $params->_method)
+		{
+			if(false === strpos($url, '?'))
+			{
+				$url .= '?';
+			}
+			else
+			{
+				$url .= '&';
+			}
+			$url .= \http_build_query($data);
+		}
+	}
+
+	/**
+	 * Undocumented function
+	 *
+	 * @param [type] $notifyHandle
+	 * @return void
+	 */
+	public function notify($notifyHandle)
+	{
+		$notifyHandle->sdk = $this;
+		$notifyHandle->exec();
 	}
 }
