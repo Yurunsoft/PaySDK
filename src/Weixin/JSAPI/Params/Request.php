@@ -12,6 +12,12 @@ class Request extends PayRequestBase
 	 */
 	public $scene_info;
 
+	/**
+	 * 微信用户在商户对应appid下的唯一标识
+	 * @var string
+	 */
+	public $openid;
+
 	public function __construct()
 	{
 		$this->trade_type = 'JSAPI';
