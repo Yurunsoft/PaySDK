@@ -143,7 +143,7 @@ class SDK extends Base
 		\ksort($data);
 		$content = '';
 		foreach ($data as $k => $v){
-			if($v != '' && !is_array($v)){
+			if($v !== '' && $v !== null && !is_array($v)){
 				$content .= $k . '=' . $v . '&';
 			}
 		}
