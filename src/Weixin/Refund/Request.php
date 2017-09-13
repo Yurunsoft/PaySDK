@@ -2,7 +2,6 @@
 namespace Yurun\PaySDK\Weixin\Refund;
 
 use \Yurun\PaySDK\WeixinRequestBase;
-use \Yurun\PaySDK\Weixin\Native\Params\SceneInfo;
 
 class Request extends WeixinRequestBase
 {
