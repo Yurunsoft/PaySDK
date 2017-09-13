@@ -30,6 +30,18 @@ abstract class Base
 	 */
 	public $publicParams;
 
+	/**
+	 * 最后请求的url地址
+	 * @var string
+	 */
+	public $url;
+
+	/**
+	 * 最后请求的结果
+	 * @var mixed
+	 */
+	public $result;
+
 	public function __construct($publicParams)
 	{
 		$this->publicParams = $publicParams;
@@ -45,25 +57,26 @@ abstract class Base
 	public function execute($params, $format = 'JSON')
 	{
 		$this->prepareExecute($params, $url, $data);
+		$this->url = $url;
 		$this->response = $this->http->send($url, $this->requestData, $params->_method);
 		switch($format)
 		{
 			case 'JSON':
-				$result = \json_decode($this->response->body, true);
+				$this->result = \json_decode($this->response->body, true);
 				break;
 			case 'XML':
-				$result = XML::fromString($this->response->body);
+				$this->result = XML::fromString($this->response->body);
 				break;
 			default:
-				$result = $this->response->body;
+				$this->result = $this->response->body;
 		}
-		if($params->_isSyncVerify && !$this->verifySync($params, $result))
+		if($params->_isSyncVerify && !$this->verifySync($params, $this->result))
 		{
 			throw new \Exception('同步返回数据验证失败');
 		}
 		else
 		{
-			return $result;
+			return $this->result;
 		}
 	}
 

@@ -4,6 +4,8 @@ namespace Yurun\PaySDK\Weixin;
 use \Yurun\PaySDK\Base;
 use Yurun\PaySDK\Lib\XML;
 use Yurun\PaySDK\Lib\ObjectToArray;
+use Yurun\PaySDK\Weixin\Report\Request;
+use Yurun\PaySDK\Weixin\Params\PublicParams;
 
 class SDK extends Base
 {
@@ -12,7 +14,13 @@ class SDK extends Base
 	 * @var \Yurun\PaySDK\Weixin\Params\PublicParams
 	 */
 	public $publicParams;
-	
+
+	/**
+	 * 用于上报的SDK实例
+	 * @var \Yurun\PaySDK\Weixin\SDK
+	 */
+	public $reportSDK;
+
 	/**
 	 * 处理执行接口的数据
 	 * @param $params
@@ -24,7 +32,7 @@ class SDK extends Base
 	public function __parseExecuteData($params, &$data, &$requestData, &$url)
 	{
 		$data = \array_merge(ObjectToArray::parse($this->publicParams), ObjectToArray::parse($params));
-		unset($data['apiDomain'], $data['appID'], $data['businessParams'], $data['_apiMethod'], $data['key'], $data['_method'], $data['_isSyncVerify'], $data['certPath'], $data['keyPath'], $data['needSignType']);
+		unset($data['apiDomain'], $data['appID'], $data['businessParams'], $data['_apiMethod'], $data['key'], $data['_method'], $data['_isSyncVerify'], $data['certPath'], $data['keyPath'], $data['needSignType'], $data['allowReport'], $data['reportLevel']);
 		$data['appid'] = $this->publicParams->appID;
 		$data['nonce_str'] = \md5(\uniqid('', true));
 		if(!$params->needSignType)
@@ -147,6 +155,63 @@ class SDK extends Base
 		{
 			$this->http->sslKey($this->publicParams->keyPath);
 		}
-		return parent::execute($params, $format);
+		parent::execute($params, $format);
+		if($params->allowReport)
+		{
+			$this->report($params);
+		}
+		return $this->result;
+	}
+
+	/**
+	 * 上报
+	 * @param mixed $params
+	 * @return void
+	 */
+	public function report($params)
+	{
+		switch($this->publicParams->reportLevel)
+		{
+			case PublicParams::REPORT_LEVEL_NONE:
+				return;
+			case PublicParams::REPORT_LEVEL_ALL:
+
+				break;
+			case PublicParams::REPORT_LEVEL_ERROR:
+				if(isset($this->result['return_code']))
+				{
+					if('SUCCESS' === $this->result['return_code'] && isset($this->result['result_code']) && 'SUCCESS' === $this->result['result_code'])
+					{
+						return;
+					}
+				}
+				else if(!empty($this->result))
+				{
+					return;
+				}
+				break;
+		}
+		if(null === $this->reportSDK)
+		{
+			$this->reportSDK = new static($this->publicParams);
+		}
+		$request = new Request;
+		$request->interface_url = $this->url;
+		$request->execute_time_ = (int)($this->response->totalTime() * 1000);
+		$request->return_code = isset($this->result['return_code']) ? $this->result['return_code'] : (empty($this->result) ? 'FAIL' : 'SUCCESS');
+		$request->return_msg = isset($this->result['return_msg']) ? $this->result['return_msg'] : null;
+		$request->result_code = isset($this->result['result_code']) ? $this->result['result_code'] : (empty($this->result) ? 'FAIL' : 'SUCCESS');
+		$request->err_code = isset($this->result['err_code']) ? $this->result['err_code'] : null;
+		$request->err_code_des = isset($this->result['err_code_des']) ? $this->result['err_code_des'] : null;
+		$request->user_ip = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '127.0.0.1';
+		$request->time = date('YmdHis');
+		if(isset($params->device_info))
+		{
+			$request->device_info = $params->device_info;
+		}
+		if(isset($params->out_trade_no))
+		{
+			$request->out_trade_no = $params->out_trade_no;
+		}
 	}
 }
