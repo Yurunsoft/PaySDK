@@ -1,7 +1,6 @@
 <?php
 namespace Yurun\PaySDK\Weixin\H5\Params;
 
-use \Yurun\PaySDK\Weixin\Params\PayRequestBase;
 use Yurun\PaySDK\Traits\JSONParams;
 
 class SceneInfo

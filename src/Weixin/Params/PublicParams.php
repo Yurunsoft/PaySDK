@@ -37,6 +37,27 @@ class PublicParams extends PublicBase
 	 */
 	public $keyPath;
 
+	/**
+	 * 交易保障上报级别
+	 * @var int
+	 */
+	public $reportLevel = PublicParams::REPORT_LEVEL_ERROR;
+
+	/**
+	 * 不上报
+	 */
+	const REPORT_LEVEL_NONE = 0;
+
+	/**
+	 * 上报所有请求
+	 */
+	const REPORT_LEVEL_ALL = 1;
+
+	/**
+	 * 只上报出错请求
+	 */
+	const REPORT_LEVEL_ERROR = 2;
+
 	public function __construct()
 	{
 		$this->apiDomain = 'https://api.mch.weixin.qq.com/';

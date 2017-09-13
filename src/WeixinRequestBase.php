@@ -15,6 +15,12 @@ abstract class WeixinRequestBase extends RequestBase
 	 */
 	public $needSignType = true;
 
+	/**
+	 * 是否允许上报
+	 * @var boolean
+	 */
+	public $allowReport = true;
+
 	public function __construct()
 	{
 		$this->_isSyncVerify = true;
