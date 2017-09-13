@@ -17,3 +17,8 @@ $request->product_id = 'test99999999';
 // 调用接口
 $pay->prepareExecute($request, $url);
 var_dump('qrcode：', $url);
+
+// 转短地址
+$request = new \Yurun\PaySDK\Weixin\Shorturl\Request;
+$request->long_url = $url;
+var_dump($pay->execute($request));
