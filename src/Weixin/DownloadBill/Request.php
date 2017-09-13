@@ -40,7 +40,6 @@ class Request extends WeixinRequestBase
 	 */
 	public $tar_type;
 
-	
 	public function __construct()
 	{
 		parent::__construct();

@@ -132,7 +132,7 @@ class SDK extends Base
 		$data['key'] = $this->publicParams->key;
 		$content = '';
 		foreach ($data as $k => $v){
-			if($v != '' && !is_array($v)){
+			if($v !== '' && $v !== null && !is_array($v)){
 				$content .= $k . '=' . $v . '&';
 			}
 		}
