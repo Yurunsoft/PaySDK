@@ -1,4 +1,7 @@
 <?php
+/**
+ * 支付宝即时到账异步通知Demo
+ */
 require __DIR__ . '/common.php';
 
 // 公共配置
