@@ -1,4 +1,7 @@
 <?php
+/**
+ * 支付宝查询对账单下载地址Demo
+ */
 require __DIR__ . '/common.php';
 
 // 公共配置
