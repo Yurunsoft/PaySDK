@@ -1,4 +1,7 @@
 <?php
+/**
+ * 支付宝回调Demo
+ */
 require __DIR__ . '/common.php';
 
 // 公共配置
