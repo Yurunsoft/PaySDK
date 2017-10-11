@@ -1,4 +1,7 @@
 <?php
+/**
+ * 支付宝手机网站支付Demo
+ */
 require __DIR__ . '/common.php';
 
 // 公共配置
@@ -17,7 +20,7 @@ $request->notify_url = $GLOBALS['PAY_CONFIG']['notify_url']; // 支付后通知�
 $request->return_url = $GLOBALS['PAY_CONFIG']['return_url']; // 支付后跳转返回地址
 $request->businessParams->out_trade_no = 'test' . mt_rand(10000000,99999999); // 商户订单号
 $request->businessParams->total_amount = 0.01; // 价格
-$request->businessParams->subject = '小米手机9黑色陶瓷尊享版';
+$request->businessParams->subject = '小米手机9黑色陶瓷尊享版'; // 商品标题
 
-// 调用接口
-echo $pay->redirectExecute($request);
+// 跳转到支付宝页面
+$pay->redirectExecute($request);

@@ -23,7 +23,7 @@ class BusinessParams
 	/**
 	 * 参与优惠计算的金额，单位为元，精确到小数点后两位，取值范围[0.01,100000000]。 
 	 * 如果该值未传入，但传入了【订单总金额】和【不可打折金额】，则该值默认为【订单总金额】-【不可打折金额】
-	 * @var [type]
+	 * @var double
 	 */
 	public $discountable_amount;
 

@@ -161,9 +161,8 @@ abstract class Base
 	}
 
 	/**
-	 * Undocumented function
-	 *
-	 * @param [type] $notifyHandle
+	 * 处理异步通知
+	 * @param mixed $notifyHandle
 	 * @return void
 	 */
 	public function notify($notifyHandle)
