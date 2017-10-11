@@ -1,4 +1,7 @@
 <?php
+/**
+ * 支付宝面对面支付之条码支付Demo
+ */
 require __DIR__ . '/common.php';
 
 // 公共配置
@@ -19,7 +22,7 @@ $request->businessParams->scene = 'bar_code'; // 条码支付，取值：bar_cod
 $request->businessParams->auth_code = '287601589603060117'; // 为了方便测试用条码支付，点开付款码，查看那一串数字就是了。
 $request->businessParams->out_trade_no = 'test' . mt_rand(10000000,99999999); // 商户订单号
 $request->businessParams->total_amount = 0.01; // 价格
-$request->businessParams->subject = '小米手机9黑色陶瓷尊享版';
+$request->businessParams->subject = '小米手机9黑色陶瓷尊享版'; // 商品标题
 
 // 调用接口
 var_dump($pay->execute($request));
