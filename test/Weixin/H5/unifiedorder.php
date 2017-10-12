@@ -22,4 +22,9 @@ $request->spbill_create_ip = '127.0.0.1'; // 客户端ip
 $request->notify_url = $GLOBALS['PAY_CONFIG']['pay_notify_url']; // 异步通知地址
 
 // 调用接口
-var_dump($pay->execute($request));
+$result = $pay->execute($request);
+if('SUCCESS' === $result['return_code'] && 'SUCCESS' === $result['result_code'])
+{
+	// 跳转支付界面
+	header('Location: ' . $result['mweb_url']);
+}
