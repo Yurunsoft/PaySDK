@@ -1,4 +1,7 @@
 <?php
+/**
+ * 微信支付回调Demo
+ */
 require __DIR__ . '/common.php';
 
 // 公共配置

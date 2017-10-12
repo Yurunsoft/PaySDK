@@ -1,4 +1,7 @@
 <?php
+/**
+ * 微信支付关闭订单Demo
+ */
 require __DIR__ . '/common.php';
 
 // 公共配置
@@ -11,6 +14,6 @@ $params->key = $GLOBALS['PAY_CONFIG']['key'];
 $sdk = new \Yurun\PaySDK\Weixin\SDK($params);
 
 $request = new \Yurun\PaySDK\Weixin\CloseOrder\Request;
-$request->transaction_id = '4004612001201709121684151520';
+$request->out_trade_no = '4004612001201709121684151520';
 
 var_dump($sdk->execute($request));

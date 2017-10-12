@@ -1,4 +1,7 @@
 <?php
+/**
+ * 微信扫码支付（模式一）Demo
+ */
 require dirname(__DIR__) . '/common.php';
 
 // 公共配置
@@ -21,4 +24,6 @@ var_dump('qrcode：', $url);
 // 转短地址
 $request = new \Yurun\PaySDK\Weixin\Shorturl\Request;
 $request->long_url = $url;
-var_dump($pay->execute($request));
+$result = $pay->execute($request);
+$shortUrl = $result['short_url'];
+var_dump($result, $shortUrl);
