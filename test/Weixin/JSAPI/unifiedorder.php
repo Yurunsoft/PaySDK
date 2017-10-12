@@ -20,8 +20,10 @@ $request->out_trade_no = 'test' . mt_rand(10000000,99999999); // 订单号
 $request->total_fee = 1; // 订单总金额，单位为：分
 $request->spbill_create_ip = '127.0.0.1'; // 客户端ip
 $request->notify_url = $GLOBALS['PAY_CONFIG']['pay_notify_url']; // 异步通知地址
-
+$request->openid = ''; // 必须设置openid
 
 
 // 调用接口
-var_dump($pay->execute($request));
+$result = $pay->execute($request);
+var_dump($result);
+// 最后需要将数据传给js，使用WeixinJSBridge进行支付
