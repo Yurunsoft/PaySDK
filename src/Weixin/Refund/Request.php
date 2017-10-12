@@ -62,4 +62,9 @@ class Request extends WeixinRequestBase
 	 * @var string
 	 */
 	public $refund_account;
+
+	public function __construct()
+	{
+		$this->needSignType = false;
+	}
 }
