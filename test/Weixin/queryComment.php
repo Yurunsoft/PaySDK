@@ -1,4 +1,7 @@
 <?php
+/**
+ * 微信支付拉取订单评价数据Demo
+ */
 require __DIR__ . '/common.php';
 
 // 公共配置
