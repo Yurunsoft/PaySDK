@@ -30,6 +30,18 @@ class PublicParams extends PublicBase
 	public $appPrivateKeyFile;
 
 	/**
+	 * 公有证书文件内容
+	 * @var string
+	 */
+	public $appPublicKey;
+	
+	/**
+	 * 公有证书文件地址，不为空时优先使用文件地址
+	 * @var string
+	 */
+	public $appPublicKeyFile;
+
+	/**
 	 * MD5密钥，安全检验码，由数字和字母组成的32位字符串，查看地址：https://b.alipay.com/order/pidAndKey.htm
 	 * @var string
 	 */
