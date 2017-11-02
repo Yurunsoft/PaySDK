@@ -1,5 +1,5 @@
 <?php
-namespace Yurun\PaySDK\Weixin\JSAPI\Params;
+namespace Yurun\PaySDK\Weixin\JSAPI\Params\Pay;
 
 use \Yurun\PaySDK\Weixin\Params\PayRequestBase;
 use \Yurun\PaySDK\Weixin\JSAPI\Params\SceneInfo;

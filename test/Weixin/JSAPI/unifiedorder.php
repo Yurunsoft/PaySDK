@@ -14,7 +14,7 @@ $params->key = $GLOBALS['PAY_CONFIG']['key'];
 $pay = new \Yurun\PaySDK\Weixin\SDK($params);
 
 // 支付接口
-$request = new \Yurun\PaySDK\Weixin\JSAPI\Params\Request;
+$request = new \Yurun\PaySDK\Weixin\JSAPI\Params\Pay\Request;
 $request->body = 'test'; // 商品描述
 $request->out_trade_no = 'test' . mt_rand(10000000,99999999); // 订单号
 $request->total_fee = 1; // 订单总金额，单位为：分
