@@ -129,7 +129,7 @@ abstract class Base
 			$url .= '&';
 		}
 		$this->requestData = $data;
-		$url .= \http_build_query($data);
+		$url .= \http_build_query($data, '', '&');
 		header('HTTP/1.1 302 Temporarily Moved');
 		header('Status: 302 Temporarily Moved');
 		header('Location: ' . $url);
@@ -156,7 +156,7 @@ abstract class Base
 			{
 				$url .= '&';
 			}
-			$url .= \http_build_query($data);
+			$url .= \http_build_query($data, '', '&');
 		}
 	}
 
