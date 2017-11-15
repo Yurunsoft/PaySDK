@@ -133,6 +133,7 @@ abstract class Base
 		header('HTTP/1.1 302 Temporarily Moved');
 		header('Status: 302 Temporarily Moved');
 		header('Location: ' . $url);
+		exit;
 	}
 
 	/**
