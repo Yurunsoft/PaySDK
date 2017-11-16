@@ -9,7 +9,7 @@ class RSA2
 		{
 			throw new \Exception('SHA256需要在PHP>=5.4.8下才可使用');
 		}
-		$key = "-----BEGIN PRIVATE KEY-----\n{$key}\n-----END PRIVATE KEY-----";
+		$key = "-----BEGIN RSA PRIVATE KEY-----\n{$key}\n-----END RSA PRIVATE KEY-----";
 		openssl_sign($data, $sign, $key, OPENSSL_ALGO_SHA256);
 		return $sign;
 	}

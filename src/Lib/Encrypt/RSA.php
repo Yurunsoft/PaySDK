@@ -5,7 +5,7 @@ class RSA
 {
 	public static function encryptPrivate($data, $key)
 	{
-		$key = "-----BEGIN PRIVATE KEY-----\n{$key}\n-----END PRIVATE KEY-----";
+		$key = "-----BEGIN RSA PRIVATE KEY-----\n{$key}\n-----END RSA PRIVATE KEY-----";
 		openssl_sign($data, $sign, $key, OPENSSL_ALGO_SHA1);
 		return $sign;
 	}

@@ -80,6 +80,7 @@ class SDK extends Base
 		{
 			return false;
 		}
+		$signType = $data['sign_type'];
 		unset($data['sign_type']);
 		$content = $this->parseSignData($data);
 		if(empty($this->publicParams->appPublicKeyFile))
@@ -92,14 +93,14 @@ class SDK extends Base
 			$key = $this->publicParams->appPublicKeyFile;
 			$method = 'verifyPublicFromFile';
 		}
-		switch($this->publicParams->sign_type)
+		switch($signType)
 		{
 			case 'RSA':
-				return \Yurun\PaySDK\Lib\Encrypt\DSA::$method($content, $key, \base64_decode($data['sign']));
+				return \Yurun\PaySDK\Lib\Encrypt\RSA::$method($content, $key, \base64_decode($data['sign']));
 			case 'RSA2':
 				return \Yurun\PaySDK\Lib\Encrypt\RSA2::$method($content, $key, \base64_decode($data['sign']));
 			default:
-				throw new \Exception('未知的加密方式：' . $this->publicParams->sign_type);
+				throw new \Exception('未知的加密方式：' . $signType);
 		}
 	}
 
