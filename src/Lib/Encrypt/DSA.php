@@ -5,7 +5,7 @@ class DSA
 {
 	public static function encryptPrivate($data, $key)
 	{
-		$key = "-----BEGIN RSA PRIVATE KEY-----\n{$key}\n-----END RSA PRIVATE KEY-----";
+		$key = "-----BEGIN DSA PRIVATE KEY-----\n{$key}\n-----END DSA PRIVATE KEY-----";
 		openssl_sign($data, $sign, $key, OPENSSL_ALGO_DSS1);
 		return $sign;
 	}
