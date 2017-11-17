@@ -25,4 +25,10 @@ $request->businessParams->refund_amount = '0.01'; // 需要退款的金额，该
 $request->businessParams->refund_reason = '退款原因，可以不写';
 
 // 调用接口
-var_dump($pay->execute($request));
+$result = $pay->execute($request);
+
+var_dump('result:', $result);
+
+var_dump('success:', $pay->checkResult());
+
+var_dump('error:', $pay->getError(), 'error_code:', $pay->getErrorCode());

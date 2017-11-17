@@ -22,4 +22,10 @@ $request->total_fee = 1; // 订单总金额，单位为：分
 $request->spbill_create_ip = '127.0.0.1'; // 客户端ip
 
 // 调用接口
-var_dump($pay->execute($request));
+$result = $pay->execute($request);
+
+var_dump('result:', $result);
+
+var_dump('success:', $pay->checkResult());
+
+var_dump('error:', $pay->getError(), 'error_code:', $pay->getErrorCode());

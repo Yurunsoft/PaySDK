@@ -16,4 +16,10 @@ $sdk = new \Yurun\PaySDK\Weixin\SDK($params);
 $request = new \Yurun\PaySDK\Weixin\CloseOrder\Request;
 $request->out_trade_no = '4004612001201709121684151520';
 
-var_dump($sdk->execute($request));
+$result = $sdk->execute($request);
+
+var_dump('result:', $result);
+
+var_dump('success:', $sdk->checkResult());
+
+var_dump('error:', $sdk->getError(), 'error_code:', $sdk->getErrorCode());

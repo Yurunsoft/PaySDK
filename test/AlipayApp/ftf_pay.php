@@ -25,4 +25,10 @@ $request->businessParams->total_amount = 0.01; // 价格
 $request->businessParams->subject = '小米手机9黑色陶瓷尊享版'; // 商品标题
 
 // 调用接口
-var_dump($pay->execute($request));
+$result = $pay->execute($request);
+
+var_dump('result:', $result);
+
+var_dump('success:', $pay->checkResult());
+
+var_dump('error:', $pay->getError(), 'error_code:', $pay->getErrorCode());

@@ -151,7 +151,6 @@ class SDK extends Base
 		return trim($content, '&');
 	}
 
-	
 	/**
 	 * 调用执行接口
 	 * @param mixed $params
@@ -166,5 +165,54 @@ class SDK extends Base
 			$result[$params->_syncResponseName] = json_decode(AES::decrypt($result[$params->_syncResponseName], \base64_decode($this->publicParams->aesKey)), true);
 		}
 		return $result;
+	}
+
+	/**
+	 * 检查是否执行成功
+	 * @param array $result
+	 * @return boolean
+	 */
+	protected function __checkResult($result)
+	{
+		$result = reset($result);
+		return isset($result['code']) && 10000 == $result['code'] && !isset($result['sub_code']);
+	}
+	
+	/**
+	 * 获取错误信息
+	 * @param array $result
+	 * @return string
+	 */
+	protected function __getError($result)
+	{
+		$result = reset($result);
+		if(isset($result['sub_code']))
+		{
+			return $result['sub_msg'];
+		}
+		if(isset($result['code']) && 10000 != $result['code'])
+		{
+			return $result['msg'];
+		}
+		return '';
+	}
+
+	/**
+	 * 获取错误代码
+	 * @param array $result
+	 * @return string
+	 */
+	protected function __getErrorCode($result)
+	{
+		$result = reset($result);
+		if(isset($result['sub_code']))
+		{
+			return $result['sub_code'];
+		}
+		if(isset($result['code']) && 10000 != $result['code'])
+		{
+			return $result['code'];
+		}
+		return '';
 	}
 }

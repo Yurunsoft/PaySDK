@@ -124,4 +124,34 @@ class SDK extends Base
 		}
 		return trim($content, '&');
 	}
+
+	/**
+	 * 检查是否执行成功
+	 * @param array $result
+	 * @return boolean
+	 */
+	protected function __checkResult($result)
+	{
+		return true;
+	}
+	
+	/**
+	 * 获取错误信息
+	 * @param array $result
+	 * @return string
+	 */
+	protected function __getError($result)
+	{
+		return '';
+	}
+
+	/**
+	 * 获取错误代码
+	 * @param array $result
+	 * @return string
+	 */
+	protected function __getErrorCode($result)
+	{
+		return '';
+	}
 }

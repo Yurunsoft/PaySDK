@@ -18,4 +18,10 @@ $sdk = new \Yurun\PaySDK\Weixin\SDK($params);
 $request = new \Yurun\PaySDK\Weixin\Reverse\Request;
 $request->transaction_id = '4004612001201709121684151520'; // 微信订单号，与商户订单号二选一
 
-var_dump($sdk->execute($request));
+$result = $sdk->execute($request);
+
+var_dump('result:', $result);
+
+var_dump('success:', $sdk->checkResult());
+
+var_dump('error:', $sdk->getError(), 'error_code:', $sdk->getErrorCode());
