@@ -76,9 +76,14 @@ $request->notify_url = ''; // 异步通知地址
 
 // 调用接口
 $result = $pay->execute($request);
-if('SUCCESS' === $result['return_code'] && 'SUCCESS' === $result['result_code'])
+if($pay->checkResult())
 {
 	// 跳转支付界面
 	header('Location: ' . $result['mweb_url']);
 }
+else
+{
+	var_dump($pay->getErrorCode() . ':' . $pay->getError());
+}
+exit;
 ```
