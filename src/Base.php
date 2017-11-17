@@ -113,6 +113,57 @@ abstract class Base
 	public abstract function verifySync($params, $data);
 
 	/**
+	 * 检查是否执行成功
+	 * @param array $result
+	 * @return boolean
+	 */
+	protected abstract function __checkResult($result);
+
+	/**
+	 * 获取错误信息
+	 * @param array $result
+	 * @return string
+	 */
+	protected abstract function __getError($result);
+
+	/**
+	 * 获取错误代码
+	 * @param array $result
+	 * @return string
+	 */
+	protected abstract function __getErrorCode($result);
+	
+	/**
+	 * 检查是否执行成功
+	 * @param array $result
+	 * @return boolean
+	 */
+	public function checkResult($result = null)
+	{
+		return $this->__checkResult(null === $result ? $this->result : $result);
+	}
+	
+	/**
+	 * 获取错误信息
+	 * @param array $result
+	 * @return string
+	 */
+	public function getError($result = null)
+	{
+		return $this->__getError(null === $result ? $this->result : $result);
+	}
+
+	/**
+	 * 获取错误代码
+	 * @param array $result
+	 * @return string
+	 */
+	public function getErrorCode($result = null)
+	{
+		return $this->__getErrorCode(null === $result ? $this->result : $result);
+	}
+
+	/**
 	 * 使用跳转的方式处理
 	 * @param array $params
 	 * @return void

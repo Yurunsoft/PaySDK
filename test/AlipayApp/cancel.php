@@ -23,4 +23,10 @@ $request->businessParams->out_trade_no = 'test36521521'; // 订单支付时传�
 $request->businessParams->trade_no = ''; // 支付宝交易号，和商户订单号不能同时为空
 
 // 调用接口
-var_dump($pay->execute($request));
+$result = $pay->execute($request);
+
+var_dump('result:', $result);
+
+var_dump('success:', $pay->checkResult());
+
+var_dump('error:', $pay->getError(), 'error_code:', $pay->getErrorCode());

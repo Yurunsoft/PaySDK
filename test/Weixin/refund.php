@@ -21,4 +21,10 @@ $request->out_refund_no = 'refund' . mt_rand(10000000,99999999); // 商户退款
 $request->total_fee = 1; // 订单总金额，单位为分，只能为整数
 $request->refund_fee = 1; // 退款总金额，订单总金额，单位为分，只能为整数
 
-var_dump($sdk->execute($request));
+$result = $sdk->execute($request);
+
+var_dump('result:', $result);
+
+var_dump('success:', $sdk->checkResult());
+
+var_dump('error:', $sdk->getError(), 'error_code:', $sdk->getErrorCode());

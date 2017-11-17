@@ -28,4 +28,10 @@ $param->amount_percentage = ''; // 分账信息中分账百分比。取值范围
 $param->desc = ''; // 分账描述
 $request->businessParams->royalty_parameters[] = $param;
 // 调用接口
-var_dump($pay->execute($request));
+$result = $pay->execute($request);
+
+var_dump('result:', $result);
+
+var_dump('success:', $pay->checkResult());
+
+var_dump('error:', $pay->getError(), 'error_code:', $pay->getErrorCode());

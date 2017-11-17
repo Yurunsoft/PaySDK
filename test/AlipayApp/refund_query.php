@@ -22,4 +22,10 @@ $request->businessParams->out_trade_no = '';
 $request->businessParams->out_request_no = '';
 
 // 调用接口
-var_dump($pay->execute($request));
+$result = $pay->execute($request);
+
+var_dump('result:', $result);
+
+var_dump('success:', $pay->checkResult());
+
+var_dump('error:', $pay->getError(), 'error_code:', $pay->getErrorCode());

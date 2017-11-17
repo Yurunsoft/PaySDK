@@ -25,5 +25,10 @@ $request->openid = ''; // 必须设置openid
 
 // 调用接口
 $result = $pay->execute($request);
-var_dump($result);
+
+var_dump('result:', $result);
+
+var_dump('success:', $pay->checkResult());
+
+var_dump('error:', $pay->getError(), 'error_code:', $pay->getErrorCode());
 // 最后需要将数据传给js，使用WeixinJSBridge进行支付

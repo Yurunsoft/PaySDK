@@ -25,7 +25,12 @@ $request->businessParams->subject = '小米手机9黑色陶瓷尊享版'; // 商
 // 调用接口
 try{
 	$data = $pay->execute($request);
-	var_dump($data);
+	
+	var_dump('result:', $data);
+	
+	var_dump('success:', $pay->checkResult());
+	
+	var_dump('error:', $pay->getError(), 'error_code:', $pay->getErrorCode());
 }
 catch(Exception $e){
 	var_dump($pay->response->body);

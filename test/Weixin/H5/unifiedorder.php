@@ -31,4 +31,5 @@ if('SUCCESS' === $result['return_code'] && 'SUCCESS' === $result['result_code'])
 {
 	// 跳转支付界面
 	header('Location: ' . $result['mweb_url']);
+	exit;
 }

@@ -98,9 +98,9 @@ class SDK extends Base
 		{
 			$data = XML::fromString($data);
 		}
-		if(!isset($data['sign']))
+		if(isset($data['return_code']) && 'SUCCESS' !== $data['return_code'])
 		{
-			return false;
+			return !isset($data['sign']);
 		}
 		$content = $this->parseSignData($data);
 		switch($this->publicParams->sign_type)
@@ -132,7 +132,7 @@ class SDK extends Base
 		$data['key'] = $this->publicParams->key;
 		$content = '';
 		foreach ($data as $k => $v){
-			if($v !== '' && $v !== null && !is_array($v)){
+			if($v != '' && !is_array($v)){
 				$content .= $k . '=' . $v . '&';
 			}
 		}
@@ -213,5 +213,51 @@ class SDK extends Base
 		{
 			$request->out_trade_no = $params->out_trade_no;
 		}
+	}
+	
+	/**
+	 * 检查是否执行成功
+	 * @param array $result
+	 * @return boolean
+	 */
+	protected function __checkResult($result)
+	{
+		return isset($result['return_code']) && 'SUCCESS' === $result['return_code'] && isset($result['result_code']) && 'SUCCESS' === $result['result_code'];
+	}
+	
+	/**
+	 * 获取错误信息
+	 * @param array $result
+	 * @return string
+	 */
+	protected function __getError($result)
+	{
+		if(isset($result['result_code']) && 'SUCCESS' !== $result['result_code'])
+		{
+			return $result['err_code_des'];
+		}
+		if(isset($result['return_code']) && 'SUCCESS' !== $result['return_code'])
+		{
+			return $result['return_msg'];
+		}
+		return '';
+	}
+
+	/**
+	 * 获取错误代码
+	 * @param array $result
+	 * @return string
+	 */
+	protected function __getErrorCode($result)
+	{
+		if(isset($result['result_code']) && 'SUCCESS' !== $result['result_code'])
+		{
+			return $result['err_code'];
+		}
+		if(isset($result['return_code']) && 'SUCCESS' !== $result['return_code'])
+		{
+			return $result['return_code'];
+		}
+		return '';
 	}
 }
