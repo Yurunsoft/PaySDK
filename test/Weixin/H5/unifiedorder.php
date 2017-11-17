@@ -27,9 +27,13 @@ $request->scene_info->wap_name = 'test';
 
 // 调用接口
 $result = $pay->execute($request);
-if('SUCCESS' === $result['return_code'] && 'SUCCESS' === $result['result_code'])
+if($pay->checkResult())
 {
 	// 跳转支付界面
 	header('Location: ' . $result['mweb_url']);
-	exit;
 }
+else
+{
+	var_dump($pay->getErrorCode() . ':' . $pay->getError());
+}
+exit;
