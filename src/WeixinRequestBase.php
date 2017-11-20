@@ -16,10 +16,23 @@ abstract class WeixinRequestBase extends RequestBase
 	public $needSignType = true;
 
 	/**
+	 * 签名类型，为null时使用publicParams设置
+	 * @var string
+	 */
+	public $signType = null;
+	
+	/**
+	 * 参数中需要带有nonce_str
+	 * @var boolean
+	 */
+	public $needNonceStr = true;
+
+	/**
 	 * 是否允许上报
 	 * @var boolean
 	 */
 	public $allowReport = true;
+
 
 	public function __construct()
 	{
