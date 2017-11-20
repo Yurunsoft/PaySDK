@@ -21,5 +21,6 @@ class Request extends WeixinRequestBase
 	{
 		parent::__construct();
 		$this->_isSyncVerify = $this->needSignType = false;
+		$this->signType = 'MD5';
 	}
 }
