@@ -32,10 +32,20 @@ class SDK extends Base
 	public function __parseExecuteData($params, &$data, &$requestData, &$url)
 	{
 		$data = \array_merge(ObjectToArray::parse($this->publicParams), ObjectToArray::parse($params));
-		unset($data['apiDomain'], $data['appID'], $data['businessParams'], $data['_apiMethod'], $data['key'], $data['_method'], $data['_isSyncVerify'], $data['certPath'], $data['keyPath'], $data['needSignType'], $data['allowReport'], $data['reportLevel']);
+		unset($data['apiDomain'], $data['appID'], $data['businessParams'], $data['_apiMethod'], $data['key'], $data['_method'], $data['_isSyncVerify'], $data['certPath'], $data['keyPath'], $data['needSignType'], $data['allowReport'], $data['reportLevel'], $data['needNonceStr'], $data['signType']);
 		$data['appid'] = $this->publicParams->appID;
-		$data['nonce_str'] = \md5(\uniqid('', true));
-		if(!$params->needSignType)
+		if($params->needNonceStr)
+		{
+			$data['nonce_str'] = \md5(\uniqid('', true));
+		}
+		if($params->needSignType)
+		{
+			if(null !== $params->signType)
+			{
+				$data['sign_type'] = $params->signType;
+			}
+		}
+		else
 		{
 			unset($data['sign_type']);
 		}
