@@ -22,6 +22,12 @@ class SDK extends Base
 	public $reportSDK;
 
 	/**
+	 * 最后使用的签名类型
+	 * @var string
+	 */
+	public $signType;
+
+	/**
 	 * 处理执行接口的数据
 	 * @param $params
 	 * @param &$data 数据数组
@@ -38,14 +44,15 @@ class SDK extends Base
 		{
 			$data['nonce_str'] = \md5(\uniqid('', true));
 		}
-		if($params->needSignType)
+		if(null === $params->signType)
 		{
-			if(null !== $params->signType)
-			{
-				$data['sign_type'] = $params->signType;
-			}
+			$this->signType = $this->publicParams->sign_type;
 		}
 		else
+		{
+			$this->signType = $data['sign_type'] = $params->signType;
+		}
+		if(!$params->needSignType)
 		{
 			unset($data['sign_type']);
 		}
@@ -86,14 +93,14 @@ class SDK extends Base
 	public function sign($data)
 	{
 		$content = $this->parseSignData($data);
-		switch($this->publicParams->sign_type)
+		switch($this->signType)
 		{
 			case 'HMAC-SHA256':
 				return strtoupper(hash_hmac('sha256', $content, $this->publicParams->key));
 			case 'MD5':
 				return strtoupper(md5($content));
 			default:
-				throw new \Exception('未知的签名方式：' . $this->publicParams->sign_type);
+				throw new \Exception('未知的签名方式：' . $this->signType);
 		}
 	}
 	
@@ -188,14 +195,11 @@ class SDK extends Base
 
 				break;
 			case PublicParams::REPORT_LEVEL_ERROR:
-				if(isset($this->result['return_code']))
+				if($this->checkResult())
 				{
-					if('SUCCESS' === $this->result['return_code'] && isset($this->result['result_code']) && 'SUCCESS' === $this->result['result_code'])
-					{
-						return;
-					}
+					return;
 				}
-				else if(!empty($this->result))
+				else if(empty($this->result))
 				{
 					return;
 				}
