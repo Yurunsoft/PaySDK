@@ -8,6 +8,12 @@ use \Yurun\PaySDK\Lib\ObjectToArray;
 
 abstract class Base extends NotifyBase
 {
+	/**
+	 * 返回数据是否需要签名
+	 * @var boolean
+	 */
+	public $needSign = true;
+	
 	public function __construct()
 	{
 		parent::__construct();
