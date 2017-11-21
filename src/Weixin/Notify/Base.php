@@ -41,10 +41,10 @@ abstract class Base extends NotifyBase
 	}
 	
 	/**
-	 * 验证签名
+	 * 对通知进行验证，是否是正确的通知
 	 * @return bool
 	 */
-	public function checkSign()
+	public function notifyVerify()
 	{
 		return !isset($this->data['return_code']) || 'SUCCESS' !== $this->data['return_code'] || $this->sdk->verifyCallback($this->data);
 	}

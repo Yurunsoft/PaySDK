@@ -37,7 +37,7 @@ abstract class NotifyBase
 	public function exec()
 	{
 		$this->data = $this->getNotifyData();
-		if(!$this->checkSign())
+		if(!$this->notifyVerify())
 		{
 			$this->reply(false, '签名失败');
 			throw new \Exception('签名验证失败');
@@ -60,10 +60,10 @@ abstract class NotifyBase
 	public abstract function getNotifyData();
 
 	/**
-	 * 验证签名
+	 * 对通知进行验证，是否是正确的通知
 	 * @return bool
 	 */
-	public abstract function checkSign();
+	public abstract function notifyVerify();
 
 	/**
 	 * 后续执行操作
