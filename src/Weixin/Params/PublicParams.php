@@ -6,10 +6,22 @@ use \Yurun\PaySDK\PublicBase;
 class PublicParams extends PublicBase
 {
 	/**
+	 * 微信分配的子商户公众账号ID，服务商、银行服务商需要。
+	 * @var string
+	 */
+	public $sub_appid;
+
+	/**
 	 * 微信支付分配的商户号
 	 * @var string
 	 */
 	public $mch_id;
+
+	/**
+	 * 微信支付分配的子商户号，开发者模式下必填，服务商、银行服务商需要。
+	 * @var string
+	 */
+	public $sub_mch_id;
 
 	/**
 	 * 签名类型，目前支持HMAC-SHA256和MD5，默认为MD5
