@@ -33,8 +33,8 @@ abstract class NotifyBase
 		$this->data = $this->getNotifyData();
 		if(!$this->notifyVerify())
 		{
-			$this->reply(false, '签名失败');
-			throw new \Exception('签名验证失败');
+			$this->reply(false, '通知不合法');
+			throw new \Exception('通知不合法');
 		}
 		$this->__exec();
 	}
