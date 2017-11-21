@@ -16,6 +16,12 @@ abstract class WeixinRequestBase extends RequestBase
 	public $needAppID = true;
 
 	/**
+	 * 参数中是否需要带有mch_id
+	 * @var boolean
+	 */
+	public $needMchID = true;
+
+	/**
 	 * 参数中是否需要带有sign_type
 	 * @var boolean
 	 */
