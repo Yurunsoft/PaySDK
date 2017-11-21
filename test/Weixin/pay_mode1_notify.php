@@ -40,9 +40,9 @@ class PayNotify extends \Yurun\PaySDK\Weixin\Notify\PayMode1
 			$this->replyData->prepay_id = $data['prepay_id'];
 			$this->replyData->result_code = 'SUCCESS'; // 交易是否成功
 			// $this->replyData->err_code_des = ''; // 错误信息
-			$this->reply('SUCCESS');
+			$this->reply(true);
 		}catch(Exception $e){
-			$this->reply('FAIL', $e->getMessage());
+			$this->reply(false, $e->getMessage());
 		}
 	}
 }

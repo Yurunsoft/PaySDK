@@ -24,7 +24,7 @@ class RefundNotify extends \Yurun\PaySDK\Weixin\Notify\Refund
 		// 支付成功处理，一般做订单处理
 		file_put_contents(__DIR__ . '/refund_notify_result.txt', date('Y-m-d H:i:s') . ':' . var_export($this->data, true));
 		// 告诉微信我处理过了，不要再通过了
-		$this->reply('SUCCESS', 'OK');
+		$this->reply(true, 'OK');
 	}
 }
 $refundNotify = new RefundNotify;
