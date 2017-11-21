@@ -15,7 +15,7 @@ abstract class NotifyBase
 
 	/**
 	 * 返回数据
-	 * @var \Yurun\PaySDK\Weixin\Reply\Base
+	 * @var mixed
 	 */
 	public $replyData;
 
@@ -39,7 +39,7 @@ abstract class NotifyBase
 		$this->data = $this->getNotifyData();
 		if(!$this->checkSign())
 		{
-			$this->reply('FAIL', '签名失败');
+			$this->reply(false, '签名失败');
 			throw new \Exception('签名验证失败');
 		}
 		$this->__exec();
@@ -47,24 +47,11 @@ abstract class NotifyBase
 
 	/**
 	 * 返回数据
+	 * @param boolean $success
+	 * @param string $message
 	 * @return void
 	 */
-	public function reply($code = null, $msg = null)
-	{
-		if(null !== $code)
-		{
-			$this->replyData->return_code = $code;
-		}
-		if(null !== $msg)
-		{
-			$this->replyData->return_msg = $msg;
-		}
-		if($this->needSign)
-		{
-			$this->replyData->sign = $this->sdk->sign(ObjectToArray::parse($this->replyData));
-		}
-		echo $this->replyData;
-	}
+	public abstract function reply($success, $message = '');
 
 	/**
 	 * 获取通知数据

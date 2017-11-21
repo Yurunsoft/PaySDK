@@ -125,14 +125,15 @@ class SDK extends Base
 	public function sign($data)
 	{
 		$content = $this->parseSignData($data);
-		switch($this->signType)
+		$signType = null === $this->signType ? $this->publicParams->sign_type : $this->signType;
+		switch($signType)
 		{
 			case 'HMAC-SHA256':
 				return strtoupper(hash_hmac('sha256', $content, $this->publicParams->key));
 			case 'MD5':
 				return strtoupper(md5($content));
 			default:
-				throw new \Exception('未知的签名方式：' . $this->signType);
+				throw new \Exception('未知的签名方式：' . $signType);
 		}
 	}
 	
