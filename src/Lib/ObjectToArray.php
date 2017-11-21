@@ -10,6 +10,13 @@ class ObjectToArray
 	 */
 	public static function parse($object)
 	{
-		return get_object_vars($object);
+		if(\method_exists($object, 'toArray'))
+		{
+			return $object->toArray();
+		}
+		else
+		{
+			return get_object_vars($object);
+		}
 	}
 }

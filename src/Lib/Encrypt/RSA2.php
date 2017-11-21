@@ -3,7 +3,7 @@ namespace Yurun\PaySDK\Lib\Encrypt;
 
 class RSA2
 {
-	public static function encryptPrivate($data, $key)
+	public static function signPrivate($data, $key)
 	{
 		if(!defined('OPENSSL_ALGO_SHA256'))
 		{
@@ -14,7 +14,7 @@ class RSA2
 		return $sign;
 	}
 
-	public static function encryptPrivateFromFile($data, $fileName)
+	public static function signPrivateFromFile($data, $fileName)
 	{
 		if(!defined('OPENSSL_ALGO_SHA256'))
 		{

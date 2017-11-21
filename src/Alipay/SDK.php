@@ -43,12 +43,12 @@ class SDK extends Base
 		if(empty($this->publicParams->appPrivateKeyFile))
 		{
 			$key = $this->publicParams->appPrivateKey;
-			$method = 'encryptPrivate';
+			$method = 'signPrivate';
 		}
 		else
 		{
 			$key = $this->publicParams->appPrivateKeyFile;
-			$method = 'encryptPrivateFromFile';
+			$method = 'signPrivateFromFile';
 		}
 		switch($this->publicParams->sign_type)
 		{

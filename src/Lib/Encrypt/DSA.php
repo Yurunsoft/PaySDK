@@ -3,14 +3,14 @@ namespace Yurun\PaySDK\Lib\Encrypt;
 
 class DSA
 {
-	public static function encryptPrivate($data, $key)
+	public static function signPrivate($data, $key)
 	{
 		$key = "-----BEGIN DSA PRIVATE KEY-----\n{$key}\n-----END DSA PRIVATE KEY-----";
 		openssl_sign($data, $sign, $key, OPENSSL_ALGO_DSS1);
 		return $sign;
 	}
 
-	public static function encryptPrivateFromFile($data, $fileName)
+	public static function signPrivateFromFile($data, $fileName)
 	{
 		$key = file_get_contents($fileName);
 		$res = openssl_get_privatekey($key);
