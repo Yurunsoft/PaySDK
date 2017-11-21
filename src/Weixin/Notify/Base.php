@@ -4,6 +4,7 @@ namespace Yurun\PaySDK\Weixin\Notify;
 use Yurun\PaySDK\NotifyBase;
 use \Yurun\PaySDK\Weixin\Reply\Base as ReplyBase;
 use \Yurun\PaySDK\Lib\XML;
+use \Yurun\PaySDK\Lib\ObjectToArray;
 
 abstract class Base extends NotifyBase
 {
@@ -11,6 +12,23 @@ abstract class Base extends NotifyBase
 	{
 		parent::__construct();
 		$this->replyData = new ReplyBase;
+	}
+
+	/**
+	 * 返回数据
+	 * @param boolean $success
+	 * @param string $message
+	 * @return void
+	 */
+	public function reply($success, $message = '')
+	{
+		$this->replyData->return_code = $success ? 'SUCCESS' : 'FAIL';
+		$this->replyData->return_msg = $message;
+		if($this->needSign)
+		{
+			$this->replyData->sign = $this->sdk->sign(ObjectToArray::parse($this->replyData));
+		}
+		echo $this->replyData;
 	}
 
 	/**
