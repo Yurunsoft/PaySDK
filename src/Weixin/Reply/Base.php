@@ -1,7 +1,6 @@
 <?php
 namespace Yurun\PaySDK\Weixin\Reply;
 
-use Yurun\PaySDK\NotifyBase;
 use \Yurun\PaySDK\Traits\XMLParams;
 
 class Base
