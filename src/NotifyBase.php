@@ -19,12 +19,6 @@ abstract class NotifyBase
 	 */
 	public $replyData;
 
-	/**
-	 * 返回数据是否需要签名
-	 * @var boolean
-	 */
-	public $needSign = true;
-
 	public function __construct()
 	{
 		
