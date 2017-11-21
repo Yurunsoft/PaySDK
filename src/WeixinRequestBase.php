@@ -10,7 +10,13 @@ abstract class WeixinRequestBase extends RequestBase
 	public $_apiMethod = '';
 
 	/**
-	 * 参数中需要带有sign_type
+	 * 参数中是否需要带有app_id
+	 * @var boolean
+	 */
+	public $needAppID = true;
+
+	/**
+	 * 参数中是否需要带有sign_type
 	 * @var boolean
 	 */
 	public $needSignType = true;
@@ -22,7 +28,7 @@ abstract class WeixinRequestBase extends RequestBase
 	public $signType = null;
 	
 	/**
-	 * 参数中需要带有nonce_str
+	 * 参数中是否需要带有nonce_str
 	 * @var boolean
 	 */
 	public $needNonceStr = true;
