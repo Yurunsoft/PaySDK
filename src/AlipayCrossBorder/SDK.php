@@ -173,7 +173,15 @@ class SDK extends Base
 	 */
 	protected function __checkResult($result)
 	{
-		return isset($result['is_success']) && 'T' === $result['is_success'];
+		if(isset($result['is_success']) && 'T' === $result['is_success'])
+		{
+			if(isset($result['response']))
+			{
+				$response = (array)$result['response'];
+				return 'SUCCESS' === (string)reset($response)->result_code;
+			}
+		}
+		return false;
 	}
 	
 	/**
@@ -183,7 +191,26 @@ class SDK extends Base
 	 */
 	protected function __getError($result)
 	{
-		return isset($result['error']) ? $result['error'] : '';
+		if(isset($result['is_success']))
+		{
+			if('T' === $result['is_success'])
+			{
+				if(isset($result['response']))
+				{
+					$response = (array)$result['response'];
+					$item = reset($response);
+					if('SUCCESS' !== (string)$item->result_code)
+					{
+						return (string)$item->error;
+					}
+				}
+			}
+			else
+			{
+				return $result['error'];
+			}
+		}
+		return '';
 	}
 
 	/**
@@ -193,6 +220,25 @@ class SDK extends Base
 	 */
 	protected function __getErrorCode($result)
 	{
-		return isset($result['error']) ? $result['error'] : '';
+		if(isset($result['is_success']))
+		{
+			if('T' === $result['is_success'])
+			{
+				if(isset($result['response']))
+				{
+					$response = (array)$result['response'];
+					$item = reset($response);
+					if('SUCCESS' !== (string)$item->result_code)
+					{
+						return (string)$item->result_code;
+					}
+				}
+			}
+			else
+			{
+				return $result['error'];
+			}
+		}
+		return '';
 	}
 }
