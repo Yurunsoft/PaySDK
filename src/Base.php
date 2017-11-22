@@ -81,6 +81,19 @@ abstract class Base
 	}
 
 	/**
+	 * 调用执行接口，将结果保存至文件
+	 * @param mixed $params
+	 * @param string $saveFilename
+	 * @return void
+	 */
+	public function executeDownload($params, $saveFilename)
+	{
+		$this->prepareExecute($params, $url, $data);
+		$this->url = $url;
+		$this->http->saveFile($saveFilename)->send($url, $this->requestData, $params->_method);;
+	}
+
+	/**
 	 * 签名
 	 * @param array $data
 	 * @return string
