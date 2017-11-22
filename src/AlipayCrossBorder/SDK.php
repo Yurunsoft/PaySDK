@@ -130,13 +130,24 @@ class SDK extends Base
 	}
 
 	/**
+	 * 调用执行接口
+	 * @param mixed $params
+	 * @param string $method
+	 * @return mixed
+	 */
+	public function execute($params, $format = 'XML')
+	{
+		return parent::execute($params, $format);
+	}
+
+	/**
 	 * 检查是否执行成功
 	 * @param array $result
 	 * @return boolean
 	 */
 	protected function __checkResult($result)
 	{
-		return true;
+		return isset($result['is_success']) && 'T' === $result['is_success'];
 	}
 	
 	/**
@@ -146,7 +157,7 @@ class SDK extends Base
 	 */
 	protected function __getError($result)
 	{
-		return '';
+		return isset($result['error']) ? $result['error'] : '';
 	}
 
 	/**
@@ -156,6 +167,6 @@ class SDK extends Base
 	 */
 	protected function __getErrorCode($result)
 	{
-		return '';
+		return isset($result['error']) ? $result['error'] : '';
 	}
 }
