@@ -11,15 +11,8 @@ abstract class Pay extends Base
 	 */
 	public function notifyVerify()
 	{
-		if(parent::notifyVerify())
-		{
-			$request = new \Yurun\PaySDK\AlipayCrossBorder\Online\NotifyVerify\Request;
-			$request->notify_id = $this->data['notify_id'];
-			return true === $this->sdk->execute($request);
-		}
-		else
-		{
-			return false;
-		}
+		$request = new \Yurun\PaySDK\AlipayCrossBorder\Online\NotifyVerify\Request;
+		$request->notify_id = $this->data['notify_id'];
+		return 'true' === $this->sdk->execute($request, '');
 	}
 }
