@@ -5,8 +5,6 @@ use Yurun\PaySDK\AlipayCrossBorder\Params\SplitFundInfo;
 
 class BusinessParams
 {
-	use \Yurun\PaySDK\Traits\JSONParams;
-
 	/**
 	 * 商品的标题/交易标题/订单标题/订单关键字等。
 	 * 该参数最长为128个汉字。
@@ -105,7 +103,7 @@ class BusinessParams
 	 */
 	public $split_fund_info = array();
 
-	public function toString()
+	public function toArray()
 	{
 		$obj = (array)$this;
 		if(empty($obj['split_fund_info']))
@@ -116,6 +114,6 @@ class BusinessParams
 		{
 			$obj['split_fund_info'] = json_encode($obj['split_fund_info']);
 		}
-		return \json_encode($obj);
+		return $obj;
 	}
 }
