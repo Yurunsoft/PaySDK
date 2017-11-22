@@ -113,7 +113,33 @@ class SDK extends Base
 	 */
 	public function verifySync($params, $data)
 	{
-		return true;
+		if(!isset($data['sign'], $data['sign_type']))
+		{
+			return true;
+		}
+		$response = (array)$data['response'];
+		$content = $this->parseSignData(reset($response));
+		if(empty($this->publicParams->appPublicKeyFile))
+		{
+			$key = $this->publicParams->appPublicKey;
+			$method = 'verifyPublic';
+		}
+		else
+		{
+			$key = $this->publicParams->appPublicKeyFile;
+			$method = 'verifyPublicFromFile';
+		}
+		switch($data['sign_type'])
+		{
+			case 'DSA':
+				return \Yurun\PaySDK\Lib\Encrypt\DSA::$method($content, $key, \base64_decode($data['sign']));
+			case 'RSA':
+				return \Yurun\PaySDK\Lib\Encrypt\RSA::$method($content, $key, \base64_decode($data['sign']));
+			case 'MD5':
+				return $data['sign'] === md5($content . $this->publicParams->md5Key);
+			default:
+				throw new \Exception('未知的加密方式：' . $data['sign_type']);
+		}
 	}
 
 	public function parseSignData($data)
