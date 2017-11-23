@@ -118,7 +118,7 @@ class SDK extends Base
 			return true;
 		}
 		$response = (array)$data['response'];
-		$content = $this->parseSignData(reset($response));
+		$content = $this->parseSignData((array)reset($response));
 		if(empty($this->publicParams->appPublicKeyFile))
 		{
 			$key = $this->publicParams->appPublicKey;
@@ -201,7 +201,14 @@ class SDK extends Base
 					$item = reset($response);
 					if('SUCCESS' !== (string)$item->result_code)
 					{
-						return (string)$item->error;
+						if(isset($item->error))
+						{
+							return (string)$item->error;
+						}
+						else
+						{
+							return (string)$item->detail_error_des;
+						}
 					}
 				}
 			}
@@ -230,7 +237,14 @@ class SDK extends Base
 					$item = reset($response);
 					if('SUCCESS' !== (string)$item->result_code)
 					{
-						return (string)$item->result_code;
+						if(isset($item->error))
+						{
+							return (string)$item->result_code;
+						}
+						else
+						{
+							return (string)$item->detail_error_code;
+						}
 					}
 				}
 			}
