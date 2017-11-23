@@ -107,7 +107,7 @@ class Request extends AlipayRequestBase
 	 * 最大允许商品数量50
 	 * @var array<\Yurun\PaySDK\AlipayCrossBorder\InStore\PreCreate\GoodsDetail>
 	 */
-	public $goods_detail;
+	public $goods_detail = array();
 
 	/**
 	 * 用于传送商家的具体业务信息;如果商家和支付宝同意传输此参数并就该参数的含义达成协议, 则此参数才有效。

@@ -17,8 +17,8 @@ $pay = new \Yurun\PaySDK\AlipayCrossBorder\SDK($params);
 
 // 支付接口
 $request = new \Yurun\PaySDK\AlipayCrossBorder\InStore\ModifyStatus\Request;
-$request->businessParams->qrcode = 'https://qr.alipay.com/ocx08830r7djh7dbkkv9k3e';
-$request->businessParams->status = 'RESTART';
+$request->qrcode = 'https://qr.alipay.com/ocx08830r7djh7dbkkv9k3e';
+$request->status = 'RESTART';
 
 // 调用接口
 $result = $pay->execute($request);

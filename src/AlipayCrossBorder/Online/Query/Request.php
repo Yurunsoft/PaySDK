@@ -2,7 +2,6 @@
 namespace Yurun\PaySDK\AlipayCrossBorder\Online\Query;
 
 use \Yurun\PaySDK\AlipayRequestBase;
-use \Yurun\PaySDK\AlipayCrossBorder\Online\Query\BusinessParams;
 
 class Request extends AlipayRequestBase
 {
@@ -13,14 +12,21 @@ class Request extends AlipayRequestBase
 	public $service = 'single_trade_query';
 
 	/**
-	 * 业务请求参数
-	 * @var \Yurun\PaySDK\AlipayCrossBorder\Online\Query\BusinessParams
+	 * 支付宝根据商户请求，创建订单生成的支付宝交易号。 
+	 * 最短16位，最长64位。 
+	 * 建议使用支付宝交易号进行查询，用商户网站唯一订单号查询的效率比较低。
+	 * @var string
 	 */
-	public $businessParams;
+	public $trade_no;
+	
+	/**
+	 * 支付宝合作商户网站唯一订单号（确保在商户系统中唯一）。
+	 * @var string
+	 */
+	public $out_trade_no;
 
 	public function __construct()
 	{
-		$this->businessParams = new BusinessParams;
 		$this->_method = 'GET';
 		$this->_isSyncVerify = true;
 	}

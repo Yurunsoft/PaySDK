@@ -17,18 +17,18 @@ $pay = new \Yurun\PaySDK\AlipayCrossBorder\SDK($params);
 
 // 支付接口
 $request = new \Yurun\PaySDK\AlipayCrossBorder\InStore\BarcodePay\Request;
-$request->businessParams->alipay_seller_id = $GLOBALS['PAY_CONFIG']['appid'];
-$request->businessParams->quantity = 1;
-$request->businessParams->trans_name = '测试商品'; // 商品名称
-$request->businessParams->partner_trans_id = 'test' . mt_rand(10000000,99999999); // 商户订单号
-$request->businessParams->currency = 'USD';
-$request->businessParams->trans_amount = 0.01; // 价格
-$request->businessParams->buyer_identity_code = '289092826576909279'; // 付款码
-$request->businessParams->identity_code_type = 'barcode'; // QRcode 或 barcode
-$request->businessParams->memo = '备注';
-$request->businessParams->extend_info->secondary_merchant_name = '某某小店';
-$request->businessParams->extend_info->secondary_merchant_id = '001';
-$request->businessParams->extend_info->secondary_merchant_industry = '5812';
+$request->alipay_seller_id = $GLOBALS['PAY_CONFIG']['appid'];
+$request->quantity = 1;
+$request->trans_name = '测试商品'; // 商品名称
+$request->partner_trans_id = 'test' . mt_rand(10000000,99999999); // 商户订单号
+$request->currency = 'USD';
+$request->trans_amount = 0.01; // 价格
+$request->buyer_identity_code = '285902802486590277'; // 付款码
+$request->identity_code_type = 'barcode'; // QRcode 或 barcode
+$request->memo = '备注';
+$request->extend_info->secondary_merchant_name = '某某小店';
+$request->extend_info->secondary_merchant_id = '001';
+$request->extend_info->secondary_merchant_industry = '5812';
 
 // 调用接口
 $result = $pay->execute($request);

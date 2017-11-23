@@ -15,7 +15,7 @@ $pay = new \Yurun\PaySDK\AlipayCrossBorder\SDK($params);
 
 // 支付接口
 $request = new \Yurun\PaySDK\AlipayCrossBorder\Online\Query\Request;
-$request->businessParams->out_trade_no = 'test37132408';
+$request->out_trade_no = 'test37132408';
 
 // 调用接口
 $result = $pay->execute($request);

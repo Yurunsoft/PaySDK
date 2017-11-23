@@ -2,7 +2,7 @@
 namespace Yurun\PaySDK\AlipayCrossBorder\InStore\CreateMerchantQR;
 
 use \Yurun\PaySDK\AlipayRequestBase;
-use \Yurun\PaySDK\AlipayCrossBorder\InStore\CreateMerchantQR\BusinessParams;
+use \Yurun\PaySDK\Lib\ObjectToArray;
 
 class Request extends AlipayRequestBase
 {
@@ -25,16 +25,22 @@ class Request extends AlipayRequestBase
 	public $notify_url;
 
 	/**
-	 * 业务请求参数
-	 * @var \Yurun\PaySDK\AlipayCrossBorder\InStore\CreateMerchantQR\BusinessParams
+	 * 业务类型
+	 * @var string
 	 */
-	public $businessParams;
+	public $biz_type = 'OVERSEASHOPQRCODE';
+
+	/**
+	 * 业务数据
+	 * @var \Yurun\PaySDK\AlipayCrossBorder\InStore\CreateMerchantQR\BizData
+	 */
+	public $biz_data;
 
 	public function __construct()
 	{
-		$this->businessParams = new BusinessParams;
 		$this->_method = 'GET';
 		$this->_isSyncVerify = true;
+		$this->biz_data = new \Yurun\PaySDK\AlipayCrossBorder\InStore\CreateMerchantQR\BizData;
 	}
 
 	public function toArray()
@@ -44,6 +50,7 @@ class Request extends AlipayRequestBase
 		{
 			$obj['timestamp'] = date('Y-m-d H:i:s');
 		}
+		$obj['biz_data'] = json_encode(ObjectToArray::parse($obj['biz_data']));
 		return $obj;
 	}
 }

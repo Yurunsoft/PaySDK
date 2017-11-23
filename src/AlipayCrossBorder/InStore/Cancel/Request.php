@@ -2,7 +2,6 @@
 namespace Yurun\PaySDK\AlipayCrossBorder\InStore\Cancel;
 
 use \Yurun\PaySDK\AlipayRequestBase;
-use \Yurun\PaySDK\AlipayCrossBorder\InStore\Cancel\BusinessParams;
 
 class Request extends AlipayRequestBase
 {
@@ -25,14 +24,19 @@ class Request extends AlipayRequestBase
 	public $terminal_timestamp;
 
 	/**
-	 * 业务请求参数
-	 * @var \Yurun\PaySDK\AlipayCrossBorder\InStore\Cancel\BusinessParams
+	 * 商户网站的订单号
+	 * @var string
 	 */
-	public $businessParams;
+	public $out_trade_no;
+
+	/**
+	 * 支付宝的订单号
+	 * @var string
+	 */
+	public $trade_no;
 
 	public function __construct()
 	{
-		$this->businessParams = new BusinessParams;
 		$this->_method = 'GET';
 		$this->_isSyncVerify = true;
 	}

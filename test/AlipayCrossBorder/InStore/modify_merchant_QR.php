@@ -17,18 +17,18 @@ $pay = new \Yurun\PaySDK\AlipayCrossBorder\SDK($params);
 
 // 支付接口
 $request = new \Yurun\PaySDK\AlipayCrossBorder\InStore\ModifyMerchantQR\Request;
-$request->businessParams->qrcode = 'https://qr.alipay.com/ocx08830r7djh7dbkkv9k3e';
+$request->qrcode = 'https://qr.alipay.com/ocx08830r7djh7dbkkv9k3e';
 $request->notify_url = $GLOBALS['PAY_CONFIG']['notify_url'];
-$request->businessParams->biz_data->secondary_merchant_industry = '5812';
-$request->businessParams->biz_data->secondary_merchant_id = 'x001';
-$request->businessParams->biz_data->secondary_merchant_name = 'xxxStore222';
-$request->businessParams->biz_data->store_id = 'x0001';
-$request->businessParams->biz_data->store_name = 'xxxxStore';
-$request->businessParams->biz_data->trans_currency = 'USD';
-$request->businessParams->biz_data->currency = 'USD';
+$request->biz_data->secondary_merchant_industry = '5812';
+$request->biz_data->secondary_merchant_id = 'x001';
+$request->biz_data->secondary_merchant_name = 'xxxStore222';
+$request->biz_data->store_id = 'x0001';
+$request->biz_data->store_name = 'xxxxStore';
+$request->biz_data->trans_currency = 'USD';
+$request->biz_data->currency = 'USD';
 // 下面两个参数在沙箱环境下传了就出错，生产环境可以传
-$request->businessParams->biz_data->country_code = 'CN';
-$request->businessParams->biz_data->address = 'wc';
+$request->biz_data->country_code = 'CN';
+$request->biz_data->address = 'wc';
 
 
 // 调用接口
@@ -38,5 +38,5 @@ var_dump('result:', $result);
 
 var_dump('success:', $pay->checkResult());
 
-var_dump('error:', $pay->getError(), 'error_code:', $pay->getErrorCode(), $pay->url);
+var_dump('error:', $pay->getError(), 'error_code:', $pay->getErrorCode());
 

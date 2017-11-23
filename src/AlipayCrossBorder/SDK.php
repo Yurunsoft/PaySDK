@@ -23,11 +23,7 @@ class SDK extends Base
 	public function __parseExecuteData($params, &$data, &$requestData, &$url)
 	{
 		$data = \array_merge(ObjectToArray::parse($this->publicParams), ObjectToArray::parse($params));
-		if(isset($params->businessParams))
-		{
-			$data = \array_merge($data, ObjectToArray::parse($params->businessParams));
-		}
-		unset($data['apiDomain'], $data['appID'], $data['businessParams'], $data['appPrivateKey'], $data['appPrivateKeyFile'], $data['md5Key'], $data['appPublicKey'], $data['appPublicKeyFile'], $data['_syncResponseName'], $data['_method'], $data['_isSyncVerify']);
+		unset($data['apiDomain'], $data['appID'], $data['appPrivateKey'], $data['appPrivateKeyFile'], $data['md5Key'], $data['appPublicKey'], $data['appPublicKeyFile'], $data['_syncResponseName'], $data['_method'], $data['_isSyncVerify']);
 		$data['partner'] = $this->publicParams->appID;
 		foreach($data as $key => $value)
 		{
@@ -245,7 +241,7 @@ class SDK extends Base
 					$item = reset($response);
 					if(isset($item->result_code) && 'SUCCESS' !== (string)$item->result_code)
 					{
-						if(isset($item->error))
+						if(isset($item->result_code))
 						{
 							return (string)$item->result_code;
 						}
