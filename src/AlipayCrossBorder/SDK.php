@@ -62,6 +62,9 @@ class SDK extends Base
 			case 'RSA':
 				$result = \Yurun\PaySDK\Lib\Encrypt\RSA::$method($content, $key);
 				break;
+			case 'RSA2':
+				$result = \Yurun\PaySDK\Lib\Encrypt\RSA2::$method($content, $key);
+				break;
 			case 'MD5':
 				return md5($content . $this->publicParams->md5Key);
 			default:
@@ -113,7 +116,7 @@ class SDK extends Base
 	 */
 	public function verifySync($params, $data)
 	{
-		if(!isset($data['sign'], $data['sign_type']))
+		if(!isset($data['sign'], $data['sign_type'], $data['response']))
 		{
 			return true;
 		}
@@ -178,7 +181,12 @@ class SDK extends Base
 			if(isset($result['response']))
 			{
 				$response = (array)$result['response'];
-				return 'SUCCESS' === (string)reset($response)->result_code;
+				$item = reset($response);
+				return !isset($item->result_code) || 'SUCCESS' === (string)$item->result_code;
+			}
+			else
+			{
+				return true;
 			}
 		}
 		return false;
@@ -199,7 +207,7 @@ class SDK extends Base
 				{
 					$response = (array)$result['response'];
 					$item = reset($response);
-					if('SUCCESS' !== (string)$item->result_code)
+					if(isset($item->result_code) && 'SUCCESS' !== (string)$item->result_code)
 					{
 						if(isset($item->error))
 						{
@@ -235,7 +243,7 @@ class SDK extends Base
 				{
 					$response = (array)$result['response'];
 					$item = reset($response);
-					if('SUCCESS' !== (string)$item->result_code)
+					if(isset($item->result_code) && 'SUCCESS' !== (string)$item->result_code)
 					{
 						if(isset($item->error))
 						{
