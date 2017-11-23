@@ -2,7 +2,6 @@
 namespace Yurun\PaySDK\AlipayCrossBorder\Online\DownloadSettlement;
 
 use \Yurun\PaySDK\AlipayRequestBase;
-use \Yurun\PaySDK\AlipayCrossBorder\Online\DownloadSettlement\BusinessParams;
 
 class Request extends AlipayRequestBase
 {
@@ -13,14 +12,19 @@ class Request extends AlipayRequestBase
 	public $service = 'forex_liquidation_file';
 
 	/**
-	 * 业务请求参数
-	 * @var \Yurun\PaySDK\AlipayCrossBorder\Online\DownloadSettlement\BusinessParams
+	 * 交易的开始日期、格式为YYYYMMDD
+	 * @var string
 	 */
-	public $businessParams;
+	public $start_date;
+	
+	/**
+	 * 交易的结束日期、格式为YYYYMMDD
+	 * @var string
+	 */
+	public $end_date;
 
 	public function __construct()
 	{
-		$this->businessParams = new BusinessParams;
 		$this->_method = 'GET';
 	}
 }

@@ -17,7 +17,7 @@ $pay = new \Yurun\PaySDK\AlipayCrossBorder\SDK($params);
 
 // 支付接口
 $request = new \Yurun\PaySDK\AlipayCrossBorder\InStore\Cancel\Request;
-$request->businessParams->trade_no = '2017112221001004630200394698';
+$request->trade_no = '2017112321001004630200394894';
 
 // 调用接口
 $result = $pay->execute($request);

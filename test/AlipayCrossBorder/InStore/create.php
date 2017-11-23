@@ -16,12 +16,13 @@ $params->apiDomain = 'https://openapi.alipaydev.com/gateway.do'; // 设为沙箱
 $pay = new \Yurun\PaySDK\AlipayCrossBorder\SDK($params);
 
 // 支付接口
-$request = new \Yurun\PaySDK\AlipayCrossBorder\InStore\PreCreate\Request;
+$request = new \Yurun\PaySDK\AlipayCrossBorder\InStore\CreateQR\Request;
 $request->notify_url = $GLOBALS['PAY_CONFIG']['notify_url'];
 $request->out_trade_no = 'test' . mt_rand(10000000,99999999); // 商户订单号
 $request->subject = '测试商品'; // 商品标题
 $request->total_fee = 0.01; // 价格
 $request->seller_id = $GLOBALS['PAY_CONFIG']['appid'];
+$request->buyer_id = '2088622887298635';
 $request->currency = 'USD';
 $request->trans_currency = 'USD';
 $request->extend_params->secondary_merchant_id = '1';

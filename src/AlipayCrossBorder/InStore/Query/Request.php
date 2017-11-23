@@ -2,7 +2,6 @@
 namespace Yurun\PaySDK\AlipayCrossBorder\InStore\Query;
 
 use \Yurun\PaySDK\AlipayRequestBase;
-use \Yurun\PaySDK\AlipayCrossBorder\InStore\Query\BusinessParams;
 
 class Request extends AlipayRequestBase
 {
@@ -13,14 +12,19 @@ class Request extends AlipayRequestBase
 	public $service = 'alipay.acquire.overseas.query';
 
 	/**
-	 * 业务请求参数
-	 * @var \Yurun\PaySDK\AlipayCrossBorder\InStore\Query\BusinessParams
+	 * 商户网站的订单号
+	 * @var string
 	 */
-	public $businessParams;
+	public $partner_trans_id;
+	
+	/**
+	 * 支付宝订单号
+	 * @var string
+	 */
+	public $alipay_trans_id;
 
 	public function __construct()
 	{
-		$this->businessParams = new BusinessParams;
 		$this->_method = 'GET';
 		$this->_isSyncVerify = true;
 	}

@@ -17,9 +17,11 @@ $pay = new \Yurun\PaySDK\AlipayCrossBorder\SDK($params);
 
 // 支付接口
 $request = new \Yurun\PaySDK\AlipayCrossBorder\InStore\Refund\Request;
-$request->businessParams->partner_trans_id = 'test73599553';
-$request->businessParams->partner_refund_id = 'test' . mt_rand(10000000,99999999);
-$request->businessParams->refund_amount = 0.01;
+$request->notify_url = $GLOBALS['PAY_CONFIG']['notify_url'];
+$request->partner_trans_id = 'test58522852';
+$request->partner_refund_id = 'test' . mt_rand(10000000,99999999);
+$request->refund_amount = 0.01;
+$request->currency = 'USD';
 
 // 调用接口
 $result = $pay->execute($request);
@@ -28,5 +30,5 @@ var_dump('result:', $result);
 
 var_dump('success:', $pay->checkResult());
 
-var_dump('error:', $pay->getError(), 'error_code:', $pay->getErrorCode());
+var_dump('error:', $pay->getError(), 'error_code:', $pay->getErrorCode(), $pay->requestData, $pay->url);
 

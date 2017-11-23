@@ -1,8 +1,6 @@
 <?php
 namespace Yurun\PaySDK\AlipayCrossBorder\InStore\ModifyMerchantQR;
 
-use \Yurun\PaySDK\AlipayCrossBorder\InStore\ModifyMerchantQR\BusinessParams;
-
 class Request extends \Yurun\PaySDK\AlipayCrossBorder\InStore\CreateMerchantQR\Request
 {
 	/**
@@ -12,14 +10,9 @@ class Request extends \Yurun\PaySDK\AlipayCrossBorder\InStore\CreateMerchantQR\R
 	public $service = 'alipay.commerce.qrcode.modify';
 	
 	/**
-	 * 业务请求参数
-	 * @var \Yurun\PaySDK\AlipayCrossBorder\InStore\ModifyMerchantQR\BusinessParams
+	 * 成功生成代码后返回的二维码值
+	 * @var string
 	 */
-	public $businessParams;
+	public $qrcode;
 	
-	public function __construct()
-	{
-		parent::__construct();
-		$this->businessParams = new BusinessParams;
-	}
 }

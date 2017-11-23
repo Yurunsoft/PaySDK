@@ -15,11 +15,11 @@ $pay = new \Yurun\PaySDK\AlipayCrossBorder\SDK($params);
 
 // 支付接口
 $request = new \Yurun\PaySDK\AlipayCrossBorder\Online\Refund\Request;
-$request->businessParams->out_return_no = date('Ymd') . mt_rand(100, 99999999); // 退款订单号
-$request->businessParams->out_trade_no = 'test37132408'; // 要退款订单的订单号
-$request->businessParams->return_amount = 0.01;
-$request->businessParams->currency = 'USD';
-$request->businessParams->product_code = 'NEW_OVERSEAS_SELLER';
+$request->out_return_no = date('Ymd') . mt_rand(100, 99999999); // 退款订单号
+$request->out_trade_no = 'test37132408'; // 要退款订单的订单号
+$request->return_amount = 0.01;
+$request->currency = 'USD';
+$request->product_code = 'NEW_OVERSEAS_SELLER';
 
 // 调用接口
 $result = $pay->execute($request);

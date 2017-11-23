@@ -15,8 +15,8 @@ $pay = new \Yurun\PaySDK\AlipayCrossBorder\SDK($params);
 
 // 支付接口
 $request = new \Yurun\PaySDK\AlipayCrossBorder\Online\DownloadCompare\Request;
-$request->businessParams->start_date = '20171120';
-$request->businessParams->end_date = '20171121';
+$request->start_date = '20171120';
+$request->end_date = '20171121';
 
 // 调用接口
 $result = $pay->executeDownload($request, __DIR__ . '/compare.txt');
