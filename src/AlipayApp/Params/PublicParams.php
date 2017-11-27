@@ -3,6 +3,9 @@ namespace Yurun\PaySDK\AlipayApp\Params;
 
 use \Yurun\PaySDK\PublicBase;
 
+/**
+ * 支付宝开放平台接口公共参数类
+ */
 class PublicParams extends PublicBase
 {
 	/**

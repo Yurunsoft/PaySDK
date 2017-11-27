@@ -3,6 +3,9 @@ namespace Yurun\PaySDK\AlipayCrossBorder\InStore\Cancel;
 
 use \Yurun\PaySDK\AlipayRequestBase;
 
+/**
+ * 支付宝境外到店支付-取消订单请求类
+ */
 class Request extends AlipayRequestBase
 {
 	/**

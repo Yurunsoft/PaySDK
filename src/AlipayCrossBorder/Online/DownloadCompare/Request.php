@@ -3,6 +3,9 @@ namespace Yurun\PaySDK\AlipayCrossBorder\Online\DownloadCompare;
 
 use \Yurun\PaySDK\AlipayRequestBase;
 
+/**
+ * 支付宝境外在线支付-对账单下载请求类
+ */
 class Request extends AlipayRequestBase
 {
 	/**

@@ -1,6 +1,9 @@
 <?php
 namespace Yurun\PaySDK\Alipay\Params\Pay;
 
+/**
+ * 支付宝即时到账支付业务参数类
+ */
 class BusinessParams
 {
 	/**

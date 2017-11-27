@@ -3,6 +3,9 @@ namespace Yurun\PaySDK\Weixin\SettlementQuery;
 
 use \Yurun\PaySDK\WeixinRequestBase;
 
+/**
+ * 微信支付-结算查询请求类
+ */
 class Request extends WeixinRequestBase
 {
 	/**

@@ -1,6 +1,9 @@
 <?php
 namespace Yurun\PaySDK;
 
+/**
+ * 公共参数基类
+ */
 abstract class PublicBase
 {
 	/**

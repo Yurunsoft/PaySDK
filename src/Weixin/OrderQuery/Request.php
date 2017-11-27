@@ -3,6 +3,9 @@ namespace Yurun\PaySDK\Weixin\OrderQuery;
 
 use \Yurun\PaySDK\WeixinRequestBase;
 
+/**
+ * 微信支付-查询订单请求类
+ */
 class Request extends WeixinRequestBase
 {
 	/**

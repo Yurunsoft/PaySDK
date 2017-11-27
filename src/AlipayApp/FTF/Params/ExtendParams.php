@@ -3,6 +3,9 @@ namespace Yurun\PaySDK\AlipayApp\FTF\Params;
 
 use \Yurun\PaySDK\Traits\JSONParams;
 
+/**
+ * 支付宝当面付扩展参数
+ */
 class ExtendParams
 {
 	use JSONParams;

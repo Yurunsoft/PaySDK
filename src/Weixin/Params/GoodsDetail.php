@@ -1,6 +1,9 @@
 <?php
 namespace Yurun\PaySDK\Weixin\Params;
 
+/**
+ * 微信支付-商品详情类
+ */
 class GoodsDetail
 {
 	/**

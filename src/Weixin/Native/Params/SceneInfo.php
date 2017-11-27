@@ -4,6 +4,9 @@ namespace Yurun\PaySDK\Weixin\Native\Params;
 use \Yurun\PaySDK\Weixin\Params\PayRequestBase;
 use Yurun\PaySDK\Traits\JSONParams;
 
+/**
+ * 微信支付-扫码支付-场景信息类
+ */
 class SceneInfo
 {
 	use JSONParams;

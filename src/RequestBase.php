@@ -1,6 +1,9 @@
 <?php
 namespace Yurun\PaySDK;
 
+/**
+ * 请求类基类
+ */
 abstract class RequestBase
 {
 	/**

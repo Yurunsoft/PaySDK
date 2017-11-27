@@ -4,6 +4,9 @@ namespace Yurun\PaySDK\AlipayCrossBorder\InStore\CreateQR;
 use Yurun\PaySDK\Lib\ObjectToArray;
 use \Yurun\PaySDK\AlipayRequestBase;
 
+/**
+ * 支付宝境外到店支付-创建二维码请求类
+ */
 class Request extends AlipayRequestBase
 {
 	/**

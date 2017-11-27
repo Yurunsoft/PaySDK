@@ -3,6 +3,9 @@ namespace Yurun\PaySDK\Weixin\Reverse;
 
 use \Yurun\PaySDK\WeixinRequestBase;
 
+/**
+ * 微信支付-撤销订单请求类
+ */
 class Request extends WeixinRequestBase
 {
 	/**

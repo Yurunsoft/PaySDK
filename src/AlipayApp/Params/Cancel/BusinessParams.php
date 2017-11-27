@@ -1,6 +1,9 @@
 <?php
 namespace Yurun\PaySDK\AlipayApp\Params\Cancel;
 
+/**
+ * 支付宝取消订单业务参数类
+ */
 class BusinessParams
 {
 	use \Yurun\PaySDK\Traits\JSONParams;

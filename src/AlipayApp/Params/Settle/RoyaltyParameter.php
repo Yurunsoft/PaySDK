@@ -1,6 +1,9 @@
 <?php
 namespace Yurun\PaySDK\AlipayApp\Params\Settle;
 
+/**
+ * 支付宝统一收单交易结算接口-分账明细信息类
+ */
 class RoyaltyParameter
 {
 	/**

@@ -4,6 +4,9 @@ namespace Yurun\PaySDK\AlipayApp\Fund\Transfer;
 use \Yurun\PaySDK\AlipayRequestBase;
 use \Yurun\PaySDK\AlipayApp\Fund\Transfer\BusinessParams;
 
+/**
+ * 支付宝单笔转账到支付宝账户接口请求类
+ */
 class Request extends AlipayRequestBase
 {
 	/**
@@ -20,7 +23,7 @@ class Request extends AlipayRequestBase
 
 	/**
 	 * 业务请求参数
-	 * 参考https://docs.open.alipay.com/common/105901
+	 * 参考https://docs.open.alipay.com/api_28/alipay.fund.trans.toaccount.transfer/
 	 * @var \Yurun\PaySDK\AlipayApp\Fund\Transfer\BusinessParams
 	 */
 	public $businessParams;

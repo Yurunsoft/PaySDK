@@ -1,6 +1,9 @@
 <?php
 namespace Yurun\PaySDK\Alipay\Params\RefundPwd;
 
+/**
+ * 支付宝有密退款业务参数类
+ */
 class BusinessParams
 {
 	/**

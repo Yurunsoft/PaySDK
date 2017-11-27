@@ -3,6 +3,9 @@ namespace Yurun\PaySDK\AlipayCrossBorder\InStore\ModifyStatus;
 
 use \Yurun\PaySDK\AlipayRequestBase;
 
+/**
+ * 支付宝境外到店支付-更新商户二维码状态请求类
+ */
 class Request extends AlipayRequestBase
 {
 	/**

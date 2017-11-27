@@ -1,6 +1,9 @@
 <?php
 namespace Yurun\PaySDK\AlipayApp\Params\Refund;
 
+/**
+ * 支付宝统一收单交易退款接口业务参数
+ */
 class BusinessParams
 {
 	use \Yurun\PaySDK\Traits\JSONParams;

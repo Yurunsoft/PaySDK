@@ -1,6 +1,9 @@
 <?php
 namespace Yurun\PaySDK\AlipayApp\FTF\Params;
 
+/**
+ * 支付宝当面付商品详情
+ */
 class GoodsDetail
 {
 	/**

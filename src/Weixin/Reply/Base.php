@@ -3,6 +3,9 @@ namespace Yurun\PaySDK\Weixin\Reply;
 
 use \Yurun\PaySDK\Traits\XMLParams;
 
+/**
+ * 微信支付-回复通知基类
+ */
 class Base
 {
 	use XMLParams;

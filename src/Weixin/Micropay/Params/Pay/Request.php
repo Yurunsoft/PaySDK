@@ -4,6 +4,9 @@ namespace Yurun\PaySDK\Weixin\Micropay\Params\Pay;
 use \Yurun\PaySDK\Weixin\Params\PayRequestBase;
 use \Yurun\PaySDK\Weixin\Micropay\Params\SceneInfo;
 
+/**
+ * 微信支付-刷卡支付-下单请求类
+ */
 class Request extends PayRequestBase
 {
 	/**

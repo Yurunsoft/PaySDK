@@ -3,6 +3,9 @@ namespace Yurun\PaySDK\Weixin\Shorturl;
 
 use \Yurun\PaySDK\WeixinRequestBase;
 
+/**
+ * 微信支付-转换短网址请求类
+ */
 class Request extends WeixinRequestBase
 {
 	/**

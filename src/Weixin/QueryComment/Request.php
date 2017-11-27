@@ -3,6 +3,9 @@ namespace Yurun\PaySDK\Weixin\QueryComment;
 
 use \Yurun\PaySDK\WeixinRequestBase;
 
+/**
+ * 微信支付-查询订单评价请求类
+ */
 class Request extends WeixinRequestBase
 {
 	/**

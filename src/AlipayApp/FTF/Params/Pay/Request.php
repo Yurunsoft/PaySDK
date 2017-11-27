@@ -4,6 +4,9 @@ namespace Yurun\PaySDK\AlipayApp\FTF\Params\Pay;
 use \Yurun\PaySDK\AlipayRequestBase;
 use \Yurun\PaySDK\AlipayApp\FTF\Params\Pay\BusinessParams;
 
+/**
+ * 支付宝统一收单交易支付接口请求类
+ */
 class Request extends AlipayRequestBase
 {
 	/**
@@ -26,7 +29,7 @@ class Request extends AlipayRequestBase
 
 	/**
 	 * 业务请求参数
-	 * 参考https://docs.open.alipay.com/common/105901
+	 * 参考https://docs.open.alipay.com/api_1/alipay.trade.pay
 	 * @var \Yurun\PaySDK\AlipayApp\FTF\Params\Pay\BusinessParams
 	 */
 	public $businessParams;

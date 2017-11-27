@@ -3,6 +3,9 @@ namespace Yurun\PaySDK\Weixin\ExchageRate;
 
 use \Yurun\PaySDK\WeixinRequestBase;
 
+/**
+ * 微信支付-汇率查询请求类
+ */
 class Request extends WeixinRequestBase
 {
 	/**

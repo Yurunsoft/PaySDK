@@ -4,6 +4,9 @@ namespace Yurun\PaySDK\Weixin\APP\Params\Pay;
 use \Yurun\PaySDK\Weixin\Params\PayRequestBase;
 use \Yurun\PaySDK\Weixin\APP\Params\SceneInfo;
 
+/**
+ * 微信支付-APP支付-下单请求类
+ */
 class Request extends PayRequestBase
 {
 	/**

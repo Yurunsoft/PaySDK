@@ -6,6 +6,9 @@ use \Yurun\PaySDK\Weixin\Reply\Base as ReplyBase;
 use \Yurun\PaySDK\Lib\XML;
 use \Yurun\PaySDK\Lib\ObjectToArray;
 
+/**
+ * 微信支付-通知处理基类
+ */
 abstract class Base extends NotifyBase
 {
 	/**

@@ -1,6 +1,9 @@
 <?php
 namespace Yurun\PaySDK\AlipayCrossBorder\InStore\PreCreate;
 
+/**
+ * 支付宝境外到店支付-预创建订单扩展信息类
+ */
 class ExtendInfo
 {
 	use \Yurun\PaySDK\Traits\JSONParams;

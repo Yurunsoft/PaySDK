@@ -3,6 +3,9 @@ namespace Yurun\PaySDK;
 
 use \Yurun\PaySDK\Lib\ObjectToArray;
 
+/**
+ * 通知处理类基类
+ */
 abstract class NotifyBase
 {
 	public $data;

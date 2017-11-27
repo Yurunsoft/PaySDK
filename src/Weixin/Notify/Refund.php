@@ -6,6 +6,9 @@ use \Yurun\PaySDK\Weixin\Reply\Pay as ReplyPay;
 use \Yurun\PaySDK\Lib\Encrypt\AES;
 use \Yurun\PaySDK\Lib\XML;
 
+/**
+ * 微信支付-退款通知基类
+ */
 abstract class Refund extends Base
 {
 	/**

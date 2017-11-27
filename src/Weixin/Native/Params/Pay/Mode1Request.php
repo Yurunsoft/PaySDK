@@ -4,7 +4,7 @@ namespace Yurun\PaySDK\Weixin\Native\Params\Pay;
 use \Yurun\PaySDK\WeixinRequestBase;
 
 /**
- * 模式1生成二维码
+ * 微信支付-扫码支付-模式1生成二维码
  * 详见https://pay.weixin.qq.com/wiki/doc/api/native.php?chapter=6_4
  */
 class Mode1Request extends WeixinRequestBase

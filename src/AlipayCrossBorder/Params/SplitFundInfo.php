@@ -1,6 +1,9 @@
 <?php
 namespace Yurun\PaySDK\AlipayCrossBorder\Params;
 
+/**
+ * 支付宝境外支付-分账明细类
+ */
 class SplitFundInfo
 {
 	use \Yurun\PaySDK\Traits\JSONParams;

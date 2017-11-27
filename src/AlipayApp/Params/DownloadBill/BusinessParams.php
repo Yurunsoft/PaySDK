@@ -1,6 +1,9 @@
 <?php
 namespace Yurun\PaySDK\AlipayApp\Params\DownloadBill;
 
+/**
+ * 支付宝查询对账单业务参数类
+ */
 class BusinessParams
 {
 	use \Yurun\PaySDK\Traits\JSONParams;

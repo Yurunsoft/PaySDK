@@ -4,6 +4,9 @@ namespace Yurun\PaySDK\AlipayApp\FTF\Params\QR;
 use \Yurun\PaySDK\AlipayRequestBase;
 use \Yurun\PaySDK\AlipayApp\FTF\Params\QR\BusinessParams;
 
+/**
+ * 支付宝统一收单线下交易预创建（扫码支付）请求类
+ */
 class Request extends AlipayRequestBase
 {
 	/**
@@ -26,7 +29,7 @@ class Request extends AlipayRequestBase
 
 	/**
 	 * 业务请求参数
-	 * 参考https://docs.open.alipay.com/common/105901
+	 * 参考https://docs.open.alipay.com/api_1/alipay.trade.precreate/
 	 * @var \Yurun\PaySDK\AlipayApp\FTF\Params\QR\BusinessParams
 	 */
 	public $businessParams;

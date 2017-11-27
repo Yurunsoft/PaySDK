@@ -3,6 +3,9 @@ namespace Yurun\PaySDK\Weixin\DownloadBill;
 
 use \Yurun\PaySDK\WeixinRequestBase;
 
+/**
+ * 微信支付-下载对账单请求类
+ */
 class Request extends WeixinRequestBase
 {
 	/**

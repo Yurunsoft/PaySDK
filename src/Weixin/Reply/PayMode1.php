@@ -1,6 +1,9 @@
 <?php
 namespace Yurun\PaySDK\Weixin\Reply;
 
+/**
+ * 微信支付-回复扫码支付模式一通知基类
+ */
 class PayMode1 extends Base
 {
 	/**

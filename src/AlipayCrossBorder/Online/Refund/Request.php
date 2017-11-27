@@ -3,6 +3,9 @@ namespace Yurun\PaySDK\AlipayCrossBorder\Online\Refund;
 
 use \Yurun\PaySDK\AlipayRequestBase;
 
+/**
+ * 支付宝境外在线支付-退款请求类
+ */
 class Request extends AlipayRequestBase
 {
 	/**

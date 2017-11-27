@@ -4,6 +4,9 @@ namespace Yurun\PaySDK\AlipayApp\Params\Settle;
 use \Yurun\PaySDK\AlipayRequestBase;
 use \Yurun\PaySDK\AlipayApp\Params\Settle\BusinessParams;
 
+/**
+ * 支付宝统一收单交易结算接口请求类
+ */
 class Request extends AlipayRequestBase
 {
 	/**

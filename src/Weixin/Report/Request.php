@@ -3,6 +3,9 @@ namespace Yurun\PaySDK\Weixin\Report;
 
 use \Yurun\PaySDK\WeixinRequestBase;
 
+/**
+ * 微信支付-交易保障错误提交请求类
+ */
 class Request extends WeixinRequestBase
 {
 	/**

@@ -3,6 +3,9 @@ namespace Yurun\PaySDK\AlipayCrossBorder\Params;
 
 use \Yurun\PaySDK\PublicBase;
 
+/**
+ * 支付宝境外支付公共参数类
+ */
 class PublicParams extends PublicBase
 {
 	/**

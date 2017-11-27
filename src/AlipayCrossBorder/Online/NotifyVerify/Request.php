@@ -3,6 +3,9 @@ namespace Yurun\PaySDK\AlipayCrossBorder\Online\NotifyVerify;
 
 use \Yurun\PaySDK\AlipayRequestBase;
 
+/**
+ * 支付宝境外支付通知验证请求类
+ */
 class Request extends AlipayRequestBase
 {
 	/**

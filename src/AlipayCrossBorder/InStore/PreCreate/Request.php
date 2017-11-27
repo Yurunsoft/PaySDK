@@ -4,6 +4,9 @@ namespace Yurun\PaySDK\AlipayCrossBorder\InStore\PreCreate;
 use \Yurun\PaySDK\AlipayRequestBase;
 use \Yurun\PaySDK\AlipayCrossBorder\InStore\PreCreate\BusinessParams;
 
+/**
+ * 支付宝境外到店支付-预创建订单请求类
+ */
 class Request extends AlipayRequestBase
 {
 	/**

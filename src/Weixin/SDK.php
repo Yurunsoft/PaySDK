@@ -7,6 +7,9 @@ use Yurun\PaySDK\Lib\ObjectToArray;
 use Yurun\PaySDK\Weixin\Report\Request;
 use Yurun\PaySDK\Weixin\Params\PublicParams;
 
+/**
+ * 微信支付SDK类
+ */
 class SDK extends Base
 {
 	/**

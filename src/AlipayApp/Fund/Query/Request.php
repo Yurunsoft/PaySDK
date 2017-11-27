@@ -4,6 +4,9 @@ namespace Yurun\PaySDK\AlipayApp\Fund\Query;
 use \Yurun\PaySDK\AlipayRequestBase;
 use \Yurun\PaySDK\AlipayApp\Fund\Query\BusinessParams;
 
+/**
+ * 支付宝查询转账订单接口请求类
+ */
 class Request extends AlipayRequestBase
 {
 	/**
@@ -20,7 +23,7 @@ class Request extends AlipayRequestBase
 
 	/**
 	 * 业务请求参数
-	 * 参考https://docs.open.alipay.com/common/105901
+	 * 参考https://docs.open.alipay.com/api_28/alipay.fund.trans.order.query
 	 * @var \Yurun\PaySDK\AlipayApp\Fund\Query\BusinessParams
 	 */
 	public $businessParams;

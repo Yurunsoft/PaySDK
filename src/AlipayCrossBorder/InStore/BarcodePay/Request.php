@@ -3,6 +3,9 @@ namespace Yurun\PaySDK\AlipayCrossBorder\InStore\BarcodePay;
 
 use \Yurun\PaySDK\AlipayRequestBase;
 
+/**
+ * 支付宝境外到店支付-扫码支付请求类
+ */
 class Request extends AlipayRequestBase
 {
 	/**

@@ -5,6 +5,9 @@ use \Yurun\PaySDK\Base;
 use \Yurun\PaySDK\Lib\Encrypt\AES;
 use \Yurun\PaySDK\Lib\ObjectToArray;
 
+/**
+ * 支付宝开放平台SDK类
+ */
 class SDK extends Base
 {
 	/**

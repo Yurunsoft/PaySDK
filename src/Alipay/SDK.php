@@ -4,6 +4,9 @@ namespace Yurun\PaySDK\Alipay;
 use \Yurun\PaySDK\Base;
 use \Yurun\PaySDK\Lib\ObjectToArray;
 
+/**
+ * 支付宝即时到账SDK类
+ */
 class SDK extends Base
 {
 	/**
