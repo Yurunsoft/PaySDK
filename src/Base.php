@@ -56,7 +56,7 @@ abstract class Base
 	 */
 	public function execute($params, $format = 'JSON')
 	{
-		if($params->__onExecute($this))
+		if($params->__onExecute($this, $format))
 		{
 			return $this->result;
 		}		

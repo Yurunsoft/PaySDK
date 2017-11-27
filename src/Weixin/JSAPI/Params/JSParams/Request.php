@@ -14,9 +14,10 @@ class Request extends WeixinRequestBase
 	/**
 	 * 当调用SDK的execute时触发，返回true时不执行SDK中默认的执行逻辑
 	 * @param \Yurun\PaySDK\Base $sdk
+	 * @param string $format 数据格式，json、xml等
 	 * @return boolean
 	 */
-	public function __onExecute($sdk)
+	public function __onExecute($sdk, $format)
 	{
 		$data = array(
 			'appId'			=>	$sdk->publicParams->appID,
