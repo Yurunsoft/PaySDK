@@ -1,6 +1,9 @@
 <?php
 namespace Yurun\PaySDK\AlipayApp\Fund\Query;
 
+/**
+ * 支付宝查询转账订单接口业务参数类
+ */
 class BusinessParams
 {
 	use \Yurun\PaySDK\Traits\JSONParams;

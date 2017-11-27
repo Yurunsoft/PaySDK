@@ -3,6 +3,9 @@ namespace Yurun\PaySDK\Weixin\JSAPI\Params\JSParams;
 
 use \Yurun\PaySDK\WeixinRequestBase;
 
+/**
+ * 微信支付-公众号支付-传递给JSSDK所需参数类
+ */
 class Request extends WeixinRequestBase
 {
 	/**

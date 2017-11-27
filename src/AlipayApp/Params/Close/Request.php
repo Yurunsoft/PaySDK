@@ -4,6 +4,9 @@ namespace Yurun\PaySDK\AlipayApp\Params\Close;
 use \Yurun\PaySDK\AlipayRequestBase;
 use \Yurun\PaySDK\AlipayApp\Params\Close\BusinessParams;
 
+/**
+ * 支付宝关闭订单请求类
+ */
 class Request extends AlipayRequestBase
 {
 	/**

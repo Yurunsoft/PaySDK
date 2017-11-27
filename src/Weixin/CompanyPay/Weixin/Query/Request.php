@@ -3,6 +3,9 @@ namespace Yurun\PaySDK\Weixin\CompanyPay\Weixin\Query;
 
 use \Yurun\PaySDK\WeixinRequestBase;
 
+/**
+ * 微信支付-企业付款到零钱查询请求类
+ */
 class Request extends WeixinRequestBase
 {
 	/**

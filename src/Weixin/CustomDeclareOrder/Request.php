@@ -3,6 +3,9 @@ namespace Yurun\PaySDK\Weixin\CustomDeclareOrder;
 
 use \Yurun\PaySDK\WeixinRequestBase;
 
+/**
+ * 微信支付-海关报关提交请求类
+ */
 class Request extends WeixinRequestBase
 {
 	/**

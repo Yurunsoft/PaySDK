@@ -1,6 +1,9 @@
 <?php
 namespace Yurun\PaySDK\AlipayCrossBorder\InStore\CreateMerchantQR;
 
+/**
+ * 支付宝境外到店支付-创建商户二维码渠道费配置类
+ */
 class ChannelFee
 {
 	use \Yurun\PaySDK\Traits\JSONParams;

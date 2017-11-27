@@ -1,6 +1,9 @@
 <?php
 namespace Yurun\PaySDK\AlipayCrossBorder\InStore\CreateMerchantQR;
 
+/**
+ * 支付宝境外到店支付-创建商户二维码业务数据类
+ */
 class BizData
 {
 	use \Yurun\PaySDK\Traits\JSONParams;

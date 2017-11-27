@@ -1,6 +1,9 @@
 <?php
 namespace Yurun\PaySDK\AlipayCrossBorder\InStore\BarcodePay;
 
+/**
+ * 支付宝境外到店支付-扫码支付扩展信息类
+ */
 class ExtendInfo
 {
 	use \Yurun\PaySDK\Traits\JSONParams;

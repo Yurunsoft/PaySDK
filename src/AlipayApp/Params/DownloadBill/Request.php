@@ -4,6 +4,9 @@ namespace Yurun\PaySDK\AlipayApp\Params\DownloadBill;
 use \Yurun\PaySDK\AlipayRequestBase;
 use \Yurun\PaySDK\AlipayApp\Params\DownloadBill\BusinessParams;
 
+/**
+ * 支付宝查询对账单请求类
+ */
 class Request extends AlipayRequestBase
 {
 	/**
@@ -20,7 +23,7 @@ class Request extends AlipayRequestBase
 
 	/**
 	 * 业务请求参数
-	 * 参考https://docs.open.alipay.com/api_1/alipay.trade.refund
+	 * 参考https://docs.open.alipay.com/api_15/alipay.data.dataservice.bill.downloadurl.query
 	 * @var \Yurun\PaySDK\AlipayApp\Params\DownloadBill\BusinessParams
 	 */
 	public $businessParams;

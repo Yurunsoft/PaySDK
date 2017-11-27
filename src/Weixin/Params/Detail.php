@@ -3,6 +3,9 @@ namespace Yurun\PaySDK\Weixin\Params;
 
 use Yurun\PaySDK\Traits\JSONParams;
 
+/**
+ * 微信支付-商品详细描述类
+ */
 class Detail
 {
 	use JSONParams;

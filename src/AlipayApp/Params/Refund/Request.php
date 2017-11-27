@@ -4,6 +4,9 @@ namespace Yurun\PaySDK\AlipayApp\Params\Refund;
 use \Yurun\PaySDK\AlipayRequestBase;
 use \Yurun\PaySDK\AlipayApp\Params\Refund\BusinessParams;
 
+/**
+ * 支付宝统一收单交易退款接口请求类
+ */
 class Request extends AlipayRequestBase
 {
 	/**

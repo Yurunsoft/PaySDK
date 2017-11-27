@@ -3,6 +3,9 @@ namespace Yurun\PaySDK\Weixin\CloseOrder;
 
 use \Yurun\PaySDK\WeixinRequestBase;
 
+/**
+ * 微信支付-关闭订单请求类
+ */
 class Request extends WeixinRequestBase
 {
 	/**

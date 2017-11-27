@@ -4,6 +4,9 @@ namespace Yurun\PaySDK\Weixin\CompanyPay\Bank\Pay;
 use \Yurun\PaySDK\WeixinRequestBase;
 use \Yurun\PaySDK\Lib\Encrypt\RSA;
 
+/**
+ * 微信支付-企业付款到银行卡请求类
+ */
 class Request extends WeixinRequestBase
 {
 	/**

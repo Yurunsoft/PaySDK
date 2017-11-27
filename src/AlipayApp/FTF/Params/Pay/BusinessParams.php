@@ -4,6 +4,9 @@ namespace Yurun\PaySDK\AlipayApp\FTF\Params\Pay;
 use \Yurun\PaySDK\AlipayApp\FTF\Params\GoodsDetail;
 use \Yurun\PaySDK\AlipayApp\FTF\Params\ExtendParams;
 
+/**
+ * 支付宝统一收单交易支付接口业务参数
+ */
 class BusinessParams
 {
 	use \Yurun\PaySDK\Traits\JSONParams;

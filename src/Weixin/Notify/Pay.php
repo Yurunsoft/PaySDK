@@ -4,6 +4,9 @@ namespace Yurun\PaySDK\Weixin\Notify;
 use \Yurun\PaySDK\Weixin\Notify\Base;
 use \Yurun\PaySDK\Weixin\Reply\Pay as ReplyPay;
 
+/**
+ * 微信支付-支付通知处理基类
+ */
 abstract class Pay extends Base
 {
 	/**

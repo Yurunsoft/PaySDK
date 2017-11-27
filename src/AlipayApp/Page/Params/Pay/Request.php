@@ -4,6 +4,9 @@ namespace Yurun\PaySDK\AlipayApp\Page\Params\Pay;
 use \Yurun\PaySDK\AlipayRequestBase;
 use \Yurun\PaySDK\AlipayApp\Page\Params\Pay\BusinessParams;
 
+/**
+ * 支付宝PC场景下单并支付请求类
+ */
 class Request extends AlipayRequestBase
 {
 	/**
@@ -26,7 +29,7 @@ class Request extends AlipayRequestBase
 
 	/**
 	 * 业务请求参数
-	 * 参考https://docs.open.alipay.com/common/105901
+	 * 参考https://docs.open.alipay.com/270/alipay.trade.page.pay
 	 * @var \Yurun\PaySDK\AlipayApp\Page\Params\Pay\BusinessParams
 	 */
 	public $businessParams;

@@ -1,6 +1,9 @@
 <?php
 namespace Yurun\PaySDK\AlipayCrossBorder\InStore\ModifyMerchantQR;
 
+/**
+ * 支付宝境外到店支付-修改商户二维码请求类
+ */
 class Request extends \Yurun\PaySDK\AlipayCrossBorder\InStore\CreateMerchantQR\Request
 {
 	/**

@@ -3,6 +3,9 @@ namespace Yurun\PaySDK\Weixin\GetPublicKey;
 
 use \Yurun\PaySDK\WeixinRequestBase;
 
+/**
+ * 微信支付-获取RSA加密公钥请求类
+ */
 class Request extends WeixinRequestBase
 {
 	/**

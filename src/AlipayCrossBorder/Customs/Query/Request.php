@@ -3,6 +3,9 @@ namespace Yurun\PaySDK\AlipayCrossBorder\Customs\Query;
 
 use \Yurun\PaySDK\AlipayRequestBase;
 
+/**
+ * 支付宝报关查询请求类
+ */
 class Request extends AlipayRequestBase
 {
 	/**

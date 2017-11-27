@@ -4,6 +4,9 @@ namespace Yurun\PaySDK;
 use \Yurun\Until\HttpRequest;
 use Yurun\PaySDK\Lib\XML;
 
+/**
+ * SDK类基类
+ */
 abstract class Base
 {
 	/**

@@ -4,6 +4,9 @@ namespace Yurun\PaySDK\AlipayCrossBorder;
 use \Yurun\PaySDK\Base;
 use \Yurun\PaySDK\Lib\ObjectToArray;
 
+/**
+ * 支付宝境外支付SDK类
+ */
 class SDK extends Base
 {
 	/**

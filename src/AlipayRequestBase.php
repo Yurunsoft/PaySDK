@@ -1,6 +1,9 @@
 <?php
 namespace Yurun\PaySDK;
 
+/**
+ * 支付宝请求基类
+ */
 abstract class AlipayRequestBase extends RequestBase
 {
 	/**

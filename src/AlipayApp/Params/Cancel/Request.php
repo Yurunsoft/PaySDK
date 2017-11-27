@@ -4,6 +4,9 @@ namespace Yurun\PaySDK\AlipayApp\Params\Cancel;
 use \Yurun\PaySDK\AlipayRequestBase;
 use \Yurun\PaySDK\AlipayApp\Params\Cancel\BusinessParams;
 
+/**
+ * 支付宝取消订单请求参数类
+ */
 class Request extends AlipayRequestBase
 {
 	/**

@@ -6,6 +6,9 @@ use \Yurun\PaySDK\AlipayCrossBorder\Reply\Base as ReplyBase;
 use \Yurun\PaySDK\Lib\XML;
 use \Yurun\PaySDK\Lib\ObjectToArray;
 
+/**
+ * 支付宝境外支付通知基类
+ */
 abstract class Base extends NotifyBase
 {
 	public function __construct()

@@ -1,6 +1,9 @@
 <?php
 namespace Yurun\PaySDK;
 
+/**
+ * 微信请求类基类
+ */
 abstract class WeixinRequestBase extends RequestBase
 {
 	/**

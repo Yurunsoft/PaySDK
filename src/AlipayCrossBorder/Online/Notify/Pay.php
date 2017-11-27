@@ -3,6 +3,9 @@ namespace Yurun\PaySDK\AlipayCrossBorder\Online\Notify;
 
 use \Yurun\PaySDK\AlipayCrossBorder\Online\Notify\Base;
 
+/**
+ * 支付宝境外支付通知基类
+ */
 abstract class Pay extends Base
 {
 	/**

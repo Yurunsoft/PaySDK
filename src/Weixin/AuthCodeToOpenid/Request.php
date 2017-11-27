@@ -3,6 +3,9 @@ namespace Yurun\PaySDK\Weixin\AuthCodeToOpenid;
 
 use \Yurun\PaySDK\WeixinRequestBase;
 
+/**
+ * 微信支付-授权码查询openid请求类
+ */
 class Request extends WeixinRequestBase
 {
 	/**

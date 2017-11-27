@@ -4,6 +4,9 @@ namespace Yurun\PaySDK\AlipayApp\FTF\Params\QR;
 use \Yurun\PaySDK\AlipayApp\FTF\Params\GoodsDetail;
 use \Yurun\PaySDK\AlipayApp\FTF\Params\ExtendParams;
 
+/**
+ * 支付宝统一收单线下交易预创建（扫码支付）业务参数类
+ */
 class BusinessParams
 {
 	use \Yurun\PaySDK\Traits\JSONParams;

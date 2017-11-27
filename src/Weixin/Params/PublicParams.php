@@ -3,6 +3,9 @@ namespace Yurun\PaySDK\Weixin\Params;
 
 use \Yurun\PaySDK\PublicBase;
 
+/**
+ * 微信支付-公共参数类
+ */
 class PublicParams extends PublicBase
 {
 	/**

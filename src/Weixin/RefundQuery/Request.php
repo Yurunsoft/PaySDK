@@ -3,6 +3,9 @@ namespace Yurun\PaySDK\Weixin\RefundQuery;
 
 use \Yurun\PaySDK\WeixinRequestBase;
 
+/**
+ * 微信支付-退款查询请求类
+ */
 class Request extends WeixinRequestBase
 {
 	/**
