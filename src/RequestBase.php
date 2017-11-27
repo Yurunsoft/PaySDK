@@ -14,4 +14,14 @@ abstract class RequestBase
 	 * @var boolean
 	 */
 	public $_isSyncVerify = false;
+
+	/**
+	 * 当调用SDK的execute时触发，返回true时不执行SDK中默认的执行逻辑
+	 * @param \Yurun\PaySDK\Base $sdk
+	 * @return boolean
+	 */
+	public function __onExecute($sdk)
+	{
+		return false;
+	}
 }
