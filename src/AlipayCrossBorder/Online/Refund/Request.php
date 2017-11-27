@@ -66,7 +66,7 @@ class Request extends AlipayRequestBase
 
 	/**
 	 * 分账信息
-	 * @var array<Yurun\PaySDK\AlipayCrossBorder\Params\SplitFundInfo>
+	 * @var array<\Yurun\PaySDK\AlipayCrossBorder\Params\SplitFundInfo>
 	 */
 	public $split_fund_info = array();
 
