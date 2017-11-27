@@ -20,7 +20,7 @@ $request->out_trade_no = 'test' . mt_rand(10000000,99999999); // 订单号
 $request->total_fee = 1; // 订单总金额，单位为：分
 $request->spbill_create_ip = '127.0.0.1'; // 客户端ip
 $request->notify_url = $GLOBALS['PAY_CONFIG']['pay_notify_url']; // 异步通知地址
-$request->openid = ''; // 必须设置openid
+$request->openid = 'opWUlwsi_2Yy9ScbM9EdSJCxY-QA'; // 必须设置openid
 
 
 // 调用接口
@@ -31,4 +31,12 @@ var_dump('result:', $result);
 var_dump('success:', $pay->checkResult());
 
 var_dump('error:', $pay->getError(), 'error_code:', $pay->getErrorCode());
-// 最后需要将数据传给js，使用WeixinJSBridge进行支付
+
+if($pay->checkResult())
+{
+	$request = new \Yurun\PaySDK\Weixin\JSAPI\Params\JSParams\Request;
+	$request->prepay_id = $result['prepay_id'];
+	$jsapiParams = $pay->execute($request);
+	// 最后需要将数据传给js，使用WeixinJSBridge进行支付
+	echo json_encode($jsapiParams);
+}

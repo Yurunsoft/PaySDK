@@ -56,6 +56,10 @@ abstract class Base
 	 */
 	public function execute($params, $format = 'JSON')
 	{
+		if($params->__onExecute($this))
+		{
+			return $this->result;
+		}		
 		$this->prepareExecute($params, $url, $data);
 		$this->url = $url;
 		$this->response = $this->http->send($url, $this->requestData, $params->_method);
