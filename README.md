@@ -1,6 +1,6 @@
 # PaySDK
 
-PaySDK 是 PHP 集成支付 SDK ，集成了支付宝、微信支付的支付接口和其它相关接口的操作。可以轻松嵌入支持 PHP >= 5.3 的任何系统中。
+PaySDK 是 PHP 集成支付 SDK ，集成了支付宝、微信支付的支付接口和其它相关接口的操作。可以轻松嵌入支持 PHP >= 5.4 的任何系统中。
 
 我们有完善的在线技术文档：[http://doc.yurunsoft.com/PaySDK](http://doc.yurunsoft.com/PaySDK)
 
