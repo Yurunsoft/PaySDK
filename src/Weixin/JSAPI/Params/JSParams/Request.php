@@ -24,7 +24,7 @@ class Request extends WeixinRequestBase
 	{
 		$data = array(
 			'appId'			=>	$sdk->publicParams->appID,
-			'timeStamp'		=>	time(),
+			'timeStamp'		=>	strval(time()),
 			'nonceStr'		=>	md5(mt_rand()),
 			'package'		=>	'prepay_id=' . $this->prepay_id,
 			'signType'		=>	$sdk->publicParams->sign_type,
