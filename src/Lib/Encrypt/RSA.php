@@ -1,10 +1,11 @@
 <?php
 namespace Yurun\PaySDK\Lib\Encrypt;
 
-class RSA
+class RSA extends Base
 {
 	public static function signPrivate($data, $key)
 	{
+		$key = static::parseKey($key);
 		$key = "-----BEGIN RSA PRIVATE KEY-----\n{$key}\n-----END RSA PRIVATE KEY-----";
 		openssl_sign($data, $sign, $key, OPENSSL_ALGO_SHA1);
 		return $sign;
@@ -25,6 +26,7 @@ class RSA
 
 	public static function verifyPublic($data, $key, $sign)
 	{
+		$key = static::parseKey($key);
 		$key = "-----BEGIN PUBLIC KEY-----\n{$key}\n-----END PUBLIC KEY-----";
 		return 1 === openssl_verify($data, $sign, $key, OPENSSL_ALGO_SHA1);
 	}

@@ -1,7 +1,7 @@
 <?php
 namespace Yurun\PaySDK\Lib\Encrypt;
 
-class RSA2
+class RSA2 extends Base
 {
 	public static function signPrivate($data, $key)
 	{
@@ -9,6 +9,7 @@ class RSA2
 		{
 			throw new \Exception('SHA256需要在PHP>=5.4.8下才可使用');
 		}
+		$key = static::parseKey($key);
 		$key = "-----BEGIN RSA PRIVATE KEY-----\n{$key}\n-----END RSA PRIVATE KEY-----";
 		openssl_sign($data, $sign, $key, OPENSSL_ALGO_SHA256);
 		return $sign;
@@ -37,6 +38,7 @@ class RSA2
 		{
 			throw new \Exception('SHA256需要在PHP>=5.4.8下才可使用');
 		}
+		$key = static::parseKey($key);
 		$key = "-----BEGIN PUBLIC KEY-----\n{$key}\n-----END PUBLIC KEY-----";
 		return 1 === openssl_verify($data, $sign, $key, OPENSSL_ALGO_SHA256);
 	}

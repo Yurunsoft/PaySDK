@@ -1,7 +1,7 @@
 <?php
 namespace Yurun\PaySDK\Lib\Encrypt;
 
-class AES
+class AES extends Base
 {
 	public static function encrypt($data, $key)
 	{
