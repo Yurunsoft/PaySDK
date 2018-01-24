@@ -16,7 +16,8 @@ $pay = new \Yurun\PaySDK\Alipay\SDK($params);
 
 // 支付接口
 $request = new \Yurun\PaySDK\Alipay\Params\Refund\Request;
-$request->notify_url = $GLOBALS['PAY_CONFIG']['notify_url']; // 支付后通知地址（作为支付成功回调，这个可靠）
+// $request->notify_url = $GLOBALS['PAY_CONFIG']['notify_url']; // 服务器异步通知页面路径
+// $request->dback_notify_url = $GLOBALS['PAY_CONFIG']['notify_url']; // 支付宝服务器主动通知商户网站里指定的页面http 路径，用于通知商户交易充退结果。
 $request->businessParams->batch_no = date('Ymd') . mt_rand(100, 99999999); // 退款批次号
 $request->businessParams->refund_date = date('Y-m-d H:i:s'); // 退款请求时间
 $request->businessParams->batch_num = 1; // 总笔数
