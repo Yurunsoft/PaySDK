@@ -129,6 +129,18 @@ class SDK extends Base
 	}
 
 	/**
+	 * 调用执行接口
+	 * @param mixed $params
+	 * @param string $method
+	 * @return mixed
+	 */
+	public function execute($params, $format = 'XML')
+	{
+		$result = parent::execute($params, $format);
+		return $result;
+	}
+
+	/**
 	 * 检查是否执行成功
 	 * @param array $result
 	 * @return boolean
