@@ -133,7 +133,7 @@ class SDK extends Base
 		switch($this->publicParams->sign_type)
 		{
 			case 'RSA':
-				return \Yurun\PaySDK\Lib\Encrypt\DSA::$method($content, $key, \base64_decode($data['sign']));
+				return \Yurun\PaySDK\Lib\Encrypt\RSA::$method($content, $key, \base64_decode($data['sign']));
 			case 'RSA2':
 				return \Yurun\PaySDK\Lib\Encrypt\RSA2::$method($content, $key, \base64_decode($data['sign']));
 			default:
