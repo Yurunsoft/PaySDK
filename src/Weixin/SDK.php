@@ -151,9 +151,9 @@ class SDK extends Base
 		{
 			$data = XML::fromString($data);
 		}
-		if(isset($data['return_code']) && 'SUCCESS' !== $data['return_code'])
+		if(!isset($data['return_code']) || 'SUCCESS' !== $data['return_code'] || !isset($data['sign']))
 		{
-			return !isset($data['sign']);
+			return false;
 		}
 		$content = $this->parseSignData($data);
 		switch($this->publicParams->sign_type)

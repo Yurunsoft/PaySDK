@@ -11,12 +11,6 @@ use \Yurun\PaySDK\Lib\ObjectToArray;
  */
 abstract class Base extends NotifyBase
 {
-	/**
-	 * 返回数据是否需要签名
-	 * @var boolean
-	 */
-	public $needSign = true;
-	
 	public function __construct()
 	{
 		parent::__construct();
@@ -33,10 +27,6 @@ abstract class Base extends NotifyBase
 	{
 		$this->replyData->return_code = $success ? 'SUCCESS' : 'FAIL';
 		$this->replyData->return_msg = $message;
-		if($this->needSign)
-		{
-			$this->replyData->sign = $this->sdk->sign(ObjectToArray::parse($this->replyData));
-		}
 		echo $this->replyData;
 	}
 
@@ -55,6 +45,6 @@ abstract class Base extends NotifyBase
 	 */
 	public function notifyVerify()
 	{
-		return !isset($this->data['return_code']) || 'SUCCESS' !== $this->data['return_code'] || $this->sdk->verifyCallback($this->data);
+		return $this->sdk->verifyCallback($this->data);
 	}
 }
