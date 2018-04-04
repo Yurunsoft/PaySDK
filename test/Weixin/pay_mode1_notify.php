@@ -21,7 +21,7 @@ class PayNotify extends \Yurun\PaySDK\Weixin\Notify\PayMode1
 	 */
 	protected function __exec()
 	{
-		// 处理
+		// 处理，$this->data 是从微信发送来的数据
 		file_put_contents(__DIR__ . '/paymode1_notify_result.txt', date('Y-m-d H:i:s') . ':' . var_export($this->data, true));
 		// 支付接口
 		$request = new \Yurun\PaySDK\Weixin\Native\Params\Pay\Request;
