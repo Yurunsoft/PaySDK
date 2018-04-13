@@ -44,6 +44,6 @@ abstract class Refund extends Base
 	 */
 	public function notifyVerify()
 	{
-		return true;
+		return isset($data['return_code']);
 	}
 }
