@@ -38,7 +38,10 @@ abstract class WeixinRequestBase extends RequestBase
 	
 	/**
 	 * 参数中是否需要带有nonce_str
-	 * @var boolean
+	 * 为true时，自动带上nonce_str
+	 * 为false时，不带上nonce_str
+	 * 为字符串时，使用该字符串作为nonce_str字段名
+	 * @var boolean|string
 	 */
 	public $needNonceStr = true;
 
