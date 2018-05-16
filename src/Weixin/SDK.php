@@ -73,9 +73,13 @@ class SDK extends Base
 			unset($data['mch_id']);
 		}
 		// 部分接口不需要nonce_str字段
-		if($params->needNonceStr)
+		if(true === $params->needNonceStr)
 		{
 			$data['nonce_str'] = \md5(\uniqid('', true));
+		}
+		else if(is_string($params->needNonceStr))
+		{
+			$data[$params->needNonceStr] = \md5(\uniqid('', true));
 		}
 		// 处理某个接口强制使用某种签名方式
 		if(null === $params->signType)
