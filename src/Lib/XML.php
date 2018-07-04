@@ -55,5 +55,3 @@ class XML
 		return $result . '</xml>';
 	}
 }
-
-libxml_disable_entity_loader(true);
