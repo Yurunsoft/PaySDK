@@ -5,7 +5,17 @@ class XML
 {
 	public static function fromString($string)
 	{
-		return (array)\simplexml_load_string($string, null, LIBXML_NOCDATA | LIBXML_COMPACT);
+		// 填补 php <= 5.4 的安全漏洞：https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=23_5
+		// 记录旧值
+		$oldValue = libxml_disable_entity_loader(true);
+		// xml解析
+		$result = (array)\simplexml_load_string($string, null, LIBXML_NOCDATA | LIBXML_COMPACT);
+		// 恢复旧值，防止系统中其它需要用到实体加载的地方失效
+		if(false === $oldValue)
+		{
+			libxml_disable_entity_loader(false);
+		}
+		return $result;
 	}
 
 	public static function toString($data)
@@ -45,3 +55,5 @@ class XML
 		return $result . '</xml>';
 	}
 }
+
+libxml_disable_entity_loader(true);
