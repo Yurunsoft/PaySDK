@@ -1,7 +1,7 @@
 <?php
 namespace Yurun\PaySDK;
 
-use \Yurun\Until\HttpRequest;
+use \Yurun\Util\HttpRequest;
 use Yurun\PaySDK\Lib\XML;
 
 /**
@@ -11,13 +11,13 @@ abstract class Base
 {
 	/**
 	 * HttpRequest
-	 * @var \Yurun\Until\HttpRequest
+	 * @var \Yurun\Util\HttpRequest
 	 */
 	public $http;
 
 	/**
 	 * 接口请求的返回结果
-	 * @var \Yurun\Until\HttpResponse
+	 * @var \Yurun\Util\YurunHttp\Http\Response
 	 */
 	public $response;
 
@@ -45,6 +45,20 @@ abstract class Base
 	 */
 	public $result;
 
+	/**
+	 * swoole 请求类
+	 *
+	 * @var \swoole_http_request
+	 */
+	public $swooleRequest;
+
+	/**
+	 * swoole 响应类
+	 *
+	 * @var \swoole_http_response
+	 */
+	public $swooleResponse;
+
 	public function __construct($publicParams)
 	{
 		$this->publicParams = $publicParams;
@@ -69,13 +83,13 @@ abstract class Base
 		switch($format)
 		{
 			case 'JSON':
-				$this->result = \json_decode($this->response->body, true);
+				$this->result = $this->response->json(true);
 				break;
 			case 'XML':
-				$this->result = XML::fromString($this->response->body);
+				$this->result = XML::fromString($this->response->body());
 				break;
 			default:
-				$this->result = $this->response->body;
+				$this->result = $this->response->body();
 		}
 		if($params->_isSyncVerify && !$this->verifySync($params, $this->result))
 		{
@@ -201,10 +215,17 @@ abstract class Base
 		}
 		$this->requestData = $data;
 		$url .= \http_build_query($data, '', '&');
-		header('HTTP/1.1 302 Temporarily Moved');
-		header('Status: 302 Temporarily Moved');
-		header('Location: ' . $url);
-		exit;
+		if(null === $this->swooleResponse)
+		{
+			header('HTTP/1.1 302 Temporarily Moved');
+			header('Status: 302 Temporarily Moved');
+			header('Location: ' . $url);
+			exit;
+		}
+		else
+		{
+			$this->swooleResponse->redirect($url, 302);
+		}
 	}
 
 	/**

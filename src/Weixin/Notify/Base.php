@@ -27,7 +27,14 @@ abstract class Base extends NotifyBase
 	{
 		$this->replyData->return_code = $success ? 'SUCCESS' : 'FAIL';
 		$this->replyData->return_msg = $message;
-		echo $this->replyData;
+		if(null === $this->swooleResponse)
+		{
+			echo $this->replyData;
+		}
+		else
+		{
+			$this->swooleResponse->end($this->replyData->toString());
+		}
 	}
 
 	/**
@@ -36,6 +43,10 @@ abstract class Base extends NotifyBase
 	 */
 	public function getNotifyData()
 	{
+		if(null !== $this->swooleRequest)
+		{
+			return XML::fromString($this->swooleRequest->rawContent());
+		}
 		return XML::fromString(\file_get_contents('php://input'));
 	}
 	

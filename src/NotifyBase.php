@@ -8,6 +8,10 @@ use \Yurun\PaySDK\Lib\ObjectToArray;
  */
 abstract class NotifyBase
 {
+	/**
+	 * 通知数据
+	 * @var array
+	 */
 	public $data;
 
 	/**
@@ -21,6 +25,20 @@ abstract class NotifyBase
 	 * @var mixed
 	 */
 	public $replyData;
+
+	/**
+	 * swoole 请求类
+	 *
+	 * @var \swoole_http_request
+	 */
+	public $swooleRequest;
+
+	/**
+	 * swoole 响应类
+	 *
+	 * @var \swoole_http_response
+	 */
+	public $swooleResponse;
 
 	public function __construct()
 	{
