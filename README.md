@@ -1,8 +1,8 @@
 # PaySDK
 
-[![Latest Version](https://img.shields.io/packagist/v/yurunsoft/yurun-http.svg)](https://packagist.org/packages/yurunsoft/pay-sdk)
+[![Latest Version](https://img.shields.io/packagist/v/yurunsoft/pay-sdk.svg)](https://packagist.org/packages/yurunsoft/pay-sdk)
 [![IMI Doc](https://img.shields.io/badge/docs-passing-green.svg)](http://doc.yurunsoft.com/PaySDK)
-[![IMI License](https://img.shields.io/github/license/Yurunsoft/YurunHttp.svg)](https://github.com/Yurunsoft/PaySDK/blob/master/LICENSE)
+[![IMI License](https://img.shields.io/github/license/Yurunsoft/PaySDK.svg)](https://github.com/Yurunsoft/PaySDK/blob/master/LICENSE)
 
 ## 介绍
 
