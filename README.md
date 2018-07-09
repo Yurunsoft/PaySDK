@@ -52,7 +52,7 @@ API 文档：[https://apidoc.gitee.com/yurunsoft/PaySDK](https://apidoc.gitee.co
 ```json
 {
     "require": {
-        "yurunsoft/pay-sdk": "1.0.*"
+        "yurunsoft/pay-sdk": "~2.0"
     }
 }
 ```
