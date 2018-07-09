@@ -25,5 +25,5 @@ $data = $pay->execute($request);
 var_dump($data);
 
 // 下载对账单
-$download = new \Yurun\Until\Download($data['alipay_data_dataservice_bill_downloadurl_query_response']['bill_download_url']);
-$download->download(__DIR__ . '/test.zip');
+$http = new \Yurun\Util\HttpRequest;
+$http->download(__DIR__ . '/test.zip', $data['alipay_data_dataservice_bill_downloadurl_query_response']['bill_download_url']);
