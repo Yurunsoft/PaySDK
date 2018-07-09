@@ -26,7 +26,15 @@ abstract class Base extends NotifyBase
 	{
 		if($success)
 		{
-			echo 'success';
+			$result = 'success';
+			if(null === $this->swooleResponse)
+			{
+				echo $result;
+			}
+			else
+			{
+				$this->swooleResponse->end($result);
+			}
 		}
 	}
 
@@ -36,6 +44,10 @@ abstract class Base extends NotifyBase
 	 */
 	public function getNotifyData()
 	{
+		if(null !== $this->swooleRequest)
+		{
+			return $this->swooleRequest->post;
+		}
 		return $_POST;
 	}
 	

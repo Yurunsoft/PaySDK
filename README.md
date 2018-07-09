@@ -1,8 +1,16 @@
 # PaySDK
 
-PaySDK 是 PHP 集成支付 SDK ，集成了支付宝、微信支付的支付接口和其它相关接口的操作。可以轻松嵌入支持 PHP >= 5.4 的任何系统中。
+[![Latest Version](https://img.shields.io/packagist/v/yurunsoft/yurun-http.svg)](https://packagist.org/packages/yurunsoft/pay-sdk)
+[![IMI Doc](https://img.shields.io/badge/docs-passing-green.svg)](http://doc.yurunsoft.com/PaySDK)
+[![IMI License](https://img.shields.io/github/license/Yurunsoft/YurunHttp.svg)](https://github.com/Yurunsoft/PaySDK/blob/master/LICENSE)
+
+## 介绍
+
+PaySDK 是 PHP 集成支付 SDK ，集成了支付宝、微信支付的支付接口和其它相关接口的操作。可以轻松嵌入支持 PHP >= 5.4 的任何系统中，2.0 版现已支持 Swoole 协程环境。
 
 我们有完善的在线技术文档：[http://doc.yurunsoft.com/PaySDK](http://doc.yurunsoft.com/PaySDK)
+
+API 文档：[https://apidoc.gitee.com/yurunsoft/PaySDK](https://apidoc.gitee.com/yurunsoft/PaySDK)
 
 同时欢迎各位加入技术支持群：74401592 [![点击加群](https://pub.idqqimg.com/wpa/images/group.png "点击加群")](https://shang.qq.com/wpa/qunwpa?idkey=e2e6b49e9a648aae5285b3aba155d59107bb66fde02e229e078bd7359cac8ac3)，如有问题可以及时解答和修复。
 
@@ -116,4 +124,10 @@ else
 	var_dump($pay->getErrorCode() . ':' . $pay->getError());
 }
 exit;
+```
+
+### Swoole 协程环境支持
+
+```php
+\Yurun\Util\YurunHttp::setDefaultHandler('Yurun\Util\YurunHttp\Handler\Swoole');
 ```

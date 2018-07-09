@@ -33,7 +33,7 @@ try{
 	var_dump('error:', $pay->getError(), 'error_code:', $pay->getErrorCode());
 }
 catch(Exception $e){
-	var_dump($pay->response->body);
+	var_dump($pay->response->body());
 }
 // 下面二维码为演示方便随便找了个二维码接口，如有需要你可以自己生成二维码或者使用其它的二维码接口
 ?>
