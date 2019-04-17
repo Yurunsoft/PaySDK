@@ -111,7 +111,7 @@ abstract class Base
 	{
 		$this->prepareExecute($params, $url, $data);
 		$this->url = $url;
-		$this->http->saveFile($saveFilename)->send($url, $this->requestData, $params->_method);;
+		$this->http->saveFile($saveFilename)->send($url, $this->requestData, $params->_method);
 	}
 
 	/**
