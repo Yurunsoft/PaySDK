@@ -33,7 +33,7 @@ class Detail
 	
 	public function toString()
 	{
-		if(null === $this->cost_price && null === $this->receipt_id && !isset($goods_detail[0]))
+		if(null === $this->cost_price && null === $this->receipt_id && !isset($this->goods_detail[0]))
 		{
 			return null;
 		}
