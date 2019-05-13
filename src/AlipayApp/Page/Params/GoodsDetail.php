@@ -22,6 +22,6 @@ class GoodsDetail
 		{
 			return null;
 		}
-		return parent::toString();
+		return JSONParams::toString();
 	}
 }

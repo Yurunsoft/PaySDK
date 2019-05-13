@@ -22,6 +22,6 @@ class ExtendParams
 		{
 			return null;
 		}
-		return parent::toString();
+		return JSONParams::toString();
 	}
 }

@@ -43,7 +43,7 @@ class SceneInfo
 		}
 		else
 		{
-			return parent::toString();
+			return JSONParams::toString();
 		}
 	}
 }
