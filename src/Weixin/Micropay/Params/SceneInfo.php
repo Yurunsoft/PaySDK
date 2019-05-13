@@ -9,9 +9,7 @@ use Yurun\PaySDK\Traits\JSONParams;
  */
 class SceneInfo
 {
-	use JSONParams{
-		toString as private traitToString;
-	}
+	use JSONParams;
 
 	/**
 	 * 门店唯一标识
@@ -45,7 +43,7 @@ class SceneInfo
 		}
 		else
 		{
-			return $this->traitToString();
+			return parent::toString();
 		}
 	}
 }
