@@ -8,7 +8,9 @@ use \Yurun\PaySDK\Traits\JSONParams;
  */
 class GoodsDetail
 {
-	use JSONParams;
+	use JSONParams{
+		toString as private traitToString;
+	}
 
 	/**
 	 * 在支付时，可点击商品名称跳转到该地址
@@ -22,6 +24,6 @@ class GoodsDetail
 		{
 			return null;
 		}
-		return JSONParams::toString();
+		return $this->traitToString();
 	}
 }

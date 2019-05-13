@@ -8,7 +8,9 @@ use \Yurun\PaySDK\Traits\JSONParams;
  */
 class ExtendParams
 {
-	use JSONParams;
+	use JSONParams{
+		toString as private traitToString;
+	}
 
 	/**
 	 * 系统商编号，该参数作为系统商返佣数据提取的依据，请填写系统商签约协议的PID
@@ -49,6 +51,6 @@ class ExtendParams
 		{
 			return null;
 		}
-		return JSONParams::toString();
+		return $this->traitToString();
 	}
 }

@@ -8,7 +8,9 @@ use Yurun\PaySDK\Traits\JSONParams;
  */
 class Detail
 {
-	use JSONParams;
+	use JSONParams{
+		toString as private traitToString;
+	}
 
 	/**
 	 * 订单原价
@@ -39,7 +41,7 @@ class Detail
 		}
 		else
 		{
-			return JSONParams::toString();
+			return $this->traitToString();
 		}
 	}
 }
