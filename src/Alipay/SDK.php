@@ -9,6 +9,8 @@ use \Yurun\PaySDK\Lib\ObjectToArray;
  */
 class SDK extends Base
 {
+    public $gateway = 'http://notify.alipay.com/trade/notify_query.do?';
+
 	/**
 	 * 公共参数
 	 * @var \Yurun\PaySDK\Alipay\Params\PublicParams
@@ -69,6 +71,13 @@ class SDK extends Base
 		return \base64_encode($result);
 	}
 
+
+    //获取远程服务器ATN结果
+    //输出 服务器ATN结果字符串: 验证通过返回true,失败返回false. 注意:notify_id有效期大概1min, 在有效期内可以重复使用.
+    public function verify_source($partner,$notify_id){
+	    $gateway = $this->gateway.'partner='.$partner.'&notify_id='.$notify_id;
+        return url_get($gateway);
+    }
 	/**
 	 * 验证回调通知是否合法
 	 * @param $data
@@ -76,10 +85,13 @@ class SDK extends Base
 	 */
 	public function verifyCallback($data)
 	{
-		if(!isset($data['sign'], $data['sign_type']))
+		if(!isset($data['sign'], $data['sign_type'],$data['seller_id'],$data['notify_id']))
 		{
 			return false;
 		}
+		if($this->verify_source($data['seller_id'],$data['notify_id']) != 'true'){
+		    return false;
+        }
 		$content = $this->parseSignData($data);
 		if(empty($this->publicParams->appPublicKeyFile))
 		{
