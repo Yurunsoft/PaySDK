@@ -12,7 +12,7 @@ PaySDK 是 PHP 集成支付 SDK ，集成了支付宝、微信支付的支付接
 
 API 文档：[https://apidoc.gitee.com/yurunsoft/PaySDK](https://apidoc.gitee.com/yurunsoft/PaySDK)
 
-同时欢迎各位加入技术支持群：74401592 [![点击加群](https://pub.idqqimg.com/wpa/images/group.png "点击加群")](https://shang.qq.com/wpa/qunwpa?idkey=e2e6b49e9a648aae5285b3aba155d59107bb66fde02e229e078bd7359cac8ac3)，如有问题可以及时解答和修复。
+同时欢迎各位加入**宇润 PHP 全家桶技术支持群**：17916227 [![点击加群](https://pub.idqqimg.com/wpa/images/group.png "点击加群")](https://jq.qq.com/?_wv=1027&k=5wXf4Zq)，如有问题可以及时解答和修复。
 
 大家在开发中肯定会对接各种各样的支付平台，我个人精力有限，欢迎各位来提交 PR （[码云](https://gitee.com/yurunsoft/PaySDK)/[Github](https://github.com/Yurunsoft/PaySDK)），一起完善 PaySDK ，让它能够支持更多的支付平台，更加好用。
 
