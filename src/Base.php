@@ -46,16 +46,16 @@ abstract class Base
 	public $result;
 
 	/**
-	 * swoole 请求类
+	 * swoole 请求类，或支持 PSR-7 标准的对象
 	 *
-	 * @var \swoole_http_request
+	 * @var \Swoole\Http\Request|\Psr\Http\Message\ServerRequestInterface
 	 */
 	public $swooleRequest;
 
 	/**
-	 * swoole 响应类
+	 * swoole 响应类，或支持 PSR-7 标准的对象
 	 *
-	 * @var \swoole_http_response
+	 * @var \Swoole\Http\Response|\Psr\Http\Message\ResponseInterface
 	 */
 	public $swooleResponse;
 
@@ -222,9 +222,13 @@ abstract class Base
 			header('Location: ' . $url);
 			exit;
 		}
-		else
+		else if($this->swooleResponse instanceof \Swoole\Http\Response)
 		{
 			$this->swooleResponse->redirect($url, 302);
+		}
+		else if($this->swooleResponse instanceof \Psr\Http\Message\ResponseInterface)
+		{
+			$this->swooleResponse = $this->swooleResponse->withStatus(302)->withHeader('Location', $url);
 		}
 	}
 

@@ -14,9 +14,13 @@ abstract class Sync extends Base
 	 */
 	public function getNotifyData()
 	{
-		if(null !== $this->swooleRequest)
+		if($this->swooleRequest instanceof \Swoole\Http\Request)
 		{
 			return $this->swooleRequest->get;
+		}
+		if($this->swooleRequest instanceof \Psr\Http\Message\ServerRequestInterface)
+		{
+			return $this->swooleRequest->getQueryParams();
 		}
 		return $_GET;
 	}

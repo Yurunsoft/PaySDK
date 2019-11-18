@@ -31,9 +31,13 @@ abstract class Base extends NotifyBase
 		{
 			echo $this->replyData;
 		}
-		else
+		else if($this->swooleResponse instanceof \Swoole\Http\Response)
 		{
 			$this->swooleResponse->end($this->replyData->toString());
+		}
+		else if($this->swooleResponse instanceof \Psr\Http\Message\ResponseInterface)
+		{
+			$this->swooleResponse = $this->swooleResponse->write($this->replyData->toString());
 		}
 	}
 
@@ -43,9 +47,13 @@ abstract class Base extends NotifyBase
 	 */
 	public function getNotifyData()
 	{
-		if(null !== $this->swooleRequest)
+		if($this->swooleRequest instanceof \Swoole\Http\Request)
 		{
 			return XML::fromString($this->swooleRequest->rawContent());
+		}
+		if($this->swooleRequest instanceof \Psr\Http\Message\ServerRequestInterface)
+		{
+			return XML::fromString((string)$this->swooleRequest->getBody());
 		}
 		return XML::fromString(\file_get_contents('php://input'));
 	}

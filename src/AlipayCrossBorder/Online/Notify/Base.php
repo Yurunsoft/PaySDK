@@ -31,9 +31,13 @@ abstract class Base extends NotifyBase
 			{
 				echo $result;
 			}
-			else
+			else if($this->swooleResponse instanceof \Swoole\Http\Response)
 			{
 				$this->swooleResponse->end($result);
+			}
+			else if($this->swooleResponse instanceof \Psr\Http\Message\ResponseInterface)
+			{
+				$this->swooleResponse = $this->swooleResponse->write($result);
 			}
 		}
 	}
@@ -44,9 +48,13 @@ abstract class Base extends NotifyBase
 	 */
 	public function getNotifyData()
 	{
-		if(null !== $this->swooleRequest)
+		if($this->swooleRequest instanceof \Swoole\Http\Request)
 		{
 			return $this->swooleRequest->post;
+		}
+		if($this->swooleRequest instanceof \Psr\Http\Message\ServerRequestInterface)
+		{
+			return $this->swooleRequest->getParsedBody();
 		}
 		return $_POST;
 	}

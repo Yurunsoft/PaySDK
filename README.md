@@ -116,20 +116,112 @@ $request->notify_url = ''; // 异步通知地址
 $result = $pay->execute($request);
 if($pay->checkResult())
 {
-	// 跳转支付界面
-	header('Location: ' . $result['mweb_url']);
+    // 跳转支付界面
+    header('Location: ' . $result['mweb_url']);
 }
 else
 {
-	var_dump($pay->getErrorCode() . ':' . $pay->getError());
+    var_dump($pay->getErrorCode() . ':' . $pay->getError());
 }
 exit;
 ```
 
 ### Swoole 协程环境支持
 
+在 `WorkerStart` 事件中加入：
+
 ```php
 \Yurun\Util\YurunHttp::setDefaultHandler('Yurun\Util\YurunHttp\Handler\Swoole');
+```
+
+在支付、退款异步通知中，需要赋值 `Swoole` 的 `Request` 和 `Response` 对象，或者遵循 PSR-7 标准的对象即可。
+
+#### imi 框架中使用
+
+imi 是基于 PHP Swoole 的高性能协程应用开发框架，它支持 HttpApi、WebSocket、TCP、UDP 服务的开发。
+
+在 Swoole 的加持下，相比 php-fpm 请求响应能力，I/O密集型场景处理能力，有着本质上的提升。
+
+imi 框架拥有丰富的功能组件，可以广泛应用于互联网、移动通信、企业软件、云计算、网络游戏、物联网（IOT）、车联网、智能家居等领域。可以使企业 IT 研发团队的效率大大提升，更加专注于开发创新产品。
+
+<https://www.imiphp.com/>
+
+```php
+/**
+ * 这是一个在控制器中的动作方法
+ * @Action
+ */
+public function test()
+{
+    $payNotify = new class extends \Yurun\PaySDK\Weixin\Notify\Pay
+    {
+        /**
+         * 后续执行操作
+         * @return void
+         */
+        protected function __exec()
+        {
+
+        }
+    };
+    $context = RequestContext::getContext();
+    // 下面两行很关键
+    $payNotify->swooleRequest = $context['request'];
+    $payNotify->swooleResponse = $context['response'];
+
+    $sdk->notify($payNotify);
+
+    // 这句话必须填写
+    $context['response'] = $payNotify->swooleResponse;
+}
+```
+
+#### 其它框架（Swoole 对象）
+
+```php
+$payNotify = new class extends \Yurun\PaySDK\Weixin\Notify\Pay
+{
+    /**
+     * 后续执行操作
+     * @return void
+     */
+    protected function __exec()
+    {
+
+    }
+};
+// 下面两行很关键，$request、$response 从 request 中获取
+// 或者查阅如何从你使用的框架中获取
+$payNotify->swooleRequest = $request;
+$payNotify->swooleResponse = $response;
+
+$sdk->notify($payNotify);
+```
+
+#### 其它框架（PSR-7 对象）
+
+```php
+$payNotify = new class extends \Yurun\PaySDK\Weixin\Notify\Pay
+{
+    /**
+     * 后续执行操作
+     * @return void
+     */
+    protected function __exec()
+    {
+
+    }
+};
+// 目前主流 Swoole 基本都支持 PSR-7 标准的对象
+// 所以可以直接传入，如何获取请查阅对应框架的文档
+$payNotify->swooleRequest = $request;
+$payNotify->swooleResponse = $response;
+
+$sdk->notify($payNotify);
+
+// 处理完成后需要将 $response 从控制器返回或者赋值给上下文
+// 不同框架的操作不同，请自行查阅对应框架的文档
+return $payNotify->swooleResponse;
 ```
 
 ## 捐赠
