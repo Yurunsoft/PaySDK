@@ -172,7 +172,7 @@ public function test()
     $sdk->notify($payNotify);
 
     // 这句话必须填写
-    $context['response'] = $payNotify->swooleResponse;
+    return $payNotify->swooleResponse;
 }
 ```
 
