@@ -25,4 +25,4 @@ $request->businessParams->subject = '小米手机9黑色陶瓷尊享版'; // 商
 // 处理
 $pay->prepareExecute($request, $url, $data);
 
-echo $url; // 输出的是可以让app直接请求的url
+echo http_build_query($data); // 输出的是可以让app直接使用的参数
