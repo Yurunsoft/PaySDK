@@ -5,6 +5,7 @@ use Yurun\PaySDK\NotifyBase;
 use \Yurun\PaySDK\AlipayCrossBorder\Reply\Base as ReplyBase;
 use \Yurun\PaySDK\Lib\XML;
 use \Yurun\PaySDK\Lib\ObjectToArray;
+use Yurun\Util\YurunHttp\Stream\MemoryStream;
 
 /**
  * 支付宝境外支付通知基类
@@ -37,7 +38,7 @@ abstract class Base extends NotifyBase
 			}
 			else if($this->swooleResponse instanceof \Psr\Http\Message\ResponseInterface)
 			{
-				$this->swooleResponse = $this->swooleResponse->write($result);
+				$this->swooleResponse = $this->swooleResponse->withBody(new MemoryStream($result));
 			}
 		}
 	}

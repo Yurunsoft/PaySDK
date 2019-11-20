@@ -1,10 +1,11 @@
 <?php
 namespace Yurun\PaySDK\Weixin\Notify;
 
-use Yurun\PaySDK\NotifyBase;
-use \Yurun\PaySDK\Weixin\Reply\Base as ReplyBase;
 use \Yurun\PaySDK\Lib\XML;
+use Yurun\PaySDK\NotifyBase;
 use \Yurun\PaySDK\Lib\ObjectToArray;
+use Yurun\Util\YurunHttp\Stream\MemoryStream;
+use \Yurun\PaySDK\Weixin\Reply\Base as ReplyBase;
 
 /**
  * 微信支付-通知处理基类
@@ -37,7 +38,7 @@ abstract class Base extends NotifyBase
 		}
 		else if($this->swooleResponse instanceof \Psr\Http\Message\ResponseInterface)
 		{
-			$this->swooleResponse = $this->swooleResponse->write($this->replyData->toString());
+			$this->swooleResponse = $this->swooleResponse->write(new MemoryStream($this->replyData->toString()));
 		}
 	}
 
