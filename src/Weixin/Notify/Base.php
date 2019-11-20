@@ -38,7 +38,7 @@ abstract class Base extends NotifyBase
 		}
 		else if($this->swooleResponse instanceof \Psr\Http\Message\ResponseInterface)
 		{
-			$this->swooleResponse = $this->swooleResponse->write(new MemoryStream($this->replyData->toString()));
+			$this->swooleResponse = $this->swooleResponse->withBody(new MemoryStream($this->replyData->toString()));
 		}
 	}
 
