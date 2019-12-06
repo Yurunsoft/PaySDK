@@ -5,6 +5,7 @@ use \Yurun\PaySDK\WeixinRequestBase;
 
 /**
  * 微信支付-退款请求类
+ * @link https://pay.weixin.qq.com/wiki/doc/api/micropay.php?chapter=9_4
  */
 class Request extends WeixinRequestBase
 {
@@ -65,6 +66,14 @@ class Request extends WeixinRequestBase
 	 * @var string
 	 */
 	public $refund_account;
+
+	/**
+	 * 异步接收微信支付退款结果通知的回调地址，通知URL必须为外网可访问的url，不允许带参数
+	 * 如果参数中传了notify_url，则商户平台上配置的回调地址将不会生效。
+	 *
+	 * @var string
+	 */
+	public $notify_url;
 
 	public function __construct()
 	{
