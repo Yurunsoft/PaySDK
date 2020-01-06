@@ -259,12 +259,12 @@ abstract class Base
 
 	/**
 	 * 处理异步通知
-	 * @param mixed $notifyHandle
+	 * @param \Yurun\PaySDK\NotifyBase $notifyHandler
 	 * @return void
 	 */
-	public function notify($notifyHandle)
+	public function notify($notifyHandler)
 	{
-		$notifyHandle->sdk = $this;
-		$notifyHandle->exec();
+		$notifyHandler->sdk = $this;
+		$notifyHandler->exec();
 	}
 }
