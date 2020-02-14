@@ -44,7 +44,7 @@ abstract class Base extends NotifyBase
 
 	/**
 	 * 获取通知数据
-	 * @return void
+	 * @return array|mixed
 	 */
 	public function getNotifyData()
 	{

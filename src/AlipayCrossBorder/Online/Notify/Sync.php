@@ -10,7 +10,7 @@ abstract class Sync extends Base
 {
 	/**
 	 * 获取通知数据
-	 * @return void
+	 * @return array|mixed
 	 */
 	public function getNotifyData()
 	{
