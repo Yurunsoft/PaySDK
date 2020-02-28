@@ -56,4 +56,10 @@ class RSA extends Base
 		return $result;
 	}
 
+	public static function encryptPublic($data, $public)
+	{
+		openssl_public_encrypt($data, $result, $public, OPENSSL_PKCS1_OAEP_PADDING);
+		return $result;
+	}
+
 }

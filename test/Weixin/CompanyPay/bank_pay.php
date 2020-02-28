@@ -16,7 +16,9 @@ $params->keyPath = $GLOBALS['PAY_CONFIG']['keyPath'];
 $sdk = new \Yurun\PaySDK\Weixin\SDK($params);
 
 $request = new \Yurun\PaySDK\Weixin\CompanyPay\Bank\Pay\Request;
-$request->rsaPublicCertFile = dirname(__DIR__) . '/cert/weixin-rsa-public.pem'; // 设置证书路径，用于加密银行卡号、姓名、开户行
+$certFile = dirname(__DIR__) . '/cert/weixin-rsa-public.pem';
+// $request->rsaPublicCertFile = $certFile; // 设置证书路径，用于加密银行卡号、姓名、开户行
+$request->rsaPublicCertContent = file_get_contents($certFile); // 也可以直接赋值内容
 $request->partner_trade_no = 'test' . mt_rand(10000000,99999999); // 订单号
 $request->enc_bank_no = '银行卡号';
 $request->enc_true_name = '姓名';
