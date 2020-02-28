@@ -62,4 +62,20 @@ class RSA extends Base
 		return $result;
 	}
 
+	/**
+	 * pkcs1 格式转 pkcs8
+	 *
+	 * @param string $srcFile
+	 * @param string $destFile
+	 * @return void
+	 */
+	public static function pkcs1To8($srcFile, $destFile)
+	{
+		$content = exec("openssl rsa -RSAPublicKey_in -in {$srcFile} -pubout -out {$destFile}", null, $code);
+		if(0 != $code)
+		{
+			throw new \RuntimeException(sprintf('Convert PKCS1 To PKCS8 failed! code:%s message:%s', $code, $content));
+		}
+	}
+
 }
