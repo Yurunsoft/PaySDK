@@ -80,6 +80,10 @@ abstract class Base
 		$this->prepareExecute($params, $url, $data);
 		$this->url = $url;
 		$this->response = $this->http->send($url, $this->requestData, $params->_method);
+		if(!$this->response->success)
+		{
+			throw new \RuntimeException(sprintf('Request error: [%s] %s', $this->response->errno(), $this->response->error()));
+		}
 		switch($format)
 		{
 			case 'JSON':
