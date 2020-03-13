@@ -21,18 +21,21 @@ API 文档：[https://apidoc.gitee.com/yurunsoft/PaySDK](https://apidoc.gitee.co
 ## 支持的支付接口
 
 ### 支付宝
+
 * 即时到账-电脑网站支付（老）
 * 即时到账-手机网站支付（老）
 * 当面付
 * 手机网站支付
 * 电脑网站支付
 * APP支付服务端
+* 小程序支付
 * 单笔转账到支付宝账户
 * 海外支付（电脑网站、手机网站、APP、扫码）
 * 海关报关
 * 其它辅助交易接口（退款、查询等）
 
 ### 微信支付
+
 * 刷卡支付
 * 公众号支付
 * 扫码支付
@@ -52,7 +55,7 @@ API 文档：[https://apidoc.gitee.com/yurunsoft/PaySDK](https://apidoc.gitee.co
 ```json
 {
     "require": {
-        "yurunsoft/pay-sdk": "~2.1"
+        "yurunsoft/pay-sdk": "~2.2"
     }
 }
 ```
