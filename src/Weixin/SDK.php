@@ -3,6 +3,7 @@ namespace Yurun\PaySDK\Weixin;
 
 use \Yurun\PaySDK\Base;
 use Yurun\PaySDK\Lib\XML;
+use Yurun\PaySDK\Lib\Encrypt\RSA;
 use Yurun\PaySDK\Lib\ObjectToArray;
 use Yurun\PaySDK\Weixin\Report\Request;
 use Yurun\PaySDK\Weixin\Params\PublicParams;
@@ -42,7 +43,7 @@ class SDK extends Base
 	{
 		$data = \array_merge(ObjectToArray::parse($this->publicParams), ObjectToArray::parse($params));
 		// 删除不必要的字段
-		unset($data['apiDomain'], $data['appID'], $data['businessParams'], $data['_apiMethod'], $data['key'], $data['_method'], $data['_isSyncVerify'], $data['certPath'], $data['keyPath'], $data['needSignType'], $data['allowReport'], $data['reportLevel'], $data['needNonceStr'], $data['signType'], $data['needAppID'], $data['rsaPublicCertFile'], $data['needMchID']);
+		unset($data['apiDomain'], $data['appID'], $data['businessParams'], $data['_apiMethod'], $data['key'], $data['_method'], $data['_isSyncVerify'], $data['certPath'], $data['keyPath'], $data['needSignType'], $data['allowReport'], $data['reportLevel'], $data['needNonceStr'], $data['signType'], $data['needAppID'], $data['rsaPublicCertFile'], $data['rsaPublicCertContent'], $data['needMchID']);
 		// 企业付款接口特殊处理
 		if($params->needAppID)
 		{
@@ -314,4 +315,22 @@ class SDK extends Base
 		}
 		return '';
 	}
+
+	/**
+	 * 保存 RSA 公钥为 PHP 可用的 pkcs8 格式
+	 *
+	 * @param string $fileName
+	 * @param array|null $result
+	 * @return void
+	 */
+	public function saveRSAPublic($fileName, $result = null)
+	{
+		if(null === $result)
+		{
+			$result = $this->result;
+		}
+		file_put_contents($fileName, $result['pub_key']);
+		RSA::pkcs1To8($fileName, $fileName);
+	}
+
 }

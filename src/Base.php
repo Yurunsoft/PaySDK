@@ -46,16 +46,16 @@ abstract class Base
 	public $result;
 
 	/**
-	 * swoole 请求类
+	 * swoole 请求类，或支持 PSR-7 标准的对象
 	 *
-	 * @var \swoole_http_request
+	 * @var \Swoole\Http\Request|\Psr\Http\Message\ServerRequestInterface
 	 */
 	public $swooleRequest;
 
 	/**
-	 * swoole 响应类
+	 * swoole 响应类，或支持 PSR-7 标准的对象
 	 *
-	 * @var \swoole_http_response
+	 * @var \Swoole\Http\Response|\Psr\Http\Message\ResponseInterface
 	 */
 	public $swooleResponse;
 
@@ -80,6 +80,10 @@ abstract class Base
 		$this->prepareExecute($params, $url, $data);
 		$this->url = $url;
 		$this->response = $this->http->send($url, $this->requestData, $params->_method);
+		if(!$this->response->success)
+		{
+			throw new \RuntimeException(sprintf('Request error: [%s] %s', $this->response->errno(), $this->response->error()));
+		}
 		switch($format)
 		{
 			case 'JSON':
@@ -222,9 +226,13 @@ abstract class Base
 			header('Location: ' . $url);
 			exit;
 		}
-		else
+		else if($this->swooleResponse instanceof \Swoole\Http\Response)
 		{
 			$this->swooleResponse->redirect($url, 302);
+		}
+		else if($this->swooleResponse instanceof \Psr\Http\Message\ResponseInterface)
+		{
+			$this->swooleResponse = $this->swooleResponse->withStatus(302)->withHeader('Location', $url);
 		}
 	}
 
@@ -255,12 +263,12 @@ abstract class Base
 
 	/**
 	 * 处理异步通知
-	 * @param mixed $notifyHandle
+	 * @param \Yurun\PaySDK\NotifyBase $notifyHandler
 	 * @return void
 	 */
-	public function notify($notifyHandle)
+	public function notify($notifyHandler)
 	{
-		$notifyHandle->sdk = $this;
-		$notifyHandle->exec();
+		$notifyHandler->sdk = $this;
+		$notifyHandler->exec();
 	}
 }

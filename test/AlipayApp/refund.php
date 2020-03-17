@@ -17,8 +17,6 @@ $pay = new \Yurun\PaySDK\AlipayApp\SDK($params);
 
 // 支付接口
 $request = new \Yurun\PaySDK\AlipayApp\Params\Refund\Request;
-$request->notify_url = $GLOBALS['PAY_CONFIG']['notify_url']; // 支付后通知地址（作为支付成功回调，这个可靠）
-$request->return_url = $GLOBALS['PAY_CONFIG']['return_url']; // 支付后跳转返回地址
 $request->businessParams->out_trade_no = 'test62025749'; // 订单支付时传入的商户订单号,和支付宝交易号不能同时为空。
 $request->businessParams->trade_no = ''; // 支付宝交易号，和商户订单号不能同时为空
 $request->businessParams->refund_amount = '0.01'; // 需要退款的金额，该金额不能大于订单金额,单位为元，支持两位小数

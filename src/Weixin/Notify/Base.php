@@ -1,10 +1,11 @@
 <?php
 namespace Yurun\PaySDK\Weixin\Notify;
 
-use Yurun\PaySDK\NotifyBase;
-use \Yurun\PaySDK\Weixin\Reply\Base as ReplyBase;
 use \Yurun\PaySDK\Lib\XML;
+use Yurun\PaySDK\NotifyBase;
 use \Yurun\PaySDK\Lib\ObjectToArray;
+use Yurun\Util\YurunHttp\Stream\MemoryStream;
+use \Yurun\PaySDK\Weixin\Reply\Base as ReplyBase;
 
 /**
  * 微信支付-通知处理基类
@@ -31,21 +32,29 @@ abstract class Base extends NotifyBase
 		{
 			echo $this->replyData;
 		}
-		else
+		else if($this->swooleResponse instanceof \Swoole\Http\Response)
 		{
 			$this->swooleResponse->end($this->replyData->toString());
+		}
+		else if($this->swooleResponse instanceof \Psr\Http\Message\ResponseInterface)
+		{
+			$this->swooleResponse = $this->swooleResponse->withBody(new MemoryStream($this->replyData->toString()));
 		}
 	}
 
 	/**
 	 * 获取通知数据
-	 * @return void
+	 * @return array|mixed
 	 */
 	public function getNotifyData()
 	{
-		if(null !== $this->swooleRequest)
+		if($this->swooleRequest instanceof \Swoole\Http\Request)
 		{
 			return XML::fromString($this->swooleRequest->rawContent());
+		}
+		if($this->swooleRequest instanceof \Psr\Http\Message\ServerRequestInterface)
+		{
+			return XML::fromString((string)$this->swooleRequest->getBody());
 		}
 		return XML::fromString(\file_get_contents('php://input'));
 	}

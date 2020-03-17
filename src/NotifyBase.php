@@ -27,16 +27,16 @@ abstract class NotifyBase
 	public $replyData;
 
 	/**
-	 * swoole 请求类
+	 * swoole 请求类，或支持 PSR-7 标准的对象
 	 *
-	 * @var \swoole_http_request
+	 * @var \Swoole\Http\Request|\Psr\Http\Message\ServerRequestInterface
 	 */
 	public $swooleRequest;
 
 	/**
-	 * swoole 响应类
+	 * swoole 响应类，或支持 PSR-7 标准的对象
 	 *
-	 * @var \swoole_http_response
+	 * @var \Swoole\Http\Response|\Psr\Http\Message\ResponseInterface
 	 */
 	public $swooleResponse;
 

@@ -177,6 +177,10 @@ class SDK extends Base
 	 */
 	protected function __checkResult($result)
 	{
+		if(!is_array($result))
+		{
+			return false;
+		}
 		$result = reset($result);
 		return isset($result['code']) && 10000 == $result['code'] && !isset($result['sub_code']);
 	}
@@ -188,6 +192,10 @@ class SDK extends Base
 	 */
 	protected function __getError($result)
 	{
+		if(!is_array($result))
+		{
+			return '';
+		}
 		$result = reset($result);
 		if(isset($result['sub_code']))
 		{
@@ -207,6 +215,10 @@ class SDK extends Base
 	 */
 	protected function __getErrorCode($result)
 	{
+		if(!is_array($result))
+		{
+			return '';
+		}
 		$result = reset($result);
 		if(isset($result['sub_code']))
 		{

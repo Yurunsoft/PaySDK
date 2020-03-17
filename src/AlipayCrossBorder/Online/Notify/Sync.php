@@ -10,13 +10,17 @@ abstract class Sync extends Base
 {
 	/**
 	 * 获取通知数据
-	 * @return void
+	 * @return array|mixed
 	 */
 	public function getNotifyData()
 	{
-		if(null !== $this->swooleRequest)
+		if($this->swooleRequest instanceof \Swoole\Http\Request)
 		{
 			return $this->swooleRequest->get;
+		}
+		if($this->swooleRequest instanceof \Psr\Http\Message\ServerRequestInterface)
+		{
+			return $this->swooleRequest->getQueryParams();
 		}
 		return $_GET;
 	}

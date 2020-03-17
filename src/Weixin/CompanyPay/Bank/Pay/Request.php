@@ -52,10 +52,16 @@ class Request extends WeixinRequestBase
 	public $desc;
 
 	/**
-	 * RSA加密公钥文件路径
+	 * RSA加密公钥文件路径，比文件内容更优先
 	 * @var string
 	 */
 	public $rsaPublicCertFile;
+
+	/**
+	 * RSA加密公钥文件内容
+	 * @var string
+	 */
+	public $rsaPublicCertContent;
 
 	public function __construct()
 	{
@@ -66,8 +72,18 @@ class Request extends WeixinRequestBase
 	public function toArray()
 	{
 		$data = get_object_vars($this);
-		$data['enc_bank_no'] = \base64_encode(RSA::encryptPublicFromFile($data['enc_bank_no'], $this->rsaPublicCertFile));
-		$data['enc_true_name'] = \base64_encode(RSA::encryptPublicFromFile($data['enc_true_name'], $this->rsaPublicCertFile));
+		if($this->rsaPublicCertFile)
+		{
+			$method = 'encryptPublicFromFile';
+			$public = $this->rsaPublicCertFile;
+		}
+		else
+		{
+			$method = 'encryptPublic';
+			$public = $this->rsaPublicCertContent;
+		}
+		$data['enc_bank_no'] = \base64_encode(RSA::$method($data['enc_bank_no'], $public));
+		$data['enc_true_name'] = \base64_encode(RSA::$method($data['enc_true_name'], $public));
 		return $data;
 	}
 }
