@@ -52,6 +52,10 @@ abstract class Base extends NotifyBase
 		{
 			return XML::fromString($this->swooleRequest->rawContent());
 		}
+		if($this->swooleRequest instanceof \Hyperf\HttpServer\Contract\RequestInterface)
+		{
+			return XML::fromString((string)$this->swooleRequest->getBody()->getContents());
+		}
 		if($this->swooleRequest instanceof \Psr\Http\Message\ServerRequestInterface)
 		{
 			return XML::fromString((string)$this->swooleRequest->getBody());
