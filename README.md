@@ -6,7 +6,9 @@
 
 ## 介绍
 
-PaySDK 是 PHP 集成支付 SDK ，集成了支付宝、微信支付的支付接口和其它相关接口的操作。可以轻松嵌入支持 PHP >= 5.4 的任何系统中，2.0 版现已支持 Swoole 协程环境。
+PaySDK 是 PHP 集成支付 SDK ，集成了支付宝、微信支付的支付接口和其它相关接口的操作。
+
+无框架依赖，支持所有框架，支持 Swoole 协程环境。
 
 我们有完善的在线技术文档：[http://doc.yurunsoft.com/PaySDK](http://doc.yurunsoft.com/PaySDK)
 
@@ -14,9 +16,7 @@ API 文档：[https://apidoc.gitee.com/yurunsoft/PaySDK](https://apidoc.gitee.co
 
 同时欢迎各位加入**宇润 PHP 全家桶技术支持群**：17916227 [![点击加群](https://pub.idqqimg.com/wpa/images/group.png "点击加群")](https://jq.qq.com/?_wv=1027&k=5wXf4Zq)，如有问题可以及时解答和修复。
 
-大家在开发中肯定会对接各种各样的支付平台，我个人精力有限，欢迎各位来提交 PR （[码云](https://gitee.com/yurunsoft/PaySDK)/[Github](https://github.com/Yurunsoft/PaySDK)），一起完善 PaySDK ，让它能够支持更多的支付平台，更加好用。
-
-有许多朋友表示不敢用这类 SDK ，在这我再声明一下： PaySDK 是基于 MIT 协议开源的，你可以阅读修改所有无压缩无加密的源代码，绝对不会留任何后门。
+大家在开发中肯定会对接各种各样的支付平台，我个人精力有限，欢迎各位来 [Github](https://github.com/Yurunsoft/PaySDK) 提交 PR，一起完善 PaySDK ，让它能够支持更多的支付平台，更加稳定可靠好用。
 
 ## 支持的支付接口
 
@@ -52,13 +52,29 @@ API 文档：[https://apidoc.gitee.com/yurunsoft/PaySDK](https://apidoc.gitee.co
 
 在您的composer.json中加入配置：
 
+`PHP >= 7.1.0`
+
 ```json
 {
     "require": {
-        "yurunsoft/pay-sdk": "~2.2"
+        "yurunsoft/pay-sdk": "~3.0"
     }
 }
 ```
+
+`PHP >= 5.4.0 && PHP < 7.1.0`
+
+```json
+{
+    "require": {
+        "yurunsoft/pay-sdk": "~2.0"
+    }
+}
+```
+
+> 3.x 版本支持 PHP >= 7.1，持续迭代维护中
+
+> 2.x 版本支持 PHP >= 5.4，支持长期 BUG 维护，保证稳定可用，停止功能性更新
 
 然后执行`composer update`命令。
 

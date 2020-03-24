@@ -9,7 +9,7 @@
         }
     },
     "require": {
-        "php": "^5.4|^7.0",
-        "yurunsoft/yurun-http" : "~3.0"
+        "php": ">=7.1",
+        "yurunsoft/yurun-http" : "~4.0"
     }
 }
