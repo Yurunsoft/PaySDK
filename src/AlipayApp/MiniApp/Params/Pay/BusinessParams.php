@@ -4,7 +4,7 @@ namespace Yurun\PaySDK\AlipayApp\MiniApp\Params\Pay;
 use \Yurun\PaySDK\AlipayApp\MiniApp\Params\Pay\ExtendParams;
 
 /**
- * 支付宝手机支付下单业务参数类
+ * 支付宝小程序支付下单业务参数类
  */
 class BusinessParams
 {

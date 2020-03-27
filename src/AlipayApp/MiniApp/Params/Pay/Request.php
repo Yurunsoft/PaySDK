@@ -5,7 +5,7 @@ use \Yurun\PaySDK\AlipayRequestBase;
 use \Yurun\PaySDK\AlipayApp\MiniApp\Params\Pay\BusinessParams;
 
 /**
- * 支付宝手机支付下单请求类
+ * 支付宝小程序支付下单请求类
  */
 class Request extends AlipayRequestBase
 {
