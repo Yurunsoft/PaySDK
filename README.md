@@ -1,6 +1,7 @@
 # PaySDK
 
 [![Latest Version](https://img.shields.io/packagist/v/yurunsoft/pay-sdk.svg)](https://packagist.org/packages/yurunsoft/pay-sdk)
+[![Php Version](https://img.shields.io/badge/php-%3E=5.5-brightgreen.svg)](https://secure.php.net/)
 [![IMI Doc](https://img.shields.io/badge/docs-passing-green.svg)](http://doc.yurunsoft.com/PaySDK)
 [![IMI License](https://img.shields.io/github/license/Yurunsoft/PaySDK.svg)](https://github.com/Yurunsoft/PaySDK/blob/master/LICENSE)
 
@@ -52,7 +53,7 @@ API 文档：[https://apidoc.gitee.com/yurunsoft/PaySDK](https://apidoc.gitee.co
 
 在您的composer.json中加入配置：
 
-`PHP >= 7.1.0`
+`PHP >= 5.5`
 
 ```json
 {
@@ -62,7 +63,7 @@ API 文档：[https://apidoc.gitee.com/yurunsoft/PaySDK](https://apidoc.gitee.co
 }
 ```
 
-`PHP >= 5.4.0 && PHP < 7.1.0`
+`PHP >= 5.4`
 
 ```json
 {
@@ -72,7 +73,7 @@ API 文档：[https://apidoc.gitee.com/yurunsoft/PaySDK](https://apidoc.gitee.co
 }
 ```
 
-> 3.x 版本支持 PHP >= 7.1，持续迭代维护中
+> 3.x 版本支持 PHP >= 5.5，持续迭代维护中
 
 > 2.x 版本支持 PHP >= 5.4，支持长期 BUG 维护，保证稳定可用，停止功能性更新
 
@@ -95,8 +96,12 @@ $request->businessParams->out_trade_no = 'test' . mt_rand(10000000,99999999); //
 $request->businessParams->total_fee = 0.01; // 价格
 $request->businessParams->subject = '测试商品'; // 商品标题
 
-// 跳转到支付宝页面
-$pay->redirectExecute($request);
+// 跳转到支付页面
+// $pay->redirectExecute($request);
+
+// 获取跳转url
+$pay->prepareExecute($request, $url);
+var_dump($url);
 ```
 
 ### 支付宝手机网站支付
@@ -113,8 +118,12 @@ $request->businessParams->out_trade_no = 'test' . mt_rand(10000000,99999999); //
 $request->businessParams->total_amount = 0.01; // 价格
 $request->businessParams->subject = '小米手机9黑色陶瓷尊享版'; // 商品标题
 
-// 跳转到支付宝页面
-$pay->redirectExecute($request);
+// 跳转到支付页面
+// $pay->redirectExecute($request);
+
+// 获取跳转url
+$pay->prepareExecute($request, $url);
+var_dump($url);
 ```
 
 ### 微信H5支付
@@ -147,13 +156,9 @@ exit;
 
 ### Swoole 协程环境支持
 
-在 `WorkerStart` 事件中加入：
-
-```php
-\Yurun\Util\YurunHttp::setDefaultHandler('Yurun\Util\YurunHttp\Handler\Swoole');
-```
-
 在支付、退款异步通知中，需要赋值 `Swoole` 的 `Request` 和 `Response` 对象，或者遵循 PSR-7 标准的对象即可。
+
+主流框架的 `Request` 和 `Response` 对象，一般都遵循 PSR-7 标准，可以直接使用。
 
 #### imi 框架中使用
 
