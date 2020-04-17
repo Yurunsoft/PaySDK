@@ -5,7 +5,15 @@ trait JSONParams
 {
 	public function __toString()
 	{
-		return $this->toString(); 
+		$result = $this->toString();
+		if(is_string($result))
+		{
+			return $result;
+		}
+		else
+		{
+			return '';
+		}
 	}
 
 	public function toString()
