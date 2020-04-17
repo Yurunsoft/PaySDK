@@ -24,11 +24,14 @@ $success = $sdk->checkResult();
 if($success)
 {
 	// 将$result['pub_key']存储到本地，企业付款到银行卡接口调用时需要使用
-	file_put_contents(__DIR__ . '/cert/weixin-rsa-public.pem', $result['pub_key']);
+	// file_put_contents(__DIR__ . '/cert/weixin-rsa-public.pem', $result['pub_key']);
 	/*
 	你还需要执行openssl rsa -RSAPublicKey_in -in weixin-rsa-public.pem -pubout
 	将命令行输出的证书内容覆盖到weixin-rsa-public.pem文件中才可使用
 	*/
+
+	// 保存 RSA 公钥为 PHP 可用的 pkcs8 格式
+	$sdk->saveRSAPublic(__DIR__ . '/cert/weixin-rsa-public.pem');
 }
 
 var_dump('success:', $success);

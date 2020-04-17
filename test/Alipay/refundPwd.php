@@ -23,5 +23,9 @@ $request->businessParams->batch_no = date('Ymd') . mt_rand(100, 99999999); // �
 $request->businessParams->batch_num = 1; // 总笔数
 $request->businessParams->detail_data = '2017081521001004640269135539^0.01^协商退款'; // 单笔数据集
 
-// 跳转到支付宝页面
-$pay->redirectExecute($request);
+// 跳转到支付页面
+// $pay->redirectExecute($request);
+
+// 获取跳转url
+$pay->prepareExecute($request, $url);
+var_dump($url);

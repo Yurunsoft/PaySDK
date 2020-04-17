@@ -24,5 +24,9 @@ $request->businessParams->total_fee = 0.01; // 价格
 $request->businessParams->subject = '测试商品'; // 商品标题
 $request->businessParams->show_url = 'http://www.yurunsoft.com'; // 用户付款中途退出返回商户网站的地址。
 
-// 跳转到支付宝页面
-$pay->redirectExecute($request);
+// 跳转到支付页面
+// $pay->redirectExecute($request);
+
+// 获取跳转url
+$pay->prepareExecute($request, $url);
+var_dump($url);

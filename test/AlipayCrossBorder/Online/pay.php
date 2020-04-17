@@ -25,5 +25,9 @@ $request->subject = '测试商品'; // 商品标题
 $request->currency = 'USD';
 $request->supplier = '某某小店';
 
-// 跳转到支付宝页面
-$pay->redirectExecute($request);
+// 跳转到支付页面
+// $pay->redirectExecute($request);
+
+// 获取跳转url
+$pay->prepareExecute($request, $url);
+var_dump($url);
