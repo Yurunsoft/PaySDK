@@ -2,6 +2,7 @@
 namespace Yurun\PaySDK\AlipayApp;
 
 use \Yurun\PaySDK\Base;
+use Yurun\PaySDK\Lib\CertUtil;
 use \Yurun\PaySDK\Lib\Encrypt\AES;
 use \Yurun\PaySDK\Lib\ObjectToArray;
 
@@ -17,6 +18,43 @@ class SDK extends Base
 	public $publicParams;
 
 	/**
+	 * 支付宝公钥证书SN
+	 *
+	 * @var string
+	 */
+	public $alipayCertSn;
+
+	/**
+	 * 应用公钥证书SN
+	 *
+	 * @var string
+	 */
+	public $appCertSn;
+
+	/**
+	 * 支付宝根证书SN
+	 *
+	 * @var string
+	 */
+	public $alipayRootCertSn;
+
+	/**
+	 * __construct
+	 *
+	 * @param \Yurun\PaySDK\AlipayApp\Params\PublicParams $publicParams
+	 */
+	public function __construct($publicParams)
+	{
+		parent::__construct($publicParams);
+		if($publicParams->usePublicKeyCert)
+		{
+			$this->alipayCertSn = CertUtil::getCertSN($publicParams->alipayCertPath);
+			$this->appCertSn = CertUtil::getCertSN($publicParams->merchantCertPath);
+			$this->alipayRootCertSn = CertUtil::getRootCertSN($publicParams->alipayRootCertPath);
+		}
+	}
+
+	/**
 	 * 处理执行接口的数据
 	 * @param $params
 	 * @param &$data 数据数组
@@ -27,12 +65,18 @@ class SDK extends Base
 	public function __parseExecuteData($params, &$data, &$requestData, &$url)
 	{
 		$data = \array_merge(ObjectToArray::parse($this->publicParams), ObjectToArray::parse($params));
-		unset($data['apiDomain'], $data['appID'], $data['businessParams'], $data['appPrivateKey'], $data['appPrivateKeyFile'], $data['appPublicKey'], $data['appPublicKeyFile'], $data['_syncResponseName'], $data['_method'], $data['_isSyncVerify'], $data['aesKey'], $data['isUseAES']);
+		unset($data['apiDomain'], $data['appID'], $data['businessParams'], $data['appPrivateKey'], $data['appPrivateKeyFile'], $data['appPublicKey'], $data['appPublicKeyFile'], $data['_syncResponseName'], $data['_method'], $data['_isSyncVerify'], $data['aesKey'], $data['isUseAES'], $data['alipayCertPath'], $data['alipayRootCertPath'], $data['merchantCertPath'], $data['usePublicKeyCert']);
 		$data['app_id'] = $this->publicParams->appID;
 		$data['biz_content'] = $params->businessParams->toString();
 		if($this->publicParams->isUseAES)
 		{
 			$data['biz_content'] = AES::encrypt($data['biz_content'], \base64_decode($this->publicParams->aesKey));
+		}
+		// 公钥证书参数
+		if($this->publicParams->usePublicKeyCert)
+		{
+			$data['app_cert_sn'] = $this->appCertSn;
+			$data['alipay_root_cert_sn'] = $this->alipayRootCertSn;
 		}
 		$data['timestamp'] = date('Y-m-d H:i:s');
 		$data['sign'] = $this->sign($data);
@@ -118,6 +162,11 @@ class SDK extends Base
 		if(!isset($data['sign']))
 		{
 			return true;
+		}
+		// 公钥证书验证
+		if($this->publicParams->usePublicKeyCert && $this->alipayCertSn !== (isset($data['alipay_cert_sn']) ? $data['alipay_cert_sn'] : null))
+		{
+			return false;
 		}
 		$content = \json_encode($data[$params->_syncResponseName], JSON_UNESCAPED_UNICODE);
 		if(empty($this->publicParams->appPublicKeyFile))

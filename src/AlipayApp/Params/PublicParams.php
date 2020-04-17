@@ -69,6 +69,34 @@ class PublicParams extends PublicBase
 	 */
 	public $aesKey;
 
+	/**
+	 * 是否使用公钥证书模式
+	 *
+	 * @var boolean
+	 */
+	public $usePublicKeyCert = false;
+
+	/**
+	 * 支付宝公钥证书文件路径
+	 *
+	 * @var string
+	 */
+	public $alipayCertPath;
+
+	/**
+	 * 支付宝根证书文件路径
+	 *
+	 * @var string
+	 */
+	public $alipayRootCertPath;
+
+	/**
+	 * 支付宝应用公钥证书文件路径
+	 *
+	 * @var string
+	 */
+	public $merchantCertPath;
+
 	public function __construct()
 	{
 		$this->apiDomain = 'https://openapi.alipay.com/gateway.do';

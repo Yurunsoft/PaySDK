@@ -9,6 +9,13 @@ $params = new \Yurun\PaySDK\AlipayApp\Params\PublicParams;
 $params->appID = $GLOBALS['PAY_CONFIG']['appid'];
 $params->appPrivateKey = $GLOBALS['PAY_CONFIG']['privateKey'];
 $params->appPublicKey = $GLOBALS['PAY_CONFIG']['publicKey'];
+
+// 公钥证书演示
+$params->usePublicKeyCert = true;
+$params->alipayCertPath = __DIR__ . '/cert/alipayCertPublicKey_RSA2.crt';
+$params->alipayRootCertPath = __DIR__ . '/cert/alipayRootCert.crt';
+$params->merchantCertPath = __DIR__ . '/cert/appCertPublicKey_2016073000123475.crt';
+
 // $params->appPrivateKeyFile = ''; // 证书文件，如果设置则这个优先使用
 $params->apiDomain = 'https://openapi.alipaydev.com/gateway.do'; // 设为沙箱环境，如正式环境请把这行注释
 
