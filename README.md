@@ -248,6 +248,16 @@ $sdk->notify($payNotify);
 return $payNotify->swooleResponse;
 ```
 
+## 商业服务
+
+**服务内容：**
+
+* 问题排查及咨询
+* 代接支付
+* 其它合作
+
+如有需要加QQ：369124067（注明来意）
+
 ## 捐赠
 
 <img src="https://raw.githubusercontent.com/Yurunsoft/PaySDK/master/res/pay.png"/>
