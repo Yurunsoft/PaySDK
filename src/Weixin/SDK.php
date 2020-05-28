@@ -156,7 +156,7 @@ class SDK extends Base
 		{
 			$data = XML::fromString($data);
 		}
-		if(!isset($data['return_code']) || 'SUCCESS' !== $data['return_code'] || !isset($data['sign']))
+		if(!isset($data['sign']))
 		{
 			return false;
 		}
