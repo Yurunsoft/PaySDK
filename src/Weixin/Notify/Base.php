@@ -48,6 +48,10 @@ abstract class Base extends NotifyBase
 	 */
 	public function getNotifyData()
 	{
+		if(is_string($this->swooleRequest))
+		{
+			return XML::fromString($this->swooleRequest);
+		}
 		if($this->swooleRequest instanceof \Swoole\Http\Request)
 		{
 			return XML::fromString($this->swooleRequest->rawContent());
