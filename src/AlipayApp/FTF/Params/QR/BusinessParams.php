@@ -100,7 +100,7 @@ class BusinessParams
 		{
 			$obj['goods_detail'] = json_encode($obj['goods_detail']);
 		}
-		$result = $obj['extend_params']->toString();
+		$result = $obj['extend_params']->toArray();
 		if(null === $result)
 		{
 			unset($obj['extend_params']);

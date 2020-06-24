@@ -123,7 +123,7 @@ class BusinessParams
 	public function toString()
 	{
 		$obj = (array)$this;
-		$result = $obj['goods_detail']->toString();
+		$result = $obj['goods_detail']->toArray();
 		if(null === $result)
 		{
 			unset($obj['goods_detail']);
@@ -132,7 +132,7 @@ class BusinessParams
 		{
 			$obj['goods_detail'] = $result;
 		}
-		$result = $obj['extend_params']->toString();
+		$result = $obj['extend_params']->toArray();
 		if(null === $result)
 		{
 			unset($obj['extend_params']);

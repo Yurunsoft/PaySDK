@@ -136,7 +136,7 @@ class BusinessParams
 	public function toString()
 	{
 		$obj = (array)$this;
-		$result = $obj['extend_params']->toString();
+		$result = $obj['extend_params']->toArray();
 		if(null === $result)
 		{
 			unset($obj['extend_params']);

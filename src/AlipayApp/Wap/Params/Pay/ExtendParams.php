@@ -1,17 +1,11 @@
 <?php
 namespace Yurun\PaySDK\AlipayApp\Wap\Params\Pay;
 
-use \Yurun\PaySDK\Traits\JSONParams;
-
 /**
  * 支付宝手机支付下单扩展参数类
  */
 class ExtendParams
 {
-	use JSONParams{
-		toString as private traitToString;
-	}
-
 	/**
 	 * 系统商编号，该参数作为系统商返佣数据提取的依据，请填写系统商签约协议的PID
 	 * @var string
@@ -45,12 +39,12 @@ class ExtendParams
 	 */
 	public $hb_fq_seller_percent;
 
-	public function toString()
+	public function toArray()
 	{
 		if(null === $this->sys_service_provider_id && null === $this->hb_fq_num && null === $this->hb_fq_seller_percent && null === $this->needBuyerRealnamed && null === $this->TRANS_MEMO)
 		{
 			return null;
 		}
-		return $this->traitToString();
+		return (array)$this;
 	}
 }

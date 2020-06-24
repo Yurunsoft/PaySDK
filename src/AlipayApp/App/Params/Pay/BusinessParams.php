@@ -96,7 +96,7 @@ class BusinessParams
 
 	/**
 	 * 外部指定买家
-	 * @var [type]
+	 * @var array
 	 */
 	public $ext_user_info;
 
@@ -108,7 +108,7 @@ class BusinessParams
 	public function toString()
 	{
 		$obj = (array)$this;
-		$result = $obj['extend_params']->toString();
+		$result = $obj['extend_params']->toArray();
 		if(null === $result)
 		{
 			unset($obj['extend_params']);
