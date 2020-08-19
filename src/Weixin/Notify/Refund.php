@@ -33,7 +33,7 @@ abstract class Refund extends Base
 		if(isset($data['return_code']) && 'SUCCESS' === $data['return_code'])
 		{
 			$key = md5($this->sdk->publicParams->key);
-			$data['req_info'] = XML::fromString(AES::decrypt256($data['req_info'], $key));
+			$data['req_info'] = XML::fromString(AES::decrypt256(base64_decode($data['req_info']), $key, OPENSSL_RAW_DATA));
 		}
 		return $data;
 	}
