@@ -81,11 +81,13 @@ class CertUtil
     {
         $dec = 0;
         $len = strlen($hex);
-        for ($i = 1; $i <= $len; $i++)
-        {
-            $dec = bcadd($dec, bcmul(strval(hexdec($hex[$i - 1])), bcpow('16', strval($len - $i))));
+        for ($i = 1; $i <= $len; ++$i) {
+            if (ctype_xdigit($hex[$i - 1])) {
+                $dec = bcadd($dec, bcmul(strval(hexdec($hex[$i - 1])), bcpow('16', strval($len - $i))));
+            }
         }
-        return $dec;
+
+        return str_replace('.00', '', $dec);
     }
 
 }
