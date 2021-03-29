@@ -1,11 +1,11 @@
 <?php
 /**
- * 支付宝回调Demo
+ * 支付宝回调Demo.
  */
 require __DIR__ . '/common.php';
 
 // 公共配置
-$params = new \Yurun\PaySDK\AlipayApp\Params\PublicParams;
+$params = new \Yurun\PaySDK\AlipayApp\Params\PublicParams();
 $params->appPublicKey = $GLOBALS['PAY_CONFIG']['publicKey'];
 $params->appPrivateKey = $GLOBALS['PAY_CONFIG']['privateKey'];
 

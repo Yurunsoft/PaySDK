@@ -1,11 +1,11 @@
 <?php
 /**
- * 支付宝有密退款Demo
+ * 支付宝有密退款Demo.
  */
 require __DIR__ . '/common.php';
 
 // 公共配置
-$params = new \Yurun\PaySDK\Alipay\Params\PublicParams;
+$params = new \Yurun\PaySDK\Alipay\Params\PublicParams();
 $params->appID = $GLOBALS['PAY_CONFIG']['appid'];
 $params->md5Key = $GLOBALS['PAY_CONFIG']['md5Key'];
 // $params->appPrivateKey = $GLOBALS['PAY_CONFIG']['privateKey'];
@@ -15,7 +15,7 @@ $params->md5Key = $GLOBALS['PAY_CONFIG']['md5Key'];
 $pay = new \Yurun\PaySDK\Alipay\SDK($params);
 
 // 支付接口
-$request = new \Yurun\PaySDK\Alipay\Params\RefundPwd\Request;
+$request = new \Yurun\PaySDK\Alipay\Params\RefundPwd\Request();
 $request->notify_url = $GLOBALS['PAY_CONFIG']['notify_url']; // 支付后通知地址（作为支付成功回调，这个可靠）
 $request->businessParams->seller_user_id = $GLOBALS['PAY_CONFIG']['appid']; // 卖家支付宝用户号
 $request->businessParams->refund_date = date('Y-m-d H:i:s'); // 退款请求时间

@@ -1,8 +1,9 @@
 <?php
-require dirname(dirname(__DIR__)) . '/common.php';
-$GLOBALS['PAY_CONFIG'] = array(
-	'appid'			=>	'',
-	'publicKey'		=>	'',
-	'privateKey'	=>	'',
-	'md5Key'		=>	'',
-);
+
+require dirname(__DIR__, 2) . '/common.php';
+$GLOBALS['PAY_CONFIG'] = [
+    'appid'			    => '',
+    'publicKey'		 => '',
+    'privateKey'	 => '',
+    'md5Key'		    => '',
+];

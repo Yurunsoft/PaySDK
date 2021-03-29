@@ -1,11 +1,11 @@
 <?php
 /**
- * 支付宝统一收单交易退款查询Demo
+ * 支付宝统一收单交易退款查询Demo.
  */
 require __DIR__ . '/common.php';
 
 // 公共配置
-$params = new \Yurun\PaySDK\AlipayApp\Params\PublicParams;
+$params = new \Yurun\PaySDK\AlipayApp\Params\PublicParams();
 $params->appID = $GLOBALS['PAY_CONFIG']['appid'];
 $params->appPublicKey = $GLOBALS['PAY_CONFIG']['publicKey'];
 $params->appPrivateKey = $GLOBALS['PAY_CONFIG']['privateKey'];
@@ -16,7 +16,7 @@ $params->apiDomain = 'https://openapi.alipaydev.com/gateway.do'; // 设为沙箱
 $pay = new \Yurun\PaySDK\AlipayApp\SDK($params);
 
 // 支付接口
-$request = new \Yurun\PaySDK\AlipayApp\Params\RefundQuery\Request;
+$request = new \Yurun\PaySDK\AlipayApp\Params\RefundQuery\Request();
 $request->businessParams->trade_no = '';
 $request->businessParams->out_trade_no = '';
 $request->businessParams->out_request_no = '';

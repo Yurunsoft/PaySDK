@@ -1,11 +1,11 @@
 <?php
 /**
- * 支付宝有密退款Demo
+ * 支付宝有密退款Demo.
  */
 require __DIR__ . '/common.php';
 
 // 公共配置
-$params = new \Yurun\PaySDK\Alipay\Params\PublicParams;
+$params = new \Yurun\PaySDK\Alipay\Params\PublicParams();
 $params->appID = $GLOBALS['PAY_CONFIG']['appid'];
 $params->md5Key = $GLOBALS['PAY_CONFIG']['md5Key'];
 // $params->appPrivateKey = $GLOBALS['PAY_CONFIG']['privateKey'];
@@ -15,7 +15,7 @@ $params->md5Key = $GLOBALS['PAY_CONFIG']['md5Key'];
 $pay = new \Yurun\PaySDK\Alipay\SDK($params);
 
 // 支付接口
-$request = new \Yurun\PaySDK\Alipay\Params\Refund\Request;
+$request = new \Yurun\PaySDK\Alipay\Params\Refund\Request();
 // $request->notify_url = $GLOBALS['PAY_CONFIG']['notify_url']; // 服务器异步通知页面路径
 // $request->dback_notify_url = $GLOBALS['PAY_CONFIG']['notify_url']; // 支付宝服务器主动通知商户网站里指定的页面http 路径，用于通知商户交易充退结果。
 $request->businessParams->batch_no = date('Ymd') . mt_rand(100, 99999999); // 退款批次号
@@ -26,7 +26,7 @@ $request->businessParams->detail_data = '2018011921001004640250710428^0.01^测�
 // 调用接口
 $result = $pay->execute($request);
 
-if('T' !== $result['is_success'])
+if ('T' !== $result['is_success'])
 {
-	echo 'error:', $result['error'];
+    echo 'error:', $result['error'];
 }

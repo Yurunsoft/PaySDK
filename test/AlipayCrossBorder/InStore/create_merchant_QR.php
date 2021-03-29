@@ -1,11 +1,11 @@
 <?php
 /**
- * 支付宝 Cross-border In-Store Payment - Merchant QR Code Payment - 创建商户二维码 Demo
+ * 支付宝 Cross-border In-Store Payment - Merchant QR Code Payment - 创建商户二维码 Demo.
  */
 require __DIR__ . '/common.php';
 
 // 公共配置
-$params = new \Yurun\PaySDK\AlipayCrossBorder\Params\PublicParams;
+$params = new \Yurun\PaySDK\AlipayCrossBorder\Params\PublicParams();
 $params->appID = $GLOBALS['PAY_CONFIG']['appid'];
 $params->md5Key = $GLOBALS['PAY_CONFIG']['md5Key'];
 // $params->appPrivateKey = $GLOBALS['PAY_CONFIG']['privateKey'];
@@ -16,7 +16,7 @@ $params->apiDomain = 'https://openapi.alipaydev.com/gateway.do'; // 设为沙箱
 $pay = new \Yurun\PaySDK\AlipayCrossBorder\SDK($params);
 
 // 支付接口
-$request = new \Yurun\PaySDK\AlipayCrossBorder\InStore\CreateMerchantQR\Request;
+$request = new \Yurun\PaySDK\AlipayCrossBorder\InStore\CreateMerchantQR\Request();
 $request->notify_url = $GLOBALS['PAY_CONFIG']['notify_url'];
 $request->biz_data->secondary_merchant_industry = '5812';
 $request->biz_data->secondary_merchant_id = 'x001';
@@ -29,7 +29,6 @@ $request->biz_data->currency = 'USD';
 // $request->biz_data->country_code = 'CN';
 // $request->biz_data->address = 'wc';
 
-
 // 调用接口
 $result = $pay->execute($request);
 
@@ -38,4 +37,3 @@ var_dump('result:', $result);
 var_dump('success:', $pay->checkResult());
 
 var_dump('error:', $pay->getError(), 'error_code:', $pay->getErrorCode());
-

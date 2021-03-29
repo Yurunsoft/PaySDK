@@ -1,10 +1,10 @@
 <?php
 /**
- * 支付宝面对面支付之扫码支付Demo
+ * 支付宝面对面支付之扫码支付Demo.
  */
 require __DIR__ . '/common.php';
 // 公共配置
-$params = new \Yurun\PaySDK\AlipayApp\Params\PublicParams;
+$params = new \Yurun\PaySDK\AlipayApp\Params\PublicParams();
 $params->appID = $GLOBALS['PAY_CONFIG']['appid'];
 $params->appPrivateKey = $GLOBALS['PAY_CONFIG']['privateKey'];
 $params->appPublicKey = $GLOBALS['PAY_CONFIG']['publicKey'];
@@ -17,24 +17,26 @@ $params->apiDomain = 'https://openapi.alipaydev.com/gateway.do'; // 设为沙箱
 $pay = new \Yurun\PaySDK\AlipayApp\SDK($params);
 
 // 支付接口
-$request = new \Yurun\PaySDK\AlipayApp\FTF\Params\QR\Request;
+$request = new \Yurun\PaySDK\AlipayApp\FTF\Params\QR\Request();
 $request->notify_url = $GLOBALS['PAY_CONFIG']['notify_url']; // 支付后通知地址（作为支付成功回调，这个可靠）
-$request->businessParams->out_trade_no = 'test' . mt_rand(10000000,99999999); // 商户订单号
+$request->businessParams->out_trade_no = 'test' . mt_rand(10000000, 99999999); // 商户订单号
 $request->businessParams->total_amount = 0.01; // 价格
 $request->businessParams->subject = '小米手机9黑色陶瓷尊享版'; // 商品标题
 // 调用接口
-try{
-	$data = $pay->execute($request);
-	
-	var_dump('result:', $data);
-	
-	var_dump('success:', $pay->checkResult());
-	
-	var_dump('error:', $pay->getError(), 'error_code:', $pay->getErrorCode());
+try
+{
+    $data = $pay->execute($request);
+
+    var_dump('result:', $data);
+
+    var_dump('success:', $pay->checkResult());
+
+    var_dump('error:', $pay->getError(), 'error_code:', $pay->getErrorCode());
 }
-catch(Exception $e){
-	var_dump($pay->response->body());
+catch (Exception $e)
+{
+    var_dump($pay->response->body());
 }
 // 下面二维码为演示方便随便找了个二维码接口，如有需要你可以自己生成二维码或者使用其它的二维码接口
 ?>
-<img src="http://qr.liantu.com/api.php?text=<?php echo urlencode($data['alipay_trade_precreate_response']['qr_code']);?>"/>
+<img src="http://qr.liantu.com/api.php?text=<?php echo urlencode($data['alipay_trade_precreate_response']['qr_code']); ?>"/>

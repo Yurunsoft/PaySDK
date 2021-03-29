@@ -1,11 +1,11 @@
 <?php
 /**
- * 支付宝交易退款Demo
+ * 支付宝交易退款Demo.
  */
 require __DIR__ . '/common.php';
 
 // 公共配置
-$params = new \Yurun\PaySDK\AlipayApp\Params\PublicParams;
+$params = new \Yurun\PaySDK\AlipayApp\Params\PublicParams();
 $params->appID = $GLOBALS['PAY_CONFIG']['appid'];
 $params->appPublicKey = $GLOBALS['PAY_CONFIG']['publicKey'];
 $params->appPrivateKey = $GLOBALS['PAY_CONFIG']['privateKey'];
@@ -16,7 +16,7 @@ $params->apiDomain = 'https://openapi.alipaydev.com/gateway.do'; // 设为沙箱
 $pay = new \Yurun\PaySDK\AlipayApp\SDK($params);
 
 // 支付接口
-$request = new \Yurun\PaySDK\AlipayApp\Params\Refund\Request;
+$request = new \Yurun\PaySDK\AlipayApp\Params\Refund\Request();
 $request->businessParams->out_trade_no = 'test62025749'; // 订单支付时传入的商户订单号,和支付宝交易号不能同时为空。
 $request->businessParams->trade_no = ''; // 支付宝交易号，和商户订单号不能同时为空
 $request->businessParams->refund_amount = '0.01'; // 需要退款的金额，该金额不能大于订单金额,单位为元，支持两位小数
