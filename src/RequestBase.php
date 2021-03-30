@@ -22,6 +22,13 @@ abstract class RequestBase
     public $_isSyncVerify = false;
 
     /**
+     * Content-Type.
+     *
+     * @var string|null
+     */
+    public $_contentType = null;
+
+    /**
      * 当调用SDK的execute时触发，返回true时不执行SDK中默认的执行逻辑.
      *
      * @param \Yurun\PaySDK\Base $sdk

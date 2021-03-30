@@ -30,7 +30,7 @@ class SDK extends Base
     public function __parseExecuteData($params, &$data, &$requestData, &$url)
     {
         $data = array_merge(ObjectToArray::parse($this->publicParams), ObjectToArray::parse($params), ObjectToArray::parse($params->businessParams));
-        unset($data['apiDomain'], $data['appID'], $data['businessParams'], $data['appPrivateKey'], $data['appPrivateKeyFile'], $data['md5Key'], $data['appPublicKey'], $data['appPublicKeyFile'], $data['_syncResponseName'], $data['_method'], $data['_isSyncVerify']);
+        unset($data['apiDomain'], $data['appID'], $data['businessParams'], $data['appPrivateKey'], $data['appPrivateKeyFile'], $data['md5Key'], $data['appPublicKey'], $data['appPublicKeyFile'], $data['_syncResponseName'], $data['_method'], $data['_isSyncVerify'], $data['_contentType']);
         $data['partner'] = $this->publicParams->appID;
         foreach ($data as $key => $value)
         {
@@ -114,12 +114,13 @@ class SDK extends Base
     /**
      * 验证同步返回内容.
      *
-     * @param AlipayRequestBase $params
-     * @param array             $data
+     * @param AlipayRequestBase                        $params
+     * @param array                                    $data
+     * @param \Yurun\Util\YurunHttp\Http\Response|null $response
      *
      * @return bool
      */
-    public function verifySync($params, $data)
+    public function verifySync($params, $data, $response = null)
     {
         return true;
     }

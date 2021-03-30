@@ -4,15 +4,16 @@ namespace Yurun\PaySDK\Weixin;
 
 use Yurun\PaySDK\Base;
 use Yurun\PaySDK\Lib\Encrypt\RSA;
+use Yurun\PaySDK\Lib\Encrypt\SHA256withRSA\Signer;
 use Yurun\PaySDK\Lib\ObjectToArray;
-use Yurun\PaySDK\Lib\XML;
-use Yurun\PaySDK\Weixin\Params\PublicParams;
-use Yurun\PaySDK\Weixin\Report\Request;
+use Yurun\PaySDK\WeixinRequestBase;
 
 /**
- * 微信支付SDK类.
+ * 微信支付SDK类 V3.
+ *
+ * @see https://wechatpay-api.gitbook.io/wechatpay-api-v3/
  */
-class SDK extends Base
+class SDKV3 extends Base
 {
     /**
      * 公共参数.
@@ -22,23 +23,23 @@ class SDK extends Base
     public $publicParams;
 
     /**
-     * 用于上报的SDK实例.
-     *
-     * @var \Yurun\PaySDK\Weixin\SDK
-     */
-    public $reportSDK;
-
-    /**
-     * 最后使用的签名类型.
+     * 最后一次使用的 Authorization.
      *
      * @var string
      */
-    public $signType;
+    public $authorization;
+
+    /**
+     * 最后一次使用的签名.
+     *
+     * @var string
+     */
+    public $sign;
 
     /**
      * 处理执行接口的数据.
      *
-     * @param $params
+     * @param WeixinRequestBase $params
      * @param &$data 数据数组
      * @param &$requestData 请求用的数据，格式化后的
      * @param &$url 请求地址
@@ -79,24 +80,6 @@ class SDK extends Base
             $data['partnerid'] = $this->publicParams->mch_id;
             unset($data['mch_id']);
         }
-        // 部分接口不需要nonce_str字段
-        if (true === $params->needNonceStr)
-        {
-            $data['nonce_str'] = md5(uniqid('', true));
-        }
-        elseif (\is_string($params->needNonceStr))
-        {
-            $data[$params->needNonceStr] = md5(uniqid('', true));
-        }
-        // 处理某个接口强制使用某种签名方式
-        if (null === $params->signType)
-        {
-            $this->signType = $this->publicParams->sign_type;
-        }
-        else
-        {
-            $this->signType = $data['sign_type'] = $params->signType;
-        }
         // 部分接口不需要sign_type字段
         if (!$params->needSignType)
         {
@@ -109,8 +92,7 @@ class SDK extends Base
                 $data[$key] = $value->toString();
             }
         }
-        $data['sign'] = $this->sign($data);
-        $requestData = $this->parseDataToXML($data);
+        $this->authorization = $this->generateAuthorization($data, $params);
         if (false === strpos($params->_apiMethod, '://'))
         {
             $url = $this->publicParams->apiDomain . $params->_apiMethod;
@@ -122,51 +104,52 @@ class SDK extends Base
     }
 
     /**
-     * 把数组处理为xml.
+     * 生成 Authorization.
      *
-     * @param array $data
+     * @param array             $data
+     * @param WeixinRequestBase $params
      *
      * @return string
      */
-    public function parseDataToXML($data)
+    public function generateAuthorization($data, $params)
     {
-        return XML::toString($data);
+        $timestamp = time();
+        $nonceStr = md5(mt_rand());
+        $this->sign = $this->sign([
+            'data'      => $data,
+            'params'    => $params,
+            'timestamp' => $timestamp,
+            'nonce_str' => $nonceStr,
+        ]);
+        $this->http->header('Authorization', sprintf('WECHATPAY2-SHA256-RSA2048 mchid="%s",nonce_str="%s",signature="%s",timestamp="%s",serial_no="%s"', $this->publicParams->mch_id, $nonceStr, $this->sign, $timestamp, $this->publicParams->certSerialNumber));
     }
 
     /**
      * 签名.
      *
-     * @param $data
+     * @param array $data
      *
      * @return string
      */
     public function sign($data)
     {
         $content = $this->parseSignData($data);
-        $signType = null === $this->signType ? $this->publicParams->sign_type : $this->signType;
-        switch ($signType)
-        {
-            case 'HMAC-SHA256':
-                return strtoupper(hash_hmac('sha256', $content, $this->publicParams->key));
-            case 'MD5':
-                return strtoupper(md5($content));
-            default:
-                throw new \Exception('未知的签名方式：' . $signType);
-        }
+
+        return Signer::sign($content, $this->publicParams->certSerialNumber, openssl_get_privatekey(file_get_contents($this->publicParams->keyPath)))->getSign();
     }
 
     /**
      * 验证回调通知是否合法.
      *
-     * @param $data
+     * @param mixed $data
      *
      * @return bool
      */
     public function verifyCallback($data)
     {
-        if (\is_string($data))
+        if (!\is_string($data))
         {
-            $data = XML::fromString($data);
+            $data = json_encode($data);
         }
         if (!isset($data['sign']))
         {
@@ -195,24 +178,25 @@ class SDK extends Base
      */
     public function verifySync($params, $data, $response = null)
     {
-        return $this->verifyCallback($data);
+        $content = $response->getHeaderLine('Wechatpay-Timestamp') . "\n"
+                . $response->getHeaderLine('Wechatpay-Nonce') . "\n"
+                . $response->getBody() . "\n";
+        $sign = $response->getHeaderLine('Wechatpay-Signature');
+        var_dump($content);
+
+        return Signer::verify($content, $sign, openssl_get_publickey(file_get_contents($this->publicParams->certPath)));
     }
 
     public function parseSignData($data)
     {
-        unset($data['sign']);
-        ksort($data);
-        $data['key'] = $this->publicParams->key;
-        $content = '';
-        foreach ($data as $k => $v)
-        {
-            if ('' != $v && !\is_array($v))
-            {
-                $content .= $k . '=' . $v . '&';
-            }
-        }
+        /** @var WeixinRequestBase $params */
+        $params = $data['params'];
 
-        return trim($content, '&');
+        return $params->_method . "\n"
+                . '/' . $params->_apiMethod . "\n"
+                . $data['timestamp'] . "\n"
+                . $data['nonce_str'] . "\n"
+                . (\in_array($params->_method, ['POST', 'PUT']) ? json_encode($data['data']) : '') . "\n";
     }
 
     /**
@@ -223,7 +207,7 @@ class SDK extends Base
      *
      * @return mixed
      */
-    public function execute($params, $format = 'XML')
+    public function execute($params, $format = 'JSON')
     {
         if (null !== $this->publicParams->certPath)
         {
@@ -234,62 +218,8 @@ class SDK extends Base
             $this->http->sslKey($this->publicParams->keyPath);
         }
         parent::execute($params, $format);
-        if ($params->allowReport)
-        {
-            $this->report($params);
-        }
 
         return $this->result;
-    }
-
-    /**
-     * 上报.
-     *
-     * @param mixed $params
-     *
-     * @return void
-     */
-    public function report($params)
-    {
-        switch ($this->publicParams->reportLevel)
-        {
-            case PublicParams::REPORT_LEVEL_NONE:
-                return;
-            case PublicParams::REPORT_LEVEL_ALL:
-                break;
-            case PublicParams::REPORT_LEVEL_ERROR:
-                if ($this->checkResult())
-                {
-                    return;
-                }
-                elseif (empty($this->result))
-                {
-                    return;
-                }
-                break;
-        }
-        if (null === $this->reportSDK)
-        {
-            $this->reportSDK = new static($this->publicParams);
-        }
-        $request = new Request();
-        $request->interface_url = $this->url;
-        $request->execute_time_ = (int) ($this->response->totalTime() * 1000);
-        $request->return_code = isset($this->result['return_code']) ? $this->result['return_code'] : (empty($this->result) ? 'FAIL' : 'SUCCESS');
-        $request->return_msg = isset($this->result['return_msg']) ? $this->result['return_msg'] : null;
-        $request->result_code = isset($this->result['result_code']) ? $this->result['result_code'] : (empty($this->result) ? 'FAIL' : 'SUCCESS');
-        $request->err_code = isset($this->result['err_code']) ? $this->result['err_code'] : null;
-        $request->err_code_des = isset($this->result['err_code_des']) ? $this->result['err_code_des'] : null;
-        $request->user_ip = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '127.0.0.1';
-        $request->time = date('YmdHis');
-        if (isset($params->device_info))
-        {
-            $request->device_info = $params->device_info;
-        }
-        if (isset($params->out_trade_no))
-        {
-            $request->out_trade_no = $params->out_trade_no;
-        }
     }
 
     /**

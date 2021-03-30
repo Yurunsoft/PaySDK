@@ -69,7 +69,7 @@ class SDK extends Base
     public function __parseExecuteData($params, &$data, &$requestData, &$url)
     {
         $data = array_merge(ObjectToArray::parse($this->publicParams), ObjectToArray::parse($params));
-        unset($data['apiDomain'], $data['appID'], $data['businessParams'], $data['appPrivateKey'], $data['appPrivateKeyFile'], $data['appPublicKey'], $data['appPublicKeyFile'], $data['_syncResponseName'], $data['_method'], $data['_isSyncVerify'], $data['aesKey'], $data['isUseAES'], $data['alipayCertPath'], $data['alipayRootCertPath'], $data['merchantCertPath'], $data['usePublicKeyCert']);
+        unset($data['apiDomain'], $data['appID'], $data['businessParams'], $data['appPrivateKey'], $data['appPrivateKeyFile'], $data['appPublicKey'], $data['appPublicKeyFile'], $data['_syncResponseName'], $data['_method'], $data['_isSyncVerify'], $data['aesKey'], $data['isUseAES'], $data['alipayCertPath'], $data['alipayRootCertPath'], $data['merchantCertPath'], $data['usePublicKeyCert'], $data['_contentType']);
         $data['app_id'] = $this->publicParams->appID;
         $data['biz_content'] = $params->businessParams->toString();
         if ($this->publicParams->isUseAES)
@@ -163,12 +163,13 @@ class SDK extends Base
     /**
      * 验证同步返回内容.
      *
-     * @param AlipayRequestBase $params
-     * @param array             $data
+     * @param AlipayRequestBase                        $params
+     * @param array                                    $data
+     * @param \Yurun\Util\YurunHttp\Http\Response|null $response
      *
      * @return bool
      */
-    public function verifySync($params, $data)
+    public function verifySync($params, $data, $response = null)
     {
         if (!isset($data['sign']))
         {

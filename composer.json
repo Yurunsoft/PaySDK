@@ -14,5 +14,8 @@
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "2.18.3"
-    }
+    },
+    "bin": [
+        "src/Weixin/Tool/CertificateDownloader.php"
+    ]
 }

@@ -75,8 +75,8 @@ abstract class Base
     /**
      * 调用执行接口.
      *
-     * @param mixed  $params
-     * @param string $method
+     * @param RequestBase $params
+     * @param string      $method
      *
      * @return mixed
      */
@@ -88,7 +88,7 @@ abstract class Base
         }
         $this->prepareExecute($params, $url, $data);
         $this->url = $url;
-        $this->response = $this->http->send($url, $this->requestData, $params->_method);
+        $this->response = $this->http->send($url, $this->requestData, $params->_method, $params->_contentType);
         if (!$this->response->success)
         {
             throw new \RuntimeException(sprintf('Request error: [%s] %s', $this->response->errno(), $this->response->error()));
@@ -104,7 +104,7 @@ abstract class Base
             default:
                 $this->result = $this->response->body();
         }
-        if ($params->_isSyncVerify && !$this->verifySync($params, $this->result))
+        if ($params->_isSyncVerify && !$this->verifySync($params, $this->result, $this->response))
         {
             throw new \Exception('同步返回数据验证失败');
         }
@@ -162,12 +162,13 @@ abstract class Base
     /**
      * 验证同步返回内容.
      *
-     * @param mixed $params
-     * @param array $data
+     * @param mixed                                    $params
+     * @param array                                    $data
+     * @param \Yurun\Util\YurunHttp\Http\Response|null $response
      *
      * @return bool
      */
-    abstract public function verifySync($params, $data);
+    abstract public function verifySync($params, $data, $response = null);
 
     /**
      * 检查是否执行成功

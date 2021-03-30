@@ -54,11 +54,25 @@ class PublicParams extends PublicBase
     public $certPath;
 
     /**
+     * 证书序列号.
+     *
+     * @var string
+     */
+    public $certSerialNumber;
+
+    /**
      * 私钥地址
      *
      * @var string
      */
     public $keyPath;
+
+    /**
+     * V3 接口的 API 证书地址
+     *
+     * @var string
+     */
+    public $apiCertPath;
 
     /**
      * 交易保障上报级别.
