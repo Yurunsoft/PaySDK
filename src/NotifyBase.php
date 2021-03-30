@@ -17,7 +17,7 @@ abstract class NotifyBase
     /**
      * SDK实例化.
      *
-     * @var Yurun\PaySDK\Base
+     * @var \Yurun\PaySDK\Base
      */
     public $sdk;
 
@@ -75,7 +75,7 @@ abstract class NotifyBase
     /**
      * 获取通知数据.
      *
-     * @return void
+     * @return mixed
      */
     abstract public function getNotifyData();
 

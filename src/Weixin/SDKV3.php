@@ -3,7 +3,6 @@
 namespace Yurun\PaySDK\Weixin;
 
 use Yurun\PaySDK\Base;
-use Yurun\PaySDK\Lib\Encrypt\RSA;
 use Yurun\PaySDK\Lib\Encrypt\SHA256withRSA\Signer;
 use Yurun\PaySDK\Lib\ObjectToArray;
 use Yurun\PaySDK\WeixinRequestBase;
@@ -147,24 +146,7 @@ class SDKV3 extends Base
      */
     public function verifyCallback($data)
     {
-        if (!\is_string($data))
-        {
-            $data = json_encode($data);
-        }
-        if (!isset($data['sign']))
-        {
-            return false;
-        }
-        $content = $this->parseSignData($data);
-        switch ($this->publicParams->sign_type)
-        {
-            case 'HMAC-SHA256':
-                return strtoupper(hash_hmac('sha256', $content, $this->publicParams->key)) === $data['sign'];
-            case 'MD5':
-                return strtoupper(md5($content)) === $data['sign'];
-            default:
-                throw new \Exception('未知的签名方式：' . $this->publicParams->sign_type);
-        }
+        return false;
     }
 
     /**
@@ -182,7 +164,6 @@ class SDKV3 extends Base
                 . $response->getHeaderLine('Wechatpay-Nonce') . "\n"
                 . $response->getBody() . "\n";
         $sign = $response->getHeaderLine('Wechatpay-Signature');
-        var_dump($content);
 
         return Signer::verify($content, $sign, openssl_get_publickey(file_get_contents($this->publicParams->certPath)));
     }
@@ -231,7 +212,7 @@ class SDKV3 extends Base
      */
     protected function __checkResult($result)
     {
-        return isset($result['return_code']) && 'SUCCESS' === $result['return_code'] && isset($result['result_code']) && 'SUCCESS' === $result['result_code'];
+        return !isset($result['code']);
     }
 
     /**
@@ -243,16 +224,7 @@ class SDKV3 extends Base
      */
     protected function __getError($result)
     {
-        if (isset($result['result_code']) && 'SUCCESS' !== $result['result_code'])
-        {
-            return $result['err_code_des'];
-        }
-        if (isset($result['return_code']) && 'SUCCESS' !== $result['return_code'])
-        {
-            return $result['return_msg'];
-        }
-
-        return '';
+        return isset($result['message']) ? $result['message'] : '';
     }
 
     /**
@@ -264,33 +236,6 @@ class SDKV3 extends Base
      */
     protected function __getErrorCode($result)
     {
-        if (isset($result['result_code']) && 'SUCCESS' !== $result['result_code'])
-        {
-            return $result['err_code'];
-        }
-        if (isset($result['return_code']) && 'SUCCESS' !== $result['return_code'])
-        {
-            return $result['return_code'];
-        }
-
-        return '';
-    }
-
-    /**
-     * 保存 RSA 公钥为 PHP 可用的 pkcs8 格式.
-     *
-     * @param string     $fileName
-     * @param array|null $result
-     *
-     * @return void
-     */
-    public function saveRSAPublic($fileName, $result = null)
-    {
-        if (null === $result)
-        {
-            $result = $this->result;
-        }
-        file_put_contents($fileName, $result['pub_key']);
-        RSA::pkcs1To8($fileName, $fileName);
+        return isset($result['code']) ? $result['code'] : '';
     }
 }

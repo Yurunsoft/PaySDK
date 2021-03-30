@@ -47,6 +47,13 @@ class PublicParams extends PublicBase
     public $key;
 
     /**
+     * V3 版本接口的密钥.
+     *
+     * @var string
+     */
+    public $keyV3;
+
+    /**
      * 证书地址
      *
      * @var string
