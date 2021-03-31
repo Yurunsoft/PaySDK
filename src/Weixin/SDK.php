@@ -49,7 +49,7 @@ class SDK extends Base
     {
         $data = array_merge(ObjectToArray::parse($this->publicParams), ObjectToArray::parse($params));
         // 删除不必要的字段
-        unset($data['apiDomain'], $data['appID'], $data['businessParams'], $data['_apiMethod'], $data['key'], $data['_method'], $data['_isSyncVerify'], $data['certPath'], $data['keyPath'], $data['apiCertPath'], $data['certSerialNumber'], $data['needSignType'], $data['allowReport'], $data['reportLevel'], $data['needNonceStr'], $data['signType'], $data['needAppID'], $data['rsaPublicCertFile'], $data['rsaPublicCertContent'], $data['needMchID'], $data['_contentType']);
+        unset($data['apiDomain'], $data['appID'], $data['businessParams'], $data['_apiMethod'], $data['key'], $data['_method'], $data['_isSyncVerify'], $data['certPath'], $data['keyPath'], $data['apiCertPath'], $data['certSerialNumber'], $data['needSignType'], $data['allowReport'], $data['reportLevel'], $data['needNonceStr'], $data['signType'], $data['needAppID'], $data['rsaPublicCertFile'], $data['rsaPublicCertContent'], $data['needMchID'], $data['_contentType'], $data['keyV3']);
         // 企业付款接口特殊处理
         if ($params->needAppID)
         {
