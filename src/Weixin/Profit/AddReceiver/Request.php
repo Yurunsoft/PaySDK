@@ -33,7 +33,7 @@ class Request extends WeixinRequestBase
     /**
      * 分账接收方.
      *
-     * @var AdderReceiver[]
+     * @var AdderReceiver
      */
     public $receiver;
 
