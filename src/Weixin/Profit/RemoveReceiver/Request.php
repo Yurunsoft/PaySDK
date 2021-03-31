@@ -40,9 +40,9 @@ class Request extends WeixinRequestBase
     public function toArray()
     {
         $data = get_object_vars($this);
-        if (!isset($data['receivers']))
+        if (!isset($data['']))
         {
-            $data['receivers'] = json_encode($data['receivers']);
+            $data['receiver'] = json_encode($data['receiver']);
         }
 
         return $data;
