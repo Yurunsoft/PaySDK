@@ -120,7 +120,8 @@ class SDKV3 extends Base
             'timestamp' => $timestamp,
             'nonce_str' => $nonceStr,
         ]);
-        $this->http->header('Authorization', sprintf('WECHATPAY2-SHA256-RSA2048 mchid="%s",nonce_str="%s",signature="%s",timestamp="%s",serial_no="%s"', $this->publicParams->mch_id, $nonceStr, $this->sign, $timestamp, $this->publicParams->certSerialNumber));
+        $this->http->accept('application/json')
+                   ->header('Authorization', sprintf('WECHATPAY2-SHA256-RSA2048 mchid="%s",nonce_str="%s",signature="%s",timestamp="%s",serial_no="%s"', $this->publicParams->mch_id, $nonceStr, $this->sign, $timestamp, $this->publicParams->certSerialNumber));
     }
 
     /**
