@@ -5,6 +5,7 @@ namespace Yurun\PaySDK\Weixin;
 use Yurun\PaySDK\Base;
 use Yurun\PaySDK\Lib\Encrypt\SHA256withRSA\Signer;
 use Yurun\PaySDK\Lib\ObjectToArray;
+use Yurun\PaySDK\Lib\Util;
 use Yurun\PaySDK\WeixinRequestBase;
 
 /**
@@ -112,7 +113,7 @@ class SDKV3 extends Base
      */
     public function generateAuthorization($data, $params)
     {
-        $timestamp = time();
+        $timestamp = Util::getBeijingTime();
         $nonceStr = md5(mt_rand());
         $this->sign = $this->sign([
             'data'      => $data,
@@ -161,7 +162,13 @@ class SDKV3 extends Base
      */
     public function verifySync($params, $data, $response = null)
     {
-        $content = $response->getHeaderLine('Wechatpay-Timestamp') . "\n"
+        $timestamp = $response->getHeaderLine('Wechatpay-Timestamp');
+        // 5 分钟误差验证
+        if (abs(Util::getBeijingTime() - $timestamp) > 300)
+        {
+            throw new \RuntimeException('微信时间戳与本地时间相差过大');
+        }
+        $content = $timestamp . "\n"
                 . $response->getHeaderLine('Wechatpay-Nonce') . "\n"
                 . $response->getBody() . "\n";
         $sign = $response->getHeaderLine('Wechatpay-Signature');

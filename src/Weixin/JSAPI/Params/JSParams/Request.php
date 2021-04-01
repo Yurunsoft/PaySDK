@@ -2,6 +2,7 @@
 
 namespace Yurun\PaySDK\Weixin\JSAPI\Params\JSParams;
 
+use Yurun\PaySDK\Lib\Util;
 use Yurun\PaySDK\WeixinRequestBase;
 
 /**
@@ -28,7 +29,7 @@ class Request extends WeixinRequestBase
     {
         $data = [
             'appId'			    => $sdk->publicParams->appID,
-            'timeStamp'		 => (string) (time()),
+            'timeStamp'		 => (string) (Util::getBeijingTime()),
             'nonceStr'		  => md5(mt_rand()),
             'package'		   => 'prepay_id=' . $this->prepay_id,
             'signType'		  => $sdk->publicParams->sign_type,
