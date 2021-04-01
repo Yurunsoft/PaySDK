@@ -61,7 +61,7 @@ class PayRequestBase extends WeixinRequestBase
     /**
      * 订单总金额，单位为分，详见https://pay.weixin.qq.com/wiki/doc/api/H5.php?chapter=4_2.
      *
-     * @var string
+     * @var int
      */
     public $total_fee;
 
