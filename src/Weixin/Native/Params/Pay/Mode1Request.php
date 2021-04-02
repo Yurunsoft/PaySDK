@@ -37,6 +37,5 @@ class Mode1Request extends WeixinRequestBase
         $this->_method = 'GET';
         parent::__construct();
         $this->time_stamp = Util::getBeijingTime();
-        $this->needSignType = false;
     }
 }
