@@ -37,10 +37,17 @@ class Request extends WeixinRequestBase
      */
     public $receiver;
 
+    /**
+     * 签名类型，为null时使用publicParams设置.
+     *
+     * @var string
+     */
+    public $signType = 'HMAC-SHA256';
+
     public function toArray()
     {
         $data = get_object_vars($this);
-        if (!isset($data['receiver']))
+        if (isset($data['receiver']))
         {
             $data['receiver'] = json_encode($data['receiver']);
         }

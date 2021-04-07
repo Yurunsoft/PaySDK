@@ -28,6 +28,13 @@ class Request extends WeixinRequestBase
      */
     public $brand_mch_id;
 
+    /**
+     * 签名类型，为null时使用publicParams设置.
+     *
+     * @var string
+     */
+    public $signType = 'HMAC-SHA256';
+
     public function __construct()
     {
         parent::__construct();
