@@ -16,7 +16,7 @@ class Request extends WeixinRequestBase
      *
      * @var string
      */
-    public $_apiMethod = 'pay/profitsharingreturn';
+    public $_apiMethod = 'secapi/pay/profitsharingreturn';
 
     /**
      * 微信分账单号.
