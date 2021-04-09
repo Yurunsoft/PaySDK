@@ -85,9 +85,4 @@ class Request extends WeixinRequestBase
      * @var string
      */
     public $notify_url;
-
-    public function __construct()
-    {
-        $this->needSignType = false;
-    }
 }

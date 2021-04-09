@@ -61,7 +61,7 @@ class PayRequestBase extends WeixinRequestBase
     /**
      * 订单总金额，单位为分，详见https://pay.weixin.qq.com/wiki/doc/api/H5.php?chapter=4_2.
      *
-     * @var string
+     * @var int
      */
     public $total_fee;
 
@@ -117,6 +117,26 @@ class PayRequestBase extends WeixinRequestBase
      * @var string
      */
     public $limit_pay;
+
+    /**
+     * 开发票入口开放标识.
+     *
+     * Y，传入Y时，支付成功消息和支付详情页将出现开票入口。需要在微信支付商户平台或微信公众平台开通电子发票功能，传此字段才可生效
+     *
+     * @var string
+     */
+    public $receipt;
+
+    /**
+     * 是否需要分账.
+     *
+     * Y-是，需要分账
+     * N-否，不分账
+     * 字母要求大写，不传默认不分账
+     *
+     * @var string
+     */
+    public $profit_sharing;
 
     public function __construct()
     {

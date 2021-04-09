@@ -2,6 +2,7 @@
 
 namespace Yurun\PaySDK\Weixin\APP\Params\Client;
 
+use Yurun\PaySDK\Lib\Util;
 use Yurun\PaySDK\WeixinRequestBase;
 
 /**
@@ -60,7 +61,7 @@ class Request extends WeixinRequestBase
         $data = get_object_vars($this);
         if (!isset($data['timestamp']))
         {
-            $data['timestamp'] = time();
+            $data['timestamp'] = Util::getBeijingTime();
         }
 
         return $data;

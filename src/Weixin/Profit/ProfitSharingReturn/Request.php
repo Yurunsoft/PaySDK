@@ -16,7 +16,7 @@ class Request extends WeixinRequestBase
      *
      * @var string
      */
-    public $_apiMethod = 'pay/profitsharingremovereceiver';
+    public $_apiMethod = 'secapi/pay/profitsharingreturn';
 
     /**
      * 微信分账单号.
@@ -81,4 +81,11 @@ class Request extends WeixinRequestBase
      * @var string
      */
     public $description;
+
+    /**
+     * 签名类型，为null时使用publicParams设置.
+     *
+     * @var string
+     */
+    public $signType = 'HMAC-SHA256';
 }

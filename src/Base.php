@@ -104,6 +104,10 @@ abstract class Base
             default:
                 $this->result = $this->response->body();
         }
+        if (!$this->checkResult($this->result))
+        {
+            throw new \Exception(sprintf('Error: [%s] %s', $this->getErrorCode($this->result), $this->getError($this->result)));
+        }
         if ($params->_isSyncVerify && !$this->verifySync($params, $this->result, $this->response))
         {
             throw new \Exception('同步返回数据验证失败');

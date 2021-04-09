@@ -49,7 +49,7 @@ class SDK extends Base
     {
         $data = array_merge(ObjectToArray::parse($this->publicParams), ObjectToArray::parse($params));
         // 删除不必要的字段
-        unset($data['apiDomain'], $data['appID'], $data['businessParams'], $data['_apiMethod'], $data['key'], $data['_method'], $data['_isSyncVerify'], $data['certPath'], $data['keyPath'], $data['apiCertPath'], $data['certSerialNumber'], $data['needSignType'], $data['allowReport'], $data['reportLevel'], $data['needNonceStr'], $data['signType'], $data['needAppID'], $data['rsaPublicCertFile'], $data['rsaPublicCertContent'], $data['needMchID'], $data['_contentType']);
+        unset($data['apiDomain'], $data['appID'], $data['businessParams'], $data['_apiMethod'], $data['key'], $data['_method'], $data['_isSyncVerify'], $data['certPath'], $data['keyPath'], $data['apiCertPath'], $data['certSerialNumber'], $data['needSignType'], $data['allowReport'], $data['reportLevel'], $data['needNonceStr'], $data['signType'], $data['needAppID'], $data['rsaPublicCertFile'], $data['rsaPublicCertContent'], $data['needMchID'], $data['_contentType'], $data['keyV3']);
         // 企业付款接口特殊处理
         if ($params->needAppID)
         {
@@ -301,7 +301,7 @@ class SDK extends Base
      */
     protected function __checkResult($result)
     {
-        return isset($result['return_code']) && 'SUCCESS' === $result['return_code'] && isset($result['result_code']) && 'SUCCESS' === $result['result_code'];
+        return 'SUCCESS' === $this->getErrorCode();
     }
 
     /**
@@ -313,13 +313,17 @@ class SDK extends Base
      */
     protected function __getError($result)
     {
-        if (isset($result['result_code']) && 'SUCCESS' !== $result['result_code'])
+        foreach ([
+            'err_code_des',
+            'err_msg',
+            'error_msg',
+            'return_msg',
+        ] as $name)
         {
-            return $result['err_code_des'];
-        }
-        if (isset($result['return_code']) && 'SUCCESS' !== $result['return_code'])
-        {
-            return $result['return_msg'];
+            if (isset($result[$name]))
+            {
+                return $result[$name];
+            }
         }
 
         return '';
@@ -334,13 +338,16 @@ class SDK extends Base
      */
     protected function __getErrorCode($result)
     {
-        if (isset($result['result_code']) && 'SUCCESS' !== $result['result_code'])
+        foreach ([
+            'result_code',
+            'error_code',
+            'return_code',
+        ] as $name)
         {
-            return $result['err_code'];
-        }
-        if (isset($result['return_code']) && 'SUCCESS' !== $result['return_code'])
-        {
-            return $result['return_code'];
+            if (isset($result[$name]))
+            {
+                return $result[$name];
+            }
         }
 
         return '';

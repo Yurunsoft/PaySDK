@@ -4,6 +4,7 @@ namespace Yurun\PaySDK\Weixin\Notify;
 
 use Yurun\PaySDK\Lib\Encrypt\AES256GCM;
 use Yurun\PaySDK\Lib\Encrypt\SHA256withRSA\Signer;
+use Yurun\PaySDK\Lib\Util;
 use Yurun\PaySDK\NotifyBase;
 use Yurun\PaySDK\Weixin\Reply\BaseV3 as ReplyBase;
 use Yurun\Util\YurunHttp\Stream\MemoryStream;
@@ -91,6 +92,12 @@ abstract class BaseV3 extends NotifyBase
             $nonce = isset($_SERVER['HTTP_WECHATPAY_NONCE']) ? $_SERVER['HTTP_WECHATPAY_NONCE'] : '';
             $sign = isset($_SERVER['HTTP_WECHATPAY_SIGNATURE']) ? $_SERVER['HTTP_WECHATPAY_SIGNATURE'] : '';
             $body = file_get_contents('php://input');
+        }
+
+        // 5 分钟误差验证
+        if (abs(Util::getBeijingTime() - $timestamp) > 300)
+        {
+            throw new \RuntimeException('微信时间戳与本地时间相差过大');
         }
 
         $content = $timestamp . "\n"

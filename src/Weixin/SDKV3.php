@@ -5,6 +5,7 @@ namespace Yurun\PaySDK\Weixin;
 use Yurun\PaySDK\Base;
 use Yurun\PaySDK\Lib\Encrypt\SHA256withRSA\Signer;
 use Yurun\PaySDK\Lib\ObjectToArray;
+use Yurun\PaySDK\Lib\Util;
 use Yurun\PaySDK\WeixinRequestBase;
 
 /**
@@ -49,7 +50,7 @@ class SDKV3 extends Base
     {
         $data = array_merge(ObjectToArray::parse($this->publicParams), ObjectToArray::parse($params));
         // 删除不必要的字段
-        unset($data['apiDomain'], $data['appID'], $data['businessParams'], $data['_apiMethod'], $data['key'], $data['_method'], $data['_isSyncVerify'], $data['certPath'], $data['keyPath'], $data['apiCertPath'], $data['certSerialNumber'], $data['needSignType'], $data['allowReport'], $data['reportLevel'], $data['needNonceStr'], $data['signType'], $data['needAppID'], $data['rsaPublicCertFile'], $data['rsaPublicCertContent'], $data['needMchID'], $data['_contentType']);
+        unset($data['apiDomain'], $data['appID'], $data['businessParams'], $data['_apiMethod'], $data['key'], $data['_method'], $data['_isSyncVerify'], $data['certPath'], $data['keyPath'], $data['apiCertPath'], $data['certSerialNumber'], $data['needSignType'], $data['allowReport'], $data['reportLevel'], $data['needNonceStr'], $data['signType'], $data['needAppID'], $data['rsaPublicCertFile'], $data['rsaPublicCertContent'], $data['needMchID'], $data['_contentType'], $data['keyV3']);
         // 企业付款接口特殊处理
         if ($params->needAppID)
         {
@@ -112,7 +113,7 @@ class SDKV3 extends Base
      */
     public function generateAuthorization($data, $params)
     {
-        $timestamp = time();
+        $timestamp = Util::getBeijingTime();
         $nonceStr = md5(mt_rand());
         $this->sign = $this->sign([
             'data'      => $data,
@@ -120,7 +121,8 @@ class SDKV3 extends Base
             'timestamp' => $timestamp,
             'nonce_str' => $nonceStr,
         ]);
-        $this->http->header('Authorization', sprintf('WECHATPAY2-SHA256-RSA2048 mchid="%s",nonce_str="%s",signature="%s",timestamp="%s",serial_no="%s"', $this->publicParams->mch_id, $nonceStr, $this->sign, $timestamp, $this->publicParams->certSerialNumber));
+        $this->http->accept('application/json')
+                   ->header('Authorization', sprintf('WECHATPAY2-SHA256-RSA2048 mchid="%s",nonce_str="%s",signature="%s",timestamp="%s",serial_no="%s"', $this->publicParams->mch_id, $nonceStr, $this->sign, $timestamp, $this->publicParams->certSerialNumber));
     }
 
     /**
@@ -160,7 +162,13 @@ class SDKV3 extends Base
      */
     public function verifySync($params, $data, $response = null)
     {
-        $content = $response->getHeaderLine('Wechatpay-Timestamp') . "\n"
+        $timestamp = $response->getHeaderLine('Wechatpay-Timestamp');
+        // 5 分钟误差验证
+        if (abs(Util::getBeijingTime() - $timestamp) > 300)
+        {
+            throw new \RuntimeException('微信时间戳与本地时间相差过大');
+        }
+        $content = $timestamp . "\n"
                 . $response->getHeaderLine('Wechatpay-Nonce') . "\n"
                 . $response->getBody() . "\n";
         $sign = $response->getHeaderLine('Wechatpay-Signature');

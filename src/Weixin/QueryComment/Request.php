@@ -52,6 +52,7 @@ class Request extends WeixinRequestBase
     {
         parent::__construct();
         $this->_isSyncVerify = false;
-        $this->needSignType = false;
+        $this->needSignType = true;
+        $this->signType = 'HMAC-SHA256';
     }
 }

@@ -15,7 +15,8 @@ class AdderReceiver
      * 分账接收方类型.
      *
      * MERCHANT_ID：商户号（mch_id或者sub_mch_id）
-     * PERSONAL_OPENID：个人openid
+     * PERSONAL_OPENID：个人openid（由父商户APPID转换得到）
+     * PERSONAL_SUB_OPENID: 个人sub_openid（由子商户APPID转换得到）
      *
      * @var string
      */
@@ -26,6 +27,7 @@ class AdderReceiver
      *
      * 类型是MERCHANT_ID时，是商户号（mch_id或者sub_mch_id）
      * 类型是PERSONAL_OPENID时，是个人openid
+     * 类型是PERSONAL_SUB_OPENID时，是个人sub_openid
      *
      * @var string
      */
@@ -36,6 +38,7 @@ class AdderReceiver
      *
      * 分账接收方类型是MERCHANT_ID时，是商户全称（必传），当商户是小微商户或个体户时，是开户人姓名
      * 分账接收方类型是PERSONAL_OPENID时，是个人姓名（选传，传则校验）
+     * 分账接收方类型是PERSONAL_SUB_OPENID时，是个人姓名（选传，传则校验）
      *
      * @var string
      */
@@ -44,8 +47,7 @@ class AdderReceiver
     /**
      * 与分账方的关系类型.
      *
-     * 子商户与接收方的关系。
-     * 本字段值为枚举：
+     * 如果描述的是子商户与接收方的关系。 则本字段的枚举值为：
      * SERVICE_PROVIDER：服务商
      * STORE：门店
      * STAFF：员工
@@ -57,6 +59,14 @@ class AdderReceiver
      * USER：用户
      * SUPPLIER：供应商
      * CUSTOM：自定义
+     *
+     * 如果描述的是品牌主与接收方的关系。 则本字段的枚举值为：
+     * SUPPLIER：供应商
+     * DISTRIBUTOR：分销商
+     * SERVICE_PROVIDER：服务商
+     * PLATFORM：平台
+     * STAFF：员工
+     * OTHERS：其他
      *
      * @var string
      */

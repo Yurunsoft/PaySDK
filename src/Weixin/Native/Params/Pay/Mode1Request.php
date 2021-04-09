@@ -2,6 +2,7 @@
 
 namespace Yurun\PaySDK\Weixin\Native\Params\Pay;
 
+use Yurun\PaySDK\Lib\Util;
 use Yurun\PaySDK\WeixinRequestBase;
 
 /**
@@ -35,7 +36,6 @@ class Mode1Request extends WeixinRequestBase
     {
         $this->_method = 'GET';
         parent::__construct();
-        $this->time_stamp = time();
-        $this->needSignType = false;
+        $this->time_stamp = Util::getBeijingTime();
     }
 }
