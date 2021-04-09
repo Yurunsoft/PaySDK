@@ -313,13 +313,17 @@ class SDK extends Base
      */
     protected function __getError($result)
     {
-        if (isset($result['result_code']) && 'SUCCESS' !== $result['result_code'])
+        foreach ([
+            'err_code_des',
+            'err_msg',
+            'error_msg',
+            'return_msg',
+        ] as $name)
         {
-            return $result['err_code_des'];
-        }
-        if (isset($result['return_code']) && 'SUCCESS' !== $result['return_code'])
-        {
-            return $result['return_msg'];
+            if (isset($result[$name]))
+            {
+                return $result[$name];
+            }
         }
 
         return '';
@@ -334,13 +338,16 @@ class SDK extends Base
      */
     protected function __getErrorCode($result)
     {
-        if (isset($result['result_code']) && 'SUCCESS' !== $result['result_code'])
+        foreach ([
+            'result_code',
+            'error_code',
+            'return_code',
+        ] as $name)
         {
-            return $result['err_code'];
-        }
-        if (isset($result['return_code']) && 'SUCCESS' !== $result['return_code'])
-        {
-            return $result['return_code'];
+            if (isset($result[$name]))
+            {
+                return $result[$name];
+            }
         }
 
         return '';
