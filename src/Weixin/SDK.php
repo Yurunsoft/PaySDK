@@ -301,7 +301,7 @@ class SDK extends Base
      */
     protected function __checkResult($result)
     {
-        return isset($result['return_code']) && 'SUCCESS' === $result['return_code'] && isset($result['result_code']) && 'SUCCESS' === $result['result_code'];
+        return 'SUCCESS' === $this->getErrorCode();
     }
 
     /**
