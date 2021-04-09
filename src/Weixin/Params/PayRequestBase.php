@@ -118,6 +118,26 @@ class PayRequestBase extends WeixinRequestBase
      */
     public $limit_pay;
 
+    /**
+     * 开发票入口开放标识.
+     *
+     * Y，传入Y时，支付成功消息和支付详情页将出现开票入口。需要在微信支付商户平台或微信公众平台开通电子发票功能，传此字段才可生效
+     *
+     * @var string
+     */
+    public $receipt;
+
+    /**
+     * 是否需要分账.
+     *
+     * Y-是，需要分账
+     * N-否，不分账
+     * 字母要求大写，不传默认不分账
+     *
+     * @var string
+     */
+    public $profit_sharing;
+
     public function __construct()
     {
         $this->detail = new Detail();
