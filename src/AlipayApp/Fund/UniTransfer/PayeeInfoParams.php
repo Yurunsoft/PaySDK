@@ -19,7 +19,7 @@ class PayeeInfoParams
      * @var string
      */
     public $identity_type;
-    
+
     /**
      * 参与方真实姓名，如果非空，将校验收款支付宝账号姓名一致性。当identity_type=ALIPAY_LOGON_ID时，本字段必填。
      * @var string

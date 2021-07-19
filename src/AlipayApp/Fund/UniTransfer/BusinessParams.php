@@ -26,7 +26,7 @@ class BusinessParams
      * @var string
      */
     public $product_code;
-    
+
     /**
      * 描述特定的业务场景，可传的参数如下：
      * DIRECT_TRANSFER：单笔无密转账到支付宝，B2C现金红包;
@@ -62,18 +62,32 @@ class BusinessParams
     /**
      * 转账业务请求的扩展参数，支持传入的扩展参数如下：
      * sub_biz_scene 子业务场景，红包业务必传，取值REDPACKET，C2C现金红包、B2C现金红包均需传入
-     * @return string
+     * @return array
      */
-    public $business_params;
+    public $business_params = array();
 
     public function toString()
     {
         $obj = (array)$this;
+
         if (empty($obj['payee_info'])) {
             unset($obj['payee_info']);
         } else {
             $obj['payee_info'] = \json_encode($obj['payee_info']);
         }
+
+        if (empty($obj['business_params'])) {
+            unset($obj['business_params']);
+        } else {
+            $obj['business_params'] = \json_encode($obj['business_params']);
+        }
+
+        foreach ($obj as $key => $value) {
+            if (null === $value) {
+                unset($obj[$key]);
+            }
+        }
+
         return \json_encode($obj);
     }
 

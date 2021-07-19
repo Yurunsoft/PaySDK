@@ -10,7 +10,7 @@ class Request extends AlipayRequestBase
 {
     /**
      * 接口名称
-     * @link https://opendocs.alipay.com/apis/api_28/alipay.fund.trans.uni.transfer
+     * @link https://opendocs.alipay.com/open/01dtld
      * @var string
      */
     public $method = 'alipay.fund.trans.uni.transfer';
@@ -23,7 +23,7 @@ class Request extends AlipayRequestBase
 
     /**
      * 业务请求参数
-     * 参考https://docs.open.alipay.com/api_28/alipay.fund.trans.toaccount.transfer/
+     * 参考https://opendocs.alipay.com/apis/api_28/alipay.fund.trans.uni.transfer
      * @var \Yurun\PaySDK\AlipayApp\Fund\UniTransfer\BusinessParams
      */
     public $businessParams;
