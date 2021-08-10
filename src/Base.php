@@ -277,7 +277,7 @@ abstract class Base
     /**
      * 准备处理数据.
      *
-     * @param string $params
+     * @param $params
      * @param string $url
      * @param array  $data
      *

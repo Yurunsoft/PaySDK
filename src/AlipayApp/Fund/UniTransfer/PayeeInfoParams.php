@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Yurun\PaySDK\AlipayApp\Fund\UniTransfer;
-
 
 class PayeeInfoParams
 {

@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Yurun\PaySDK\AlipayApp\Fund\UniTransfer;
-
 
 use Yurun\PaySDK\AlipayRequestBase;
 
@@ -16,7 +14,7 @@ class Request extends AlipayRequestBase
     public $method = 'alipay.fund.trans.uni.transfer';
 
     /**
-     * 详见：https://docs.open.alipay.com/common/105193
+     * 详见：https://opendocs.alipay.com/isv/10467/xldcyq
      * @var string
      */
     public $app_auth_token;
