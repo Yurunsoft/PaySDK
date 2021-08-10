@@ -24,7 +24,7 @@ class Request extends AlipayRequestBase
     public $notify_url;
 
     /**
-     * 详见：https://docs.open.alipay.com/common/105193.
+     * 详见：https://opendocs.alipay.com/isv/10467/xldcyq.
      *
      * @var string
      */

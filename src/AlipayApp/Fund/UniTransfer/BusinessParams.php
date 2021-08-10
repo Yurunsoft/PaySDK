@@ -90,5 +90,4 @@ class BusinessParams
 
         return \json_encode($obj);
     }
-
 }

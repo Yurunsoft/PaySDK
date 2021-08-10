@@ -17,7 +17,7 @@ class Request extends AlipayRequestBase
     public $method = 'alipay.fund.trans.toaccount.transfer';
 
     /**
-     * 详见：https://docs.open.alipay.com/common/105193.
+     * 详见：https://opendocs.alipay.com/isv/10467/xldcyq.
      *
      * @var string
      */
@@ -25,7 +25,7 @@ class Request extends AlipayRequestBase
 
     /**
      * 业务请求参数
-     * 参考https://docs.open.alipay.com/api_28/alipay.fund.trans.toaccount.transfer/.
+     * 参考https://opendocs.alipay.com/apis/api_33/alipay.fund.trans.toaccount.transfer.
      *
      * @var \Yurun\PaySDK\AlipayApp\Fund\Transfer\BusinessParams
      */
