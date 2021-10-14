@@ -30,7 +30,10 @@ class RSA2 extends Base
             throw new \Exception('私钥文件格式错误');
         }
         openssl_sign($data, $sign, $res, \OPENSSL_ALGO_SHA256);
-        openssl_free_key($res);
+        if (PHP_VERSION_ID >= 80000)
+        {
+            openssl_free_key($res);
+        }
 
         return $sign;
     }
@@ -60,7 +63,10 @@ class RSA2 extends Base
             throw new \Exception('公钥文件格式错误');
         }
         $result = openssl_verify($data, $sign, $res, \OPENSSL_ALGO_SHA256);
-        openssl_free_key($res);
+        if (PHP_VERSION_ID >= 80000)
+        {
+            openssl_free_key($res);
+        }
 
         return 1 === $result;
     }

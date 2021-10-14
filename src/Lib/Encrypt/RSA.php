@@ -22,7 +22,10 @@ class RSA extends Base
             throw new \Exception('私钥文件格式错误');
         }
         openssl_sign($data, $sign, $res, \OPENSSL_ALGO_SHA1);
-        openssl_free_key($res);
+        if (PHP_VERSION_ID >= 80000)
+        {
+            openssl_free_key($res);
+        }
 
         return $sign;
     }
@@ -44,7 +47,10 @@ class RSA extends Base
             throw new \Exception('公钥文件格式错误');
         }
         $result = openssl_verify($data, $sign, $res, \OPENSSL_ALGO_SHA1);
-        openssl_free_key($res);
+        if (PHP_VERSION_ID >= 80000)
+        {
+            openssl_free_key($res);
+        }
 
         return 1 === $result;
     }
@@ -57,7 +63,10 @@ class RSA extends Base
             throw new \Exception('公钥文件格式错误');
         }
         openssl_public_encrypt($data, $result, $res, \OPENSSL_PKCS1_OAEP_PADDING);
-        openssl_free_key($res);
+        if (PHP_VERSION_ID >= 80000)
+        {
+            openssl_free_key($res);
+        }
 
         return $result;
     }
