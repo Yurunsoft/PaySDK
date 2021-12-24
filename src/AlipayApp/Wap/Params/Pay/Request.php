@@ -29,6 +29,13 @@ class Request extends AlipayRequestBase
      * @var string
      */
     public $notify_url;
+    
+     /**
+     * 详见：https://opendocs.alipay.com/isv/10467/xldcyq.
+     *
+     * @var string
+     */
+    public $app_auth_token;
 
     /**
      * 业务请求参数
