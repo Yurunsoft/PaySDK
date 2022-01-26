@@ -95,6 +95,20 @@ class BusinessParams
      * @var string
      */
     public $timeout_express;
+    
+    /**
+     * 禁用渠道.
+     *
+     * @var string
+     */
+    public $disable_pay_channels;
+
+    /**
+     * 指定支付渠道.
+     *
+     * @var string
+     */
+    public $enable_pay_channels;
 
     public function __construct()
     {
