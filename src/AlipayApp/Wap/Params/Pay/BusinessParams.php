@@ -59,6 +59,14 @@ class BusinessParams
     public $extend_params;
 
     /**
+     * 结算信息
+     * https://opendocs.alipay.com/open/028xr6?scene=common
+     *
+     * @var array
+     */
+    public $settle_info;
+
+    /**
      * 商品主类型：0—虚拟类商品，1—实物类商品（默认）.
      *
      * @var int
