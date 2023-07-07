@@ -15,7 +15,7 @@ PaySDK 是 PHP 集成支付 SDK ，集成了支付宝、微信支付的支付接
 
 API 文档：[https://apidoc.gitee.com/yurunsoft/PaySDK](https://apidoc.gitee.com/yurunsoft/PaySDK)
 
-不支持微信V3接口，懒得跟着他们折腾，如有需要请找别处！
+此项目进入维护阶段，不会支持微信V3接口，懒得跟着他们折腾，如有需要请找别处！
 
 作者本人不提供任何技术支持，如有需要可以加群讨论：17916227 [![点击加群](https://pub.idqqimg.com/wpa/images/group.png "点击加群")](https://jq.qq.com/?_wv=1027&k=5wXf4Zq)，有没有人回复就不一定了。
 
@@ -254,11 +254,12 @@ return $payNotify->swooleResponse;
 
 **服务内容：**
 
+* 低费率开户（仅合法商户）
 * 问题排查及咨询
 * 代接支付
 * 其它合作
 
-如有需要加QQ：369124067（注明来意）
+如有需要加QQ：`369124067` 微信：`wx_zhangrunyu`（注明来意）
 
 ## 捐赠
 
