@@ -182,7 +182,7 @@ class SDKV3 extends Base
         $params = $data['params'];
 
         return $params->_method . "\n"
-                . '/' . $params->_apiMethod . "\n"
+                . '/' . $params->_apiMethod . ($params->_method == 'GET' && $data['data'] ? '?' . http_build_query($data['data']) : '') . "\n"
                 . $data['timestamp'] . "\n"
                 . $data['nonce_str'] . "\n"
                 . (\in_array($params->_method, ['POST', 'PUT']) ? json_encode($data['data']) : '') . "\n";
