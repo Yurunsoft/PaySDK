@@ -206,7 +206,7 @@ class SDK extends Base
         $content = '';
         foreach ($data as $k => $v)
         {
-            if ('' != $v && !\is_array($v))
+            if ('' !== $v && !\is_array($v))
             {
                 $content .= $k . '=' . $v . '&';
             }
