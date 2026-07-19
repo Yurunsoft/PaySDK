@@ -88,7 +88,8 @@ class RSA extends Base
      */
     public static function pkcs1To8($srcFile, $destFile)
     {
-        $content = exec("openssl rsa -RSAPublicKey_in -in {$srcFile} -pubout -out {$destFile}", $output, $code);
+        $command = sprintf('openssl rsa -RSAPublicKey_in -in %s -pubout -out %s', escapeshellarg($srcFile), escapeshellarg($destFile));
+        $content = exec($command, $output, $code);
         if (0 != $code)
         {
             throw new \RuntimeException(sprintf('Convert PKCS1 To PKCS8 failed! code:%s message:%s', $code, $content));
