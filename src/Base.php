@@ -103,6 +103,7 @@ abstract class Base
                 break;
             default:
                 $this->result = $this->response->body();
+                break;
         }
         if (!$this->checkResult($this->result))
         {

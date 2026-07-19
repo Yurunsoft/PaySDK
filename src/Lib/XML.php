@@ -30,13 +30,9 @@ class XML
         $result = '<xml>';
         if (\is_object($data))
         {
-            $_data = ObjectToArray::parse($data);
+            $data = ObjectToArray::parse($data);
         }
-        else
-        {
-            $_data = &$data;
-        }
-        foreach ($_data as $key => $value)
+        foreach ($data as $key => $value)
         {
             if (!is_scalar($value))
             {
